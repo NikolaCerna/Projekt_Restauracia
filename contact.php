@@ -22,34 +22,13 @@ https://templatemo.com/tm-539-simple-house
 	<div class="container">
 	<!-- Top box -->
 		<!-- Logo & Site Name -->
-		<div class="placeholder">
-			<div class="parallax-window" data-parallax="scroll" data-image-src="img/simple-house-01.jpg">
-				<div class="tm-header">
-					<div class="row tm-header-inner">
-						<div class="col-md-6 col-12">
-							<img src="img/simple-house-logo.png" alt="Logo" class="tm-site-logo" /> 
-							<div class="tm-site-text-box">
-								<h1 class="tm-site-title">Simple House</h1>
-								<h6 class="tm-site-description">new restaurant template</h6>	
-							</div>
-						</div>
-						<nav class="col-md-6 col-12 tm-nav">
-							<ul class="tm-nav-ul">
-								<li class="tm-nav-li"><a href="index.html" class="tm-nav-link">Home</a></li>
-								<li class="tm-nav-li"><a href="about.html" class="tm-nav-link">About</a></li>
-								<li class="tm-nav-li"><a href="contact.html" class="tm-nav-link active">Contact</a></li>
-							</ul>
-						</nav>	
-					</div>
-				</div>
-			</div>
-		</div>
+		<?php include "parts/header.php" ?>
 
 		<main>
-			<header class="row tm-welcome-section">
+			<div class="row tm-welcome-section">
 				<h2 class="col-12 text-center tm-section-title">Contact Page</h2>
 				<p class="col-12 text-center">You may use <a rel="nofollow" href="https://www.ltcclock.com/downloads/simple-contact-form/" target="_blank">Simple Contact Form</a> to send email to your inbox. You can modify and use this template for your website. Header image has a parallax effect. Total 3 HTML pages included in this template.</p>
-			</header>
+			</div>
 
 			<div class="tm-container-inner-2 tm-contact-section">
 				<div class="row">
@@ -143,11 +122,7 @@ https://templatemo.com/tm-539-simple-house
 			</div>
 		</main>
 
-		<footer class="tm-footer text-center">
-			<p>Copyright &copy; 2020 Simple House 
-            
-            | Design: <a rel="nofollow" href="https://templatemo.com">TemplateMo</a></p>
-		</footer>
+		<?php include "parts/footer.php" ?>
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/parallax.min.js"></script>
