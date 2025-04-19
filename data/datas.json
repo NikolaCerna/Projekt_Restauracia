@@ -1,0 +1,130 @@
+{
+  "galeria": {
+    "page1": [
+      {
+        "image": "img/gallery/page1/01.jpg",
+        "title": "Margherita",
+        "description": "Pizza with tomato base, fresh mozzarella, and basil.",
+        "price": "€7.90"
+      },
+      {
+        "image": "img/gallery/page1/02.jpg",
+        "title": "Pomodoro Verde",
+        "description": "Pizza with cherry tomatoes, arugula and fresh mozzarella.",
+        "price": "€8.90"
+      },
+      {
+        "image": "img/gallery/page1/03.jpg",
+        "title": "Salame Classico",
+        "description": "Pizza with spicy salami, mozzarella, and tomato base.",
+        "price": "€8.90"
+      },
+      {
+        "image": "img/gallery/page1/04.jpg",
+        "title": "Burrata Basilico",
+        "description": "Pizza with creamy burrata, fresh basil, and olive oil.",
+        "price": "€9.50"
+      },
+      {
+        "image": "img/gallery/page1/05.jpg",
+        "title": "Rustica Verde",
+        "description": "Pizza with salami, black olives, mozzarella, and green herbs.",
+        "price": "€9.30"
+      },
+      {
+        "image": "img/gallery/page1/06.jpg",
+        "title": "Rosso Fresco",
+        "description": "Pizza with mozzarella and a rich tomato paste on top.",
+        "price": "€8.70"
+      },
+      {
+        "image": "img/gallery/page1/07.jpg",
+        "title": "Tartufo Speciale",
+        "description": "Gourmet pizza with truffles, prosciutto, and fresh mozzarella.",
+        "price": "€11.90"
+      },
+      {
+        "image": "img/gallery/page1/08.jpg",
+        "title": "Porro e Salame",
+        "description": "Pizza with leek, salami, and melted mozzarella.",
+        "price": "€8.90"
+      }
+    ],
+    "page2": [
+      {
+        "image": "img/gallery/page2/01.jpg",
+        "title": "Caesar Salad",
+        "description": "Romaine lettuce with grilled chicken or bacon, parmesan cheese, and croutons, served with a creamy Caesar dressing.",
+        "price": "€8.50"
+      },
+      {
+        "image": "img/gallery/page2/02.jpg",
+        "title": "Greek Salad",
+        "description": "A mix of vegetables like tomatoes, cucumbers, red onions, olives, feta cheese, and oregano, drizzled with olive oil and balsamic vinegar.",
+        "price": "€7.00"
+      },
+      {
+        "image": "img/gallery/page2/03.jpg",
+        "title": "Caprese Salad",
+        "description": "Fresh tomatoes, buffalo mozzarella, basil, olive oil, and balsamic vinegar – a simple and tasty Italian salad.",
+        "price": "€7.50"
+      },
+      {
+        "image": "img/gallery/page2/04.jpg",
+        "title": "Fruit Salad",
+        "description": "A mix of fresh seasonal fruits such as strawberries, bananas, grapes, apples, oranges, and more, served fresh and refreshing.",
+        "price": "€6.00"
+      },
+      {
+        "image": "img/gallery/page2/05.jpg",
+        "title": "Quinoa Salad",
+        "description": "Nutritious quinoa mixed with fresh vegetables like tomatoes, cucumbers, peppers, and herbs, drizzled with olive oil.",
+        "price": "€8.00"
+      },
+      {
+        "image": "img/gallery/page2/06.jpg",
+        "title": "Pasta Salad",
+        "description": "Pasta (such as fusilli) with fresh vegetables, olives, cheese, and a light vinaigrette – perfect as a refreshing salad.",
+        "price": "€8.90"
+      }
+    ],
+    "page3": [
+      {
+        "image": "img/gallery/page3/01.jpg",
+        "title": "Ramen",
+        "description": "A Japanese noodle soup with a rich, flavorful broth made from pork, chicken, or miso. It's typically topped with chashu (braised pork), boiled eggs, bamboo shoots, and nori (seaweed).",
+        "price": "$12.99"
+      },
+      {
+        "image": "img/gallery/page3/02.jpg",
+        "title": "Pad Thai",
+        "description": "Thai stir-fried noodle dish made with rice noodles, eggs, tofu or shrimp, peanuts, bean sprouts, and a tangy tamarind-based sauce. It’s known for its balance of sweet, salty, and sour flavors.",
+        "price": "$10.99"
+      },
+      {
+        "image": "img/gallery/page3/03.jpg",
+        "title": "Pho",
+        "description": "A traditional Vietnamese noodle soup made with rice noodles (Bánh Phở), often served with beef or chicken, and topped with fresh herbs, bean sprouts, and lime. The broth is rich and aromatic.",
+        "price": "$11.99"
+      },
+      {
+        "image": "img/gallery/page3/04.jpg",
+        "title": "Lo Mein",
+        "description": "A Chinese dish consisting of stir-fried wheat noodles with vegetables, meats (chicken, beef, or shrimp), and a savory soy-based sauce. It’s a hearty, flavorful dish often enjoyed with a side of rice.",
+        "price": "$9.99"
+      },
+      {
+        "image": "img/gallery/page3/05.jpg",
+        "title": "Chow Mein",
+        "description": "Stir-fried Chinese egg noodles, often served with vegetables and meat (chicken, beef, shrimp), cooked in a savory sauce. The noodles can be served soft or crispy, depending on the preparation.",
+        "price": "$9.99"
+      },
+      {
+        "image": "img/gallery/page3/06.jpg",
+        "title": "Japchae",
+        "description": "A Korean dish made from stir-fried sweet potato starch noodles (dangmyeon), mixed with vegetables and meat (typically beef or pork), all tossed in a sweet-savory soy sauce. It’s a savory dish with a slight sweetness.",
+        "price": "$10.99"
+      }
+    ]
+}
+}

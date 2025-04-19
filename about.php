@@ -11,7 +11,7 @@
 				<div class="row">
 					<article class="col-lg-6">
 						<figure class="tm-person">
-							<img src="img/about-01.jpg" alt="Image" class="img-fluid tm-person-img" />
+							<img src="img/about/workers/about-01.jpg" alt="Image" class="img-fluid tm-person-img" />
 							<figcaption class="tm-person-description">
 								<h4 class="tm-person-name">Jennifer Soft</h4>
 								<p class="tm-person-title">Founder and CEO</p>
@@ -26,7 +26,7 @@
 					</article>
 					<article class="col-lg-6">
 						<figure class="tm-person">
-							<img src="img/about-02.jpg" alt="Image" class="img-fluid tm-person-img" />
+							<img src="img/about/workers/about-02.jpg" alt="Image" class="img-fluid tm-person-img" />
 							<figcaption class="tm-person-description">
 								<h4 class="tm-person-name">Daisy Walker</h4>
 								<p class="tm-person-title">Executive Chef</p>
@@ -40,7 +40,7 @@
 					</article>
 					<article class="col-lg-6">
 						<figure class="tm-person">
-							<img src="img/about-03.jpg" alt="Image" class="img-fluid tm-person-img" />
+							<img src="img/about/workers/about-03.jpg" alt="Image" class="img-fluid tm-person-img" />
 							<figcaption class="tm-person-description">
 								<h4 class="tm-person-name">Florence Nelson</h4>
 								<p class="tm-person-title">Kitchen Manager</p>
@@ -54,7 +54,7 @@
 					</article>
 					<article class="col-lg-6">
 						<figure class="tm-person">
-							<img src="img/about-04.jpg" alt="Image" class="img-fluid tm-person-img" />
+							<img src="img/about/workers/about-04.jpg" alt="Image" class="img-fluid tm-person-img" />
 							<figcaption class="tm-person-description">
 								<h4 class="tm-person-name">Valentina Martin</h4>
 								<p class="tm-person-title">Culinary Director</p>
@@ -108,7 +108,7 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="tm-history-inner">
-							<img src="img/about-06.jpg" alt="Image" class="img-fluid tm-history-img" />
+							<img src="img/about/history.jpg" alt="Image" class="img-fluid tm-history-img" />
 							<div class="tm-history-text"> 
 								<h4 class="tm-history-title">History of our restaurant</h4>
 								<p class="tm-mb-p">Our journey began with a passion for bringing fresh, flavorful, and comforting dishes to the table. From our humble beginnings, we’ve grown into a beloved spot in the community,
