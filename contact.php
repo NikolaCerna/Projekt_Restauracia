@@ -1,11 +1,8 @@
 <?php include "parts/header.php" ?>
-
-<?php include "parts/nav.php" ?>
-
 		<main>
 			<div class="row tm-welcome-section">
-				<h2 class="col-12 text-center tm-section-title">Contact Page</h2>
-				<p class="col-12 text-center">You may use <a rel="nofollow" href="https://www.ltcclock.com/downloads/simple-contact-form/" target="_blank">Simple Contact Form</a> to send email to your inbox. You can modify and use this template for your website. Header image has a parallax effect. Total 3 HTML pages included in this template.</p>
+				<h2 class="col-12 text-center tm-section-title">Contact page</h2>
+				<p class="col-12 text-center">We would love to hear from you! Whether you have a question about our menu, want to make a reservation, or need assistance with anything else, feel free to reach out to us. Our team is here to help!</p>
 			</div>
 
 			<div class="tm-container-inner-2 tm-contact-section">
@@ -31,26 +28,27 @@
 					        </div>
 						</form>
 					</div>
-					<div class="col-md-6">
-						<div class="tm-address-box">
-							<h4 class="tm-info-title tm-text-success">Our Address</h4>
-							<address>
-								180 Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus 10550
-							</address>
-							<a href="tel:080-090-0110" class="tm-contact-link">
-								<i class="fas fa-phone tm-contact-icon"></i>080-090-0110
-							</a>
-							<a href="mailto:info@company.co" class="tm-contact-link">
-								<i class="fas fa-envelope tm-contact-icon"></i>info@company.co
-							</a>
-							<div class="tm-contact-social">
-								<a href="https://fb.com/templatemo" class="tm-social-link"><i class="fab fa-facebook tm-social-icon"></i></a>
-								<a href="#" class="tm-social-link"><i class="fab fa-twitter tm-social-icon"></i></a>
-								<a href="#" class="tm-social-link"><i class="fab fa-instagram tm-social-icon"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
+                    <div class="col-md-6">
+                        <div class="tm-address-box">
+                            <h4 class="tm-info-title tm-text-success">Our Address</h4>
+                            <address>
+                                Av. Lúcio Costa, 172 - Barra da Tijuca, Rio de Janeiro - RJ, 22795-006, Brazil
+                            </address>
+                            <a href="tel:+123-456-7890" class="tm-contact-link">
+                                <i class="fas fa-phone tm-contact-icon"></i>+123-456-7890
+                            </a>
+                            <a href="mailto:contact@simplehouse.com" class="tm-contact-link">
+                                <i class="fas fa-envelope tm-contact-icon"></i>contact@simplehouse.com
+                            </a>
+                            <div class="tm-contact-social">
+                                <a href="https://facebook.com/simplehouse" class="tm-social-link"><i class="fab fa-facebook tm-social-icon"></i></a>
+                                <a href="https://twitter.com/simplehouse" class="tm-social-link"><i class="fab fa-twitter tm-social-icon"></i></a>
+                                <a href="https://instagram.com/simplehouse" class="tm-social-link"><i class="fab fa-instagram tm-social-icon"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
 			</div>
             
 <!-- How to change your own map point
@@ -72,29 +70,29 @@
 				<div class="row">
 					<!-- FAQ -->
 					<div class="col-12 tm-faq">
-						<h2 class="text-center tm-section-title">FAQs</h2>
-						<p class="text-center">This section comes with Accordion tabs for different questions and answers about Simple House HTML CSS template. Thank you. #666</p>
-						<div class="tm-accordion">
-							<button class="accordion">1. Fusce eu lorem et dui #09C maximus varius?</button>
-							<div class="panel">
-							  <p>#666 Duis blandit purus vel nenenatis rutrum. Pellentesque pellentesque tindicunt lorem, ac egestas massa sollicitudin vel. Nam scelerisque vulputate quam mollis pretium. Morbi condimentum volutpat.</p>
-							</div>
-							
-							<button class="accordion">2. Vestibulum #999 ante ipsum primis in faucibus orci?</button>
-							<div class="panel">
-							  <p>Mauris euismod odio at commodo rhoncus. Maecenas nec interdum purus, sed auctor est. Sed eleifend urna nec diam consectetur, a aliquet turpis facilisis. Integer est sapien, sagittis vel massa vel, interdum euismod erat. Aenean sollicitudin nisi neque, efficitur posuere urna rutrum porta.</p>
-							</div>
-							
-							<button class="accordion">3. Can I redistribute this template as a ZIP file?</button>
-							<div class="panel">
-							  <p>Redistributing this template as a downloadable ZIP file on any template collection site is strictly prohibited. You will need to <a href="https://templatemo.com/contact">contact TemplateMo</a> for additional permissions about our templates. Thank you.</p>
-							</div>
-							
-							<button class="accordion">4. Ut ac erat sit amet neque efficitur faucibus et in lectus?</button>
-							<div class="panel">
-								<p>Vivamus viverra pretium ultricies. Praesent feugiat, sapien vitae blandit efficitur, sem nulla venenatis nunc, vel maximus ligula sem a sem. Pellentesque ligula ex, facilisis ac libero a, blandit ullamcorper enim.</p>
-							</div>
-						</div>	
+                        <h2 class="text-center tm-section-title">FAQs</h2>
+                        <p class="text-center">Here you can find answers to the most frequently asked questions from our customers.</p>
+                        <div class="tm-accordion">
+                            <button class="accordion">1. Do you offer gluten-free meals?</button>
+                            <div class="panel">
+                                <p>Yes, we offer gluten-free options for pizzas, salads, and some noodle dishes. Please ask our staff for more information.</p>
+                            </div>
+
+                            <button class="accordion">2. Can I book a table in advance?</button>
+                            <div class="panel">
+                                <p>Absolutely. You can make a reservation by phone or email. We recommend booking in advance, especially on weekends.</p>
+                            </div>
+
+                            <button class="accordion">3. Do you offer food delivery?</button>
+                            <div class="panel">
+                                <p>Yes, you can order food for delivery through our website or via partner apps like Foodora or Wolt.</p>
+                            </div>
+
+                            <button class="accordion">4. What are your opening hours?</button>
+                            <div class="panel">
+                                <p>We are open daily from 10:00 AM to 10:00 PM. Last orders are accepted until 9:30 PM.</p>
+                            </div>
+                        </div>
 					</div>
 				</div>
 			</div>
@@ -102,25 +100,5 @@
 
 		<?php include "parts/footer.php" ?>
 	</div>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/parallax.min.js"></script>
-	<script>
-		$(document).ready(function(){
-			var acc = document.getElementsByClassName("accordion");
-			var i;
-			
-			for (i = 0; i < acc.length; i++) {
-			  acc[i].addEventListener("click", function() {
-			    this.classList.toggle("active");
-			    var panel = this.nextElementSibling;
-			    if (panel.style.maxHeight) {
-			      panel.style.maxHeight = null;
-			    } else {
-			      panel.style.maxHeight = panel.scrollHeight + "px";
-			    }
-			  });
-			}	
-		});
-	</script>
 </body>
 </html>
