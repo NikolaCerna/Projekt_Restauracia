@@ -81,27 +81,10 @@
 			</div>
 			<div class="tm-container-inner tm-features">
 				<div class="row">
-					<div class="col-lg-4">
-						<div class="tm-feature">
-							<i class="fas fa-4x fa-pepper-hot tm-feature-icon"></i>
-							<p class="tm-feature-description">Our pizzas are crafted with fresh ingredients and a crispy crust, delivering rich, savory flavors in every bite.</p>
-							<a href="index.php" class="tm-btn tm-btn-primary">Read More</a>
-						</div>
-					</div>
-					<div class="col-lg-4">
-						<div class="tm-feature">
-							<i class="fas fa-4x fa-seedling tm-feature-icon"></i>
-							<p class="tm-feature-description">Our salads are a healthy and refreshing choice, packed with fresh greens and vibrant toppings for a delicious, light meal.</p>
-							<a href="index.php" class="tm-btn tm-btn-success">Read More</a>
-						</div>
-					</div>
-					<div class="col-lg-4">
-						<div class="tm-feature">
-							<i class="fas fa-4x fa-cocktail tm-feature-icon"></i>
-							<p class="tm-feature-description">Our noodles offer a perfect combination of flavors and textures, from rich sauces to tender noodles, perfect for any craving.</p>
-							<a href="index.php" class="tm-btn tm-btn-danger">Read More</a>
-						</div>
-					</div>
+					<?php
+                        include_once "functions.php";
+                        generateAbout();
+                    ?>
 				</div>
 			</div>
 			<div class="tm-container-inner tm-history">

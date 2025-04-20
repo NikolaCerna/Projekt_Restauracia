@@ -12,15 +12,18 @@
 </head>
 
 <body>
-
+<?php include_once "functions.php";
+$menu = getMenuData("header");
+?>
 <div class="container">
-
     <header class="placeholder">
         <div class="parallax-window" data-parallax="scroll" data-image-src="img/header/simple-house-01.jpg">
             <div class="tm-header">
                 <div class="row tm-header-inner">
                     <div class="col-md-6 col-12">
-                        <img src="img/header/simple-house-logo.png" alt="Logo" class="tm-site-logo" />
+                        <a href="<?php echo $menu['home']['path']; ?>">
+                            <img src="img/header/simple-house-logo.png" alt="Logo" class="tm-site-logo" />
+                        </a>
                         <div class="tm-site-text-box">
                             <h1 class="tm-site-title">La Tavola</h1>
                             <h6 class="tm-site-description">Taste. Style. Comfort.</h6>

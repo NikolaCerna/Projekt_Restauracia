@@ -126,5 +126,22 @@
         "price": "$10.99"
       }
     ]
-}
+},
+  "about": [
+    {"dsc": "Our pizzas are crafted with fresh ingredients and a crispy crust, delivering rich, savory flavors in every bite.",
+      "button": "primary",
+      "icon": "pepper-hot"
+    },
+    {
+      "dsc": "Our salads are a healthy and refreshing choice, packed with fresh greens and vibrant toppings for a delicious, light meal.",
+      "button": "success",
+      "icon": "seedling"
+    },
+    {
+      "dsc": "Our noodles offer a perfect combination of flavors and textures, from rich sauces to tender noodles, perfect for any craving.",
+      "button": "danger",
+      "icon": "cocktail"
+    }
+  ]
+
 }

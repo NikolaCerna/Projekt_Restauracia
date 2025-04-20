@@ -18,4 +18,62 @@ function generateMenu($pagex) {
         echo '</article>';
     }
 }
+
+function generateAbout() {
+    $json = file_get_contents("data/datas.json");
+    $data = json_decode($json, true);
+    $text = $data["about"];
+
+    foreach ($text as $description) {
+        echo '<div class="col-lg-4">';
+        echo '<div class="tm-feature">';
+        echo '<i class="fas fa-4x fa-' . $description["icon"] . ' tm-feature-icon"></i>';
+        echo '<p class="tm-feature-description">' . $description["dsc"] . '</p>';
+        echo '<a href="index.php" class="tm-btn tm-btn-' . $description["button"] . '">Read More</a>';
+        echo '</div>';
+        echo '</div>';
+    }
+}
+
+function validateMenuType(string $type): bool {
+    $menuTypes = [
+        'header',
+        'footer'
+    ];
+    if (in_array($type, $menuTypes)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getMenuData(string $type): array {
+    $menu = [];
+    if (validateMenuType($type)) {
+        if ($type == "header") {
+            $menu = [
+                'home' => [
+                    'name' => 'Home',
+                    'path' => 'index.php'
+                ],
+                'about' => [
+                    'name' => 'About',
+                    'path' => 'about.php'
+                ],
+                'contact' => [
+                    'name' => 'Contact',
+                    'path' => 'contact.php'
+                ]
+            ];
+        }
+    }
+    return $menu;
+}
+
+function printMenu(array $menu) {
+    foreach ($menu as $menuName => $menuData) {
+       echo '<li class="tm-nav-li"><a href="' . $menuData['path'] . '" class="tm-nav-link">' . $menuData['name']. '</a></li>';
+    }
+}
+
 ?>
