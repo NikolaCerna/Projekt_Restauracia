@@ -159,6 +159,20 @@ function generateContactText() {
     echo'</div>';
 }
 
+function generateAboutBackground() {
+    $obsah = new Obsah();
+    $url = $obsah->getValue('about_background');
+    echo '<div class="tm-container-inner tm-featured-image">';
+    echo '<div class="row">';
+    echo '<div class="col-12">';
+    echo '<div class="placeholder-2">';
+    echo '<div class="parallax-window-2" data-parallax="scroll" data-image-src="' . $url . '"></div>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+}
+
 function generateAboutText() {
     $obsah = new Obsah();
     $nadpis = $obsah->getValue('about_nadpis');
@@ -169,19 +183,38 @@ function generateAboutText() {
     echo'</div>';
 }
 
+function generateHistory() {
+    $obsah = new Obsah();
+    $nadpis = $obsah->getValue('history_nadpis');
+    $text = $obsah->getValue('history_text');
+    $url = $obsah->getValue('history_url');
+    echo '<div class="tm-container-inner tm-history">';
+    echo '<div class="row">';
+    echo '<div class="col-12">';
+    echo '<div class="tm-history-inner">';
+    echo '<img src="' . $url . '" alt="Image" class="img-fluid tm-history-img" />';
+    echo '<div class="tm-history-text"> ';
+    echo '<h4 class="tm-history-title">' . $nadpis . '</h4>';
+    echo '<p class="tm-mb-p">' . $text . '</p>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+}
+
+include_once "classes/About.php";
 function generateAbout() {
-    $json = file_get_contents("data/datas.json");
-    $data = json_decode($json, true);
-    $text = $data["about"];
+    $db = new About();
+    $about = $db->getAbout();
     echo '<div class="tm-container-inner tm-features">';
     echo '<div class="row">';
-
-    foreach ($text as $description) {
+    foreach ($about as $item) {
         echo '<div class="col-lg-4">';
         echo '<div class="tm-feature">';
-        echo '<i class="fas fa-4x fa-' . $description["icon"] . ' tm-feature-icon"></i>';
-        echo '<p class="tm-feature-description">' . $description["dsc"] . '</p>';
-        echo '<a href="index.php" class="tm-btn tm-btn-' . $description["button"] . '">Read More</a>';
+        echo '<i class="fas fa-4x fa-' . $item["icon"] . ' tm-feature-icon"></i>';
+        echo '<p class="tm-feature-description">' . $item["text"] . '</p>';
+        echo '<a href="index.php" class="tm-btn tm-btn-' . $item["button"] . '">Read More</a>';
         echo '</div>';
         echo '</div>';
     }
