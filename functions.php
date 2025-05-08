@@ -135,6 +135,40 @@ function generateInfo() {
 }
 
 include_once "classes/Obsah.php";
+
+function generateUvod() {
+    $obsah = new Obsah();
+    $nadpis = $obsah->getValue('nadpis');
+    $text = $obsah->getValue('text');
+    echo'<div class="row tm-welcome-section">';
+    echo'<h2 class="col-12 text-center tm-section-title">' . $nadpis . '</h2>';
+    echo'<p class="col-12 text-center">' . $text . '</p>';
+    echo'</div>';
+}
+
+function generateQuestionPart() {
+    $obsah = new Obsah();
+    $url = $obsah->getValue('questions_url');
+    $nadpis = $obsah->getValue('questions_nadpis');
+    $text = $obsah->getValue('questions_text');
+    echo'<div class="tm-section tm-container-inner">';
+    echo'<div class="row">';
+    echo'<div class="col-md-6">';
+    echo'<figure class="tm-description-figure">';
+    echo'<img src="' . $url . '" alt="Image" class="img-fluid" />';
+    echo'</figure>';
+    echo'</div>';
+    echo'<div class="col-md-6">';
+    echo'<div class="tm-description-box"> ';
+    echo'<h4 class="tm-gallery-title">' . $nadpis . '</h4>';
+    echo'<p class="tm-mb-45">' . $text . '</p>';
+    echo'<a href="about.php" class="tm-btn tm-btn-default tm-right">Read More</a>';
+    echo'</div>';
+    echo'</div>';
+    echo'</div>';
+    echo'</div>';
+}
+
 function generateMapa() {
     $obsah = new Obsah();
     $mapa = $obsah->getValue('mapa');
