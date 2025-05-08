@@ -15,29 +15,18 @@
 				</nav>
 			</div>
 
-			<!-- Gallery -->
-			<div class="row tm-gallery">
-				<!-- gallery page 1 -->
-				<div id="tm-gallery-page-pizza" class="tm-gallery-page">
-					<?php
-                    include_once "functions.php";
-                    generateMenu("page1");?>
-				</div> <!-- gallery page 1 -->
-				
-				<!-- gallery page 2 -->
-				<div id="tm-gallery-page-salad" class="tm-gallery-page hidden">
-                    <?php
-                        generateMenu("page2");
-                    ?>
-				</div> <!-- gallery page 2 -->
-				
-				<!-- gallery page 3 -->
-				<div id="tm-gallery-page-noodle" class="tm-gallery-page hidden">
-                    <?php
-                    generateMenu("page3");
-                    ?>
-				</div> <!-- gallery page 3 -->
-			</div> <!-- Gallery -->
+            <!-- Gallery -->
+            <div id="tm-gallery-page-pizza" class="tm-gallery-page">
+                <?php generateMenu("pizza"); ?>
+            </div>
+
+            <div id="tm-gallery-page-salad" class="tm-gallery-page hidden">
+                <?php generateMenu("salad"); ?>
+            </div>
+
+            <div id="tm-gallery-page-noodle" class="tm-gallery-page hidden">
+                <?php generateMenu("noodle"); ?>
+            </div><!-- Gallery -->
 
 			<div class="tm-section tm-container-inner">
 				<div class="row">
