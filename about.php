@@ -1,20 +1,10 @@
 <?php include "parts/header.php" ?>
 		<main>
-			<div class="row tm-welcome-section">
-				<h2 class="col-12 text-center tm-section-title">About La Tavola</h2>
-				<p class="col-13 text-center">At <strong>La Tavola</strong>, we pride ourselves on using only the freshest ingredients and crafting each dish with care and creativity.
-                    From our carefully curated selection of pizzas, made with the finest toppings, to our
-                    vibrant salads and satisfying noodles, we offer a variety of options to please every palate. Come enjoy a relaxed atmosphere, excellent service, and the perfect meal for any occasion.</p>
-			</div>
-
-			<div class="tm-container-inner tm-persons">
-				<div class="row">
-					<?php
-                        include_once "functions.php";
-                        generateWorkers();
-					?>
-				</div>
-			</div>
+            <?php
+                include_once "functions.php";
+                generateAboutText();
+                generateWorkers();
+            ?>
 			<div class="tm-container-inner tm-featured-image">
 				<div class="row">
 					<div class="col-12">
@@ -24,14 +14,10 @@
 					</div>
 				</div>
 			</div>
-			<div class="tm-container-inner tm-features">
-				<div class="row">
-					<?php
-                        include_once "functions.php";
-                        generateAbout();
-                    ?>
-				</div>
-			</div>
+            <?php
+                include_once "functions.php";
+                generateAbout();
+            ?>
 			<div class="tm-container-inner tm-history">
 				<div class="row">
 					<div class="col-12">
