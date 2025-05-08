@@ -5,11 +5,9 @@ if (!defined('__ROOT__')) {
 
 include_once "classes/JedalnyListok.php";
 
-$db = new JedalnyListok();
-
 
 function generateMenu($kategoria) {
-    global $db;
+    $db = new JedalnyListok();
     $jedalnyListok = $db->getJedalnyListok();
 
     foreach ($jedalnyListok as $item) {
@@ -32,6 +30,49 @@ function generateMenu($kategoria) {
         }
     }
 }
+
+include_once "classes/Workers.php";
+
+function generateWorkers() {
+    $db = new Workers();
+    $workers = $db->getWorkers();
+    foreach ($workers as $worker) {
+        echo'<article class="col-lg-6">';
+        echo'<figure class="tm-person">';
+        echo'<img src=' . $worker['url_fotografie'] .' alt="Image" class="img-fluid tm-person-img" />';
+        echo'<figcaption class="tm-person-description">';
+        echo'<h4 class="tm-person-name">'. $worker['meno'] . " " . $worker['priezvisko'] . '</h4>';
+        echo'<p class="tm-person-title">'. $worker['pozicia'] . '</p>';
+        echo'<p class="tm-person-about">'. $worker['popis'] . '</p>';
+        echo'<div>';
+        if (!empty($worker['facebook'])) {
+            echo '<a href="' . $worker['facebook'] . '" class="tm-social-link" target="_blank">';
+            echo '<i class="fab fa-facebook tm-social-icon"></i>';
+            echo '</a>';
+        }
+        if (!empty($worker['twitter'])) {
+            echo '<a href="' . $worker['twitter'] . '" class="tm-social-link" target="_blank">';
+            echo '<i class="fab fa-twitter tm-social-icon"></i>';
+            echo '</a>';
+        }
+        if (!empty($worker['instagram'])) {
+            echo '<a href="' . $worker['instagram'] . '" class="tm-social-link" target="_blank">';
+            echo '<i class="fab fa-instagram tm-social-icon"></i>';
+            echo '</a>';
+        }
+        if (!empty($worker['youtube'])) {
+            echo '<a href="' . $worker['youtube'] . '" class="tm-social-link" target="_blank">';
+            echo '<i class="fab fa-youtube tm-social-icon"></i>';
+            echo '</a>';
+        }
+        echo'</div>';
+        echo'</figcaption>';
+        echo'</figure>';
+        echo'</article>';
+    }
+}
+
+
 
 function generateAbout() {
     $json = file_get_contents("data/datas.json");

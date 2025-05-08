@@ -9,65 +9,10 @@
 
 			<div class="tm-container-inner tm-persons">
 				<div class="row">
-					<article class="col-lg-6">
-						<figure class="tm-person">
-							<img src="img/about/workers/about-01.jpg" alt="Image" class="img-fluid tm-person-img" />
-							<figcaption class="tm-person-description">
-								<h4 class="tm-person-name">Jennifer Soft</h4>
-								<p class="tm-person-title">Founder and CEO</p>
-								<p class="tm-person-about">Jennifer leads La Tavola with passion and dedication, ensuring every guest feels welcome and enjoys a memorable dining experience.</p>
-								<div>
-									<a href="https://fb.com" class="tm-social-link"><i class="fab fa-facebook tm-social-icon"></i></a>
-									<a href="https://twitter.com" class="tm-social-link"><i class="fab fa-twitter tm-social-icon"></i></a>
-									<a href="https://instagram.com" class="tm-social-link"><i class="fab fa-instagram tm-social-icon"></i></a>
-								</div>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-6">
-						<figure class="tm-person">
-							<img src="img/about/workers/about-02.jpg" alt="Image" class="img-fluid tm-person-img" />
-							<figcaption class="tm-person-description">
-								<h4 class="tm-person-name">Daisy Walker</h4>
-								<p class="tm-person-title">Executive Chef</p>
-								<p class="tm-person-about">Daisy crafts innovative dishes with fresh ingredients, bringing flavors that delight our customers.</p>
-								<div>
-									<a href="https://fb.com" class="tm-social-link"><i class="fab fa-facebook tm-social-icon"></i></a>
-									<a href="https://twitter.com" class="tm-social-link"><i class="fab fa-twitter tm-social-icon"></i></a>
-								</div>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-6">
-						<figure class="tm-person">
-							<img src="img/about/workers/about-03.jpg" alt="Image" class="img-fluid tm-person-img" />
-							<figcaption class="tm-person-description">
-								<h4 class="tm-person-name">Florence Nelson</h4>
-								<p class="tm-person-title">Kitchen Manager</p>
-								<p class="tm-person-about">Florence ensures our kitchen runs smoothly, maintaining quality and efficiency in every dish served.</p>
-								<div>
-									<a href="https://fb.com" class="tm-social-link"><i class="fab fa-facebook tm-social-icon"></i></a>
-									<a href="https://instagram.com" class="tm-social-link"><i class="fab fa-instagram tm-social-icon"></i></a>
-								</div>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-6">
-						<figure class="tm-person">
-							<img src="img/about/workers/about-04.jpg" alt="Image" class="img-fluid tm-person-img" />
-							<figcaption class="tm-person-description">
-								<h4 class="tm-person-name">Valentina Martin</h4>
-								<p class="tm-person-title">Culinary Director</p>
-								<p class="tm-person-about">Valentina oversees the menu, ensuring we offer unique and delicious dishes that keep our guests coming back for more.</p>
-								<div>
-									<a href="https://fb.com" class="tm-social-link"><i class="fab fa-facebook tm-social-icon"></i></a>
-									<a href="https://twitter.com" class="tm-social-link"><i class="fab fa-twitter tm-social-icon"></i></a>
-									<a href="https://instagram.com" class="tm-social-link"><i class="fab fa-instagram tm-social-icon"></i></a>
-									<a href="https://youtube.com" class="tm-social-link"><i class="fab fa-youtube tm-social-icon"></i></a>
-								</div>
-							</figcaption>
-						</figure>
-					</article>
+					<?php
+                        include_once "functions.php";
+                        generateWorkers();
+					?>
 				</div>
 			</div>
 			<div class="tm-container-inner tm-featured-image">

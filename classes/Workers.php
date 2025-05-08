@@ -12,7 +12,7 @@ class Workers extends Database {
 
     public function insertWorkers(string $meno, string $priezvisko, string $pozicia, string $popis, string $facebook, string $twitter, string $instagram, string $youtube, string $url_fotografie): bool
     {
-        $sql = "INSERT INTO zamestnanci(meno, priezvisko, pozicia, popis, facebook, twitter, instagram, youutbe, url_fotografie) 
+        $sql = "INSERT INTO zamestnanci(meno, priezvisko, pozicia, popis, facebook, twitter, instagram, youtbe, url_fotografie) 
         VALUES ('" . $meno . "', '" . $priezvisko . "', '" . $pozicia . "', '". $popis . "', '" . $facebook . "', '". $twitter . "', '" . $instagram . "', '". $youtube . "', '" . $url_fotografie . "')";
         $stmt = $this->connection->prepare($sql);
         return $stmt->execute();
@@ -91,7 +91,7 @@ class Workers extends Database {
         if (!empty($url_fotografie)) {
             $sql .= " url_fotografie = '" . $url_fotografie . "'";
         }
-        
+
         $sql .= " WHERE ID = " . $ID;
 
         $stmt = $this->connection->prepare($sql);
