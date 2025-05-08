@@ -23,22 +23,4 @@ class Kontakt extends Database {
             return false;
         }
     }
-
-    public function updateQna(int $ID, string $otazka = "", string $odpoved = ""): bool
-    {
-        $sql = "UPDATE Qna SET ";
-
-        if (!empty($otazka)) {
-            $sql .= " otazka = '" . $otazka . "'";
-        }
-
-        if (!empty($odpoved)) {
-            $sql .= ", odpoved = '" . $odpoved . "'";
-        }
-
-        $sql .= " WHERE ID = " . $ID;
-
-        $stmt = $this->connection->prepare($sql);
-        return $stmt->execute();
-    }
 }
