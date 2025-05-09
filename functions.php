@@ -4,6 +4,9 @@ if (!defined('__ROOT__')) {
 }
 
 include_once "classes/JedalnyListok.php";
+include_once "classes/Workers.php";
+include_once "classes/QNA.php";
+include_once "classes/About.php";
 
 
 function generateMenu($kategoria) {
@@ -30,8 +33,6 @@ function generateMenu($kategoria) {
         }
     }
 }
-
-include_once "classes/Workers.php";
 
 function generateWorkers() {
     $db = new Workers();
@@ -75,7 +76,6 @@ function generateWorkers() {
     echo '</div>';
     echo '</div>';
 }
-include_once "classes/QNA.php";
 
 function generateQna() {
     $db = new QNA();
@@ -86,10 +86,10 @@ function generateQna() {
     echo '<h2 class="text-center tm-section-title">FAQs</h2>';
     echo '<p class="text-center">Here you can find answers to the most frequently asked questions from our customers.</p>';
     echo '<div class="tm-accordion">';
-    foreach ($qna as $qna) {
-        echo '<button class="accordion">' . $qna['otazka'] . '</button>';
+    foreach ($qna as $item) {
+        echo '<button class="accordion">' . $item['otazka'] . '</button>';
         echo '<div class="panel">';
-        echo '<p>' . $qna['odpoved'] . '</p>';
+        echo '<p>' . $item['odpoved'] . '</p>';
         echo '</div>';
     }
     echo '</div>';
@@ -97,147 +97,6 @@ function generateQna() {
     echo '</div>';
     echo '</div>';
 }
-
-include_once "classes/Informacie.php";
-
-function generateInfo() {
-    $db = new Informacie();
-    $info = $db->getInfo();
-    echo'<div class="col-md-6">';
-    echo'<div class="tm-address-box">';
-    echo'<h4 class="tm-info-title tm-text-success">Our Address</h4>';
-    foreach ($info as $info) {
-        echo'<address>' . $info['adresa'] . '</address>';
-        echo'<a href=" "tel:' . $info['telefonne_cislo'] . '" class="tm-contact-link">';
-        echo'<i class="fas fa-phone tm-contact-icon"></i>' . $info['telefonne_cislo'] . '';
-        echo'</a>';
-        echo'<a href="mailto:' . $info['email'] . '" class="tm-contact-link">';
-        echo'<i class="fas fa-envelope tm-contact-icon"></i>' . $info['email'] . '';
-        echo'</a>';
-        echo'<div class="tm-contact-social">';
-        if (!empty($info['facebook'])) {
-            echo '<a href="' . $info['facebook'] . '" class="tm-social-link"><i class="fab fa-facebook tm-social-icon"></i></a>';
-        }
-        if (!empty($info['twitter'])) {
-            echo '<a href="' . $info['twitter'] . '" class="tm-social-link"><i class="fab fa-twitter tm-social-icon"></i></a>';
-        }
-        if (!empty($info['instagram'])) {
-            echo '<a href="' . $info['instagram'] . '" class="tm-social-link"><i class="fab fa-instagram tm-social-icon"></i></a>';
-        }
-        if (!empty($info['youtube'])) {
-            echo '<a href="' . $info['youtube'] . '" class="tm-social-link"><i class="fab fa-youtube tm-social-icon"></i></a>';
-        }
-    }
-
-    echo'</div>';
-    echo'</div>';
-    echo'</div>';
-}
-
-include_once "classes/Obsah.php";
-
-function generateUvod() {
-    $obsah = new Obsah();
-    $nadpis = $obsah->getValue('nadpis');
-    $text = $obsah->getValue('text');
-    echo'<div class="row tm-welcome-section">';
-    echo'<h2 class="col-12 text-center tm-section-title">' . $nadpis . '</h2>';
-    echo'<p class="col-12 text-center">' . $text . '</p>';
-    echo'</div>';
-}
-
-function generateQuestionPart() {
-    $obsah = new Obsah();
-    $url = $obsah->getValue('questions_url');
-    $nadpis = $obsah->getValue('questions_nadpis');
-    $text = $obsah->getValue('questions_text');
-    echo'<div class="tm-section tm-container-inner">';
-    echo'<div class="row">';
-    echo'<div class="col-md-6">';
-    echo'<figure class="tm-description-figure">';
-    echo'<img src="' . $url . '" alt="Image" class="img-fluid" />';
-    echo'</figure>';
-    echo'</div>';
-    echo'<div class="col-md-6">';
-    echo'<div class="tm-description-box"> ';
-    echo'<h4 class="tm-gallery-title">' . $nadpis . '</h4>';
-    echo'<p class="tm-mb-45">' . $text . '</p>';
-    echo'<a href="about.php" class="tm-btn tm-btn-default tm-right">Read More</a>';
-    echo'</div>';
-    echo'</div>';
-    echo'</div>';
-    echo'</div>';
-}
-
-function generateMapa() {
-    $obsah = new Obsah();
-    $mapa = $obsah->getValue('mapa');
-    echo '<div class="tm-container-inner-2 tm-map-section">';
-    echo '<div class="row">';
-    echo '<div class="col-12">';
-    echo '<div class="tm-map">';
-    echo '<iframe src="' . $mapa .'" frameborder="0" style="border:0;" allowfullscreen=""></iframe>';
-    echo '</div>';
-    echo '</div>';
-    echo '</div>';
-    echo '</div>';
-}
-
-function generateContactText() {
-    $obsah = new Obsah();
-    $nadpis = $obsah->getValue('contact_nadpis');
-    $text = $obsah->getValue('contact_text');
-    echo'<div class="row tm-welcome-section">';
-    echo'<h2 class="col-12 text-center tm-section-title">' . $nadpis . '</h2>';
-    echo'<p class="col-12 text-center">' . $text . '</p>';
-    echo'</div>';
-}
-
-function generateAboutBackground() {
-    $obsah = new Obsah();
-    $url = $obsah->getValue('about_background');
-    echo '<div class="tm-container-inner tm-featured-image">';
-    echo '<div class="row">';
-    echo '<div class="col-12">';
-    echo '<div class="placeholder-2">';
-    echo '<div class="parallax-window-2" data-parallax="scroll" data-image-src="' . $url . '"></div>';
-    echo '</div>';
-    echo '</div>';
-    echo '</div>';
-    echo '</div>';
-}
-
-function generateAboutText() {
-    $obsah = new Obsah();
-    $nadpis = $obsah->getValue('about_nadpis');
-    $text = $obsah->getValue('about_text');
-    echo'<div class="row tm-welcome-section">';
-    echo'<h2 class="col-12 text-center tm-section-title">' . $nadpis . '</h2>';
-    echo'<p class="col-13 text-center">' . $text . '</p>';
-    echo'</div>';
-}
-
-function generateHistory() {
-    $obsah = new Obsah();
-    $nadpis = $obsah->getValue('history_nadpis');
-    $text = $obsah->getValue('history_text');
-    $url = $obsah->getValue('history_url');
-    echo '<div class="tm-container-inner tm-history">';
-    echo '<div class="row">';
-    echo '<div class="col-12">';
-    echo '<div class="tm-history-inner">';
-    echo '<img src="' . $url . '" alt="Image" class="img-fluid tm-history-img" />';
-    echo '<div class="tm-history-text"> ';
-    echo '<h4 class="tm-history-title">' . $nadpis . '</h4>';
-    echo '<p class="tm-mb-p">' . $text . '</p>';
-    echo '</div>';
-    echo '</div>';
-    echo '</div>';
-    echo '</div>';
-    echo '</div>';
-}
-
-include_once "classes/About.php";
 function generateAbout() {
     $db = new About();
     $about = $db->getAbout();
