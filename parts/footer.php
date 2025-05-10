@@ -37,3 +37,20 @@
         });
     });
 </script>
+<script>
+    function toggleEditForm(ID) {
+        var form = document.getElementById("edit-form-" + ID);
+        // Ak je formulár skrytý, zobrazíme ho; inak ho skryjeme
+        if (form.style.display === "none") {
+            form.style.display = "block";
+        } else {
+            form.style.display = "none";
+        }
+    }
+</script>
+<script>
+    function toggleAddForm() {
+        var form = document.getElementById("add-form");
+        form.style.display = (form.style.display === "none") ? "block" : "none";
+    }
+</script>

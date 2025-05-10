@@ -11,13 +11,6 @@ class About extends Database {
         $this->connection = $this->getConnection();
     }
 
-    public function insertAbout(string $icon, string $text, string $button): bool
-    {
-        $sql = "INSERT INTO informacie(icon, text, button) VALUES ('" . $icon . "', '" . $text ."', '" . $button ."')";
-        $stmt = $this->connection->prepare($sql);
-        return $stmt->execute();
-    }
-
     public function getAbout(): array
     {
         $sql = "SELECT * FROM about";

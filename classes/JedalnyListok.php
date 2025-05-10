@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', "On");
+
 require_once(__ROOT__.'/classes/Database.php');
 
 
@@ -13,7 +14,7 @@ class JedalnyListok extends Database {
         $this->connection = $this->getConnection();
     }
 
-    public function insertJedalnyListok(string $nazov, string $url_obrazka, string $popis, float $cena, string $kategoria): bool
+    public function addJedlo(string $nazov, string $url_obrazka, string $popis, float $cena, string $kategoria): bool
     {
         $sql = "INSERT INTO jedalny_listok(nazov, url_obrazka, popis, cena, kategoria) VALUES ('" . $nazov . "', '" . $url_obrazka . "', '" . $popis . "', '". $cena . "', '" . $kategoria . "')";
         $stmt = $this->connection->prepare($sql);
@@ -81,5 +82,13 @@ class JedalnyListok extends Database {
 
         $stmt = $this->connection->prepare($sql);
         return $stmt->execute();
+    }
+
+    public function getCategories() {
+        $sql = "SELECT DISTINCT kategoria FROM jedla";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $kategories = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        return $kategories;
     }
 }

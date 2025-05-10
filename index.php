@@ -21,10 +21,29 @@
 					</ul>
 				</nav>
 			</div>
+            <div>
+                <button type="button" class="tm-btn tm-btn-primary" style="margin-left: 55px; margin-bottom:20px" onclick="toggleAddForm()">Pridať jedlo</button>
 
+                <div id="add-form" style="display:none; margin-top:20px;">
+                    <form method="post" action="index.php" style="max-width: 20vw; margin-left:55px">
+                        <div class="mb-2"><label>Názov:</label><input type="text" name="nazov" class="form-control" required></div>
+                        <div class="mb-2"><label>URL obrázka:</label><input type="text" name="url_obrazka" class="form-control" required></div>
+                        <div class="mb-2"><label>Popis:</label><textarea name="popis" class="form-control" required></textarea></div>
+                        <div class="mb-2"><label>Cena:</label><input type="text" name="cena" class="form-control" required></div>
+                        <div class="mb-2"><label>Kategória:</label>
+                            <select name="kategoria" class="form-control" required>
+                                <option value="pizza">pizza</option>
+                                <option value="salad">salad</option>
+                                <option value="noodle">noodle</option>
+                            </select>
+                        </div>
+                        <button type="submit" name="add" class="tm-btn tm-btn-success" style="margin-top: 20px; margin-bottom:20px">Uložiť</button>
+                    </form>
+                </div>
             <!-- Gallery -->
             <div id="tm-gallery-page-pizza" class="tm-gallery-page">
                 <?php generateMenu("pizza"); ?>
+
             </div>
 
             <div id="tm-gallery-page-salad" class="tm-gallery-page hidden">
@@ -34,6 +53,7 @@
             <div id="tm-gallery-page-noodle" class="tm-gallery-page hidden">
                 <?php generateMenu("noodle"); ?>
             </div><!-- Gallery -->
+            </div>
 
             <?php
                 $url = $obsah->getValue('questions_url');

@@ -158,13 +158,23 @@ html {
 }
 
 .tm-btn-danger {
-  background-color: #993332;
+  background-color: #870f24;
   color: white;
 }
 
 .tm-btn-danger:hover,
 .tm-btn-danger:focus {
   background-color: #752423;
+}
+
+.tm-btn-warning {
+  background-color: #af8a4e;
+  color: white;
+}
+
+.tm-btn-warning:hover,
+.tm-btn-warning:focus {
+  background-color: #997732;
 }
 
 .tm-mb-45 {
