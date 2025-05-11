@@ -83,12 +83,4 @@ class JedalnyListok extends Database {
         $stmt = $this->connection->prepare($sql);
         return $stmt->execute();
     }
-
-    public function getCategories() {
-        $sql = "SELECT DISTINCT kategoria FROM jedla";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute();
-        $kategories = $stmt->fetchAll(PDO::FETCH_COLUMN);
-        return $kategories;
-    }
 }

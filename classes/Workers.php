@@ -10,9 +10,9 @@ class Workers extends Database {
         $this->connection = $this->getConnection();
     }
 
-    public function insertWorkers(string $meno, string $priezvisko, string $pozicia, string $popis, string $facebook, string $twitter, string $instagram, string $youtube, string $url_fotografie): bool
+    public function addWorker(string $meno, string $priezvisko, string $pozicia, string $popis, string $facebook, string $twitter, string $instagram, string $youtube, string $url_fotografie): bool
     {
-        $sql = "INSERT INTO zamestnanci(meno, priezvisko, pozicia, popis, facebook, twitter, instagram, youtbe, url_fotografie) 
+        $sql = "INSERT INTO zamestnanci(meno, priezvisko, pozicia, popis, facebook, twitter, instagram, youtube, url_fotografie) 
         VALUES ('" . $meno . "', '" . $priezvisko . "', '" . $pozicia . "', '". $popis . "', '" . $facebook . "', '". $twitter . "', '" . $instagram . "', '". $youtube . "', '" . $url_fotografie . "')";
         $stmt = $this->connection->prepare($sql);
         return $stmt->execute();
@@ -68,28 +68,28 @@ class Workers extends Database {
             $sql .= " meno = '" . $meno . "'";
         }
         if (!empty($priezvisko)) {
-            $sql .= " priezvisko = '" . $priezvisko . "'";
+            $sql .= ", priezvisko = '" . $priezvisko . "'";
         }
         if (!empty($pozicia)) {
-            $sql .= " pozicia = '" . $pozicia . "'";
+            $sql .= ", pozicia = '" . $pozicia . "'";
         }
         if (!empty($popis)) {
-            $sql .= " popis = '" . $popis . "'";
+            $sql .= ", popis = '" . $popis . "'";
         }
         if (!empty($facebook)) {
-            $sql .= " facebook = '" . $facebook . "'";
+            $sql .= ", facebook = '" . $facebook . "'";
         }
         if (!empty($twitter)) {
-            $sql .= " twitter = '" . $twitter . "'";
+            $sql .= ", twitter = '" . $twitter . "'";
         }
         if (!empty($instagram)) {
-            $sql .= " instagram = '" . $instagram . "'";
+            $sql .= ", instagram = '" . $instagram . "'";
         }
         if (!empty($youtube)) {
-            $sql .= " youtube = '" . $youtube . "'";
+            $sql .= ", youtube = '" . $youtube . "'";
         }
         if (!empty($url_fotografie)) {
-            $sql .= " url_fotografie = '" . $url_fotografie . "'";
+            $sql .= ", url_fotografie = '" . $url_fotografie . "'";
         }
 
         $sql .= " WHERE ID = " . $ID;

@@ -116,7 +116,7 @@ html {
 */
 
 .tm-btn {
-  display: inline-block;
+  display: block;
   font-size: 1rem;
   width: auto;
   padding: 10px 30px;
@@ -336,7 +336,6 @@ p, address {
 .tm-section-title {
   font-size: 2rem;
   font-weight: 400;
-  margin-bottom: 30px;
 }
 
 .tm-gallery {
@@ -603,7 +602,7 @@ p, address {
 
 @media (min-width: 768px) {
  .tm-history-img {
-    max-width: 50%;
+    max-height: 50%;
   }
   
   .tm-history-inner {
@@ -615,7 +614,7 @@ p, address {
   font-size: 1.6rem;
   font-weight: 300;
   color: #1A6692;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .tm-history-text {
@@ -717,12 +716,12 @@ p, address {
 .tm-info-title {
   font-size: 1.6rem;
   font-weight: 300;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
 }
 
 address {
   font-style: normal;
-  margin-bottom: 50px;
+  margin-bottom: 0px;
 }
 
 .tm-address-box {
@@ -744,7 +743,7 @@ address {
 .tm-contact-link {
   display: inline-block;
   color: #626364;
-  margin-bottom: 25px;
+  margin-bottom: 5px;
   text-decoration: none;
 }
 

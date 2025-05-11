@@ -26,6 +26,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
     exit();
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_workers'])) {
+    // Získame hodnoty z formulára
+    $ID = $_POST['update_workers'];
+    $url_obrazka = $_POST['url_fotografie'];
+    $meno = $_POST['meno'];
+    $priezvisko = $_POST['priezvisko'];
+    $pozicia = $_POST['pozicia'];
+    $popis = $_POST['popis'];
+    $facebook = $_POST['facebook'];
+    $twitter = $_POST['twitter'];
+    $instagram = $_POST['instagram'];
+    $youtube = $_POST['youtube'];
+    // Vytvoríme inštanciu triedy JedalnyListok a voláme metódu na update
+    $db = new Workers();
+    $db->updateWorker($ID, $meno, $priezvisko, $pozicia, $popis, $facebook, $twitter, $instagram, $youtube, $url_obrazka);
+
+    // Po úspešnom update presmerujeme na stránku (zobrazíme aktuálne dáta)
+    header("Location: about.php");
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add'])) {
     $nazov = $_POST['nazov'];
     $url_obrazka = $_POST['url_obrazka'];
@@ -40,11 +61,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add'])) {
     exit();
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-worker'])) {
+    $pozicia = $_POST['pozicia'];
+    $popis = $_POST['popis'];
+    $meno = $_POST['meno'];
+    $priezvisko = $_POST['priezvisko'];
+    $url_fotografie = $_POST['url_fotografie'];
+    $facebook = $_POST['facebook'];
+    $twitter = $_POST['twitter'];
+    $instagram = $_POST['instagram'];
+    $youtube = $_POST['youtube'];
+
+    $db = new Workers();
+    $db->addWorker($meno, $priezvisko, $pozicia, $popis, $facebook, $twitter, $instagram, $youtube, $url_fotografie);
+
+    header("Location: about.php");
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete'])) {
     $ID = $_POST['delete'];
     $db = new JedalnyListok();
     $db->deleteJedlo($ID);
     header("Location: index.php");
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_worker'])) {
+    $ID = $_POST['delete_worker'];
+    $db = new Workers();
+    $db->deleteWorker($ID);
+    header("Location: about.php");
     exit();
 }
 
@@ -106,38 +153,72 @@ function generateWorkers() {
     echo '<div class="tm-container-inner tm-persons">';
     echo '<div class="row">';
     foreach ($workers as $worker) {
+        $ID = $worker['ID'];
+        $url_obrazka = $worker['url_fotografie'];
+        $meno = $worker['meno'];
+        $priezvisko = $worker['priezvisko'];
+        $pozicia = $worker['pozicia'];
+        $popis = $worker['popis'];
+        $facebook = $worker['facebook'];
+        $twitter = $worker['twitter'];
+        $instagram = $worker['instagram'];
+        $youtube = $worker['youtube'];
         echo'<article class="col-lg-6">';
+        echo '<button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm(' . $ID . ')">Upraviť</button>';
         echo'<figure class="tm-person">';
-        echo'<img src=' . $worker['url_fotografie'] .' alt="Image" class="img-fluid tm-person-img" />';
+        echo'<img src=' . $url_obrazka .' alt="Image" class="img-fluid tm-person-img" />';
+
+
         echo'<figcaption class="tm-person-description">';
-        echo'<h4 class="tm-person-name">'. $worker['meno'] . " " . $worker['priezvisko'] . '</h4>';
-        echo'<p class="tm-person-title">'. $worker['pozicia'] . '</p>';
-        echo'<p class="tm-person-about">'. $worker['popis'] . '</p>';
+        echo'<h4 class="tm-person-name">'. $meno . " " . $priezvisko . '</h4>';
+        echo'<p class="tm-person-title">'. $pozicia . '</p>';
+        echo'<p class="tm-person-about">'. $popis . '</p>';
         echo'<div>';
         if (!empty($worker['facebook'])) {
-            echo '<a href="' . $worker['facebook'] . '" class="tm-social-link" target="_blank">';
+            echo '<a href="' . $facebook . '" class="tm-social-link" target="_blank">';
             echo '<i class="fab fa-facebook tm-social-icon"></i>';
             echo '</a>';
         }
         if (!empty($worker['twitter'])) {
-            echo '<a href="' . $worker['twitter'] . '" class="tm-social-link" target="_blank">';
+            echo '<a href="' . $twitter . '" class="tm-social-link" target="_blank">';
             echo '<i class="fab fa-twitter tm-social-icon"></i>';
             echo '</a>';
         }
         if (!empty($worker['instagram'])) {
-            echo '<a href="' . $worker['instagram'] . '" class="tm-social-link" target="_blank">';
+            echo '<a href="' . $instagram . '" class="tm-social-link" target="_blank">';
             echo '<i class="fab fa-instagram tm-social-icon"></i>';
             echo '</a>';
         }
         if (!empty($worker['youtube'])) {
-            echo '<a href="' . $worker['youtube'] . '" class="tm-social-link" target="_blank">';
+            echo '<a href="' . $youtube . '" class="tm-social-link" target="_blank">';
             echo '<i class="fab fa-youtube tm-social-icon"></i>';
             echo '</a>';
         }
+
         echo'</div>';
         echo'</figcaption>';
+        echo '<form method="post" action="about.php">';
+        echo '<button type="submit" name="delete_worker" value="' . $ID . '" class="tm-btn tm-btn-danger">Zmazať</button>';
+        echo '</form>';
         echo'</figure>';
+        echo '<div id="edit-form-workers-' . $ID . '" class="edit-form" style="display:none;">';
+        echo '<form method="post" action="about.php">';
+        echo '<input type="hidden" name="update_workers" value="' . $ID . '">';
+        echo '<div class="mb-2"><label>URL obrázka:</label><input type="text" name="url_fotografie" class="form-control" value="' . $url_obrazka . '"></div>';
+        echo '<div class="mb-2"><label>Meno:</label><input type="text" name="meno" class="form-control" value="' . $meno . '"></div>';
+        echo '<div class="mb-2"><label>Priezvisko:</label><input type="text" name="priezvisko" class="form-control" value="' . $priezvisko . '"></div>';
+        echo '<div class="mb-2"><label>Pozícia:</label><input type="text" name="pozicia" class="form-control" value="' . $pozicia . '"></div>';
+        echo '<div class="mb-2"><label>Popis:</label><textarea name="popis" class="form-control">' . $popis . '</textarea></div>';
+        echo '<div class="mb-2"><label>Facebook:</label><input type="text" name="facebook" class="form-control" value="' . $facebook . '"></div>';
+        echo '<div class="mb-2"><label>Twitter:</label><input type="text" name="twitter" class="form-control" value="' . $twitter . '"></div>';
+        echo '<div class="mb-2"><label>Instagram:</label><input type="text" name="instagram" class="form-control" value="' . $instagram . '"></div>';
+        echo '<div class="mb-2"><label>Youtube:</label><input type="text" name="youtube" class="form-control" value="' . $youtube . '"></div>';
+
+        echo '<button type="submit" class="tm-btn tm-btn-success" style="margin-bottom:20px">Uložiť</button>';
+        echo '</form>';
+        echo '</div>';
         echo'</article>';
+
     }
     echo '</div>';
     echo '</div>';

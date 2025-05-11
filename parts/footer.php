@@ -54,3 +54,20 @@
         form.style.display = (form.style.display === "none") ? "block" : "none";
     }
 </script>
+<script>
+    function toggleEdit(type, ID) {
+        var form = document.getElementById("edit-form-" + type + "-" + ID);
+        form.style.display = (form.style.display === "none" || form.style.display === "") ? "block" : "none";
+    }
+</script>
+<script>
+    function toggleEditForm(ID) {
+        var form = document.getElementById("edit-form-workers-" + ID);
+        // Ak je formulár skrytý, zobrazíme ho; inak ho skryjeme
+        if (form.style.display === "none") {
+            form.style.display = "block";
+        } else {
+            form.style.display = "none";
+        }
+    }
+</script>
