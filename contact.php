@@ -185,8 +185,53 @@
                 echo '</div>';
                 echo '</div>';
                 echo '</div>';
-                generateQna();
-            ?>
+                echo '<div class="tm-container-inner-2 tm-info-section">';
+                echo '<div class="row">';
+                echo '<div class="col-12 tm-faq">';
+
+                $nadpis = $obsah->getValue('qna_nadpis');
+                $nadpisID = $obsah->getID('qna_nadpis');
+                $text = $obsah->getValue('qna_text');
+                $textID = $obsah->getID('qna_text');
+                echo '<h2 class="text-center tm-section-title">' . $nadpis . '</h2>';
+                echo'<button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEdit(\'qna_nadpis\', ' . $nadpisID . ')">Upraviť nadpis</button>';
+
+                echo '<div id="edit-form-qna_nadpis-' . $nadpisID . '" class="edit-form" style="display:none;">';
+                echo '<form method="post" action="contact.php" style="margin-left:5px;">';
+                echo '<input type="hidden" name="update_id_c" value="' . $nadpisID . '">';
+                echo '<input type="hidden" name="kluc" value="qna_nadpis">';
+                echo '<div class="mb-2"><input type="text" name="nova_hodnota_c" class="form-control" value="' . $nadpis . '"</input></div>';
+                echo '<button type="submit" class="tm-btn tm-btn-success"">Uložiť</button>';
+                echo '</form>';
+                echo '</div>';
+
+                echo '<p class="text-center">' . $text . '</p>';
+                echo'<button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEdit(\'qna_text\', ' . $textID . ')">Upraviť text</button>';
+
+                echo '<div id="edit-form-qna_text-' . $textID . '" class="edit-form" style="display:none;">';
+                echo '<form method="post" action="contact.php" style="margin-left:5px;">';
+                echo '<input type="hidden" name="update_id_c" value="' . $textID . '">';
+                echo '<input type="hidden" name="kluc" value="qna_text">';
+                echo '<div class="mb-2"><input type="text" name="nova_hodnota_c" class="form-control" value="' . $text . '"</input></div>';
+                echo '<button type="submit" class="tm-btn tm-btn-success"">Uložiť</button>';
+                echo '</form>';
+                echo '</div>';
+
+                echo '<div class="tm-accordion">';
+                ?>
+
+                <button type="button" class="tm-btn tm-btn-primary" style="margin-left: 55px; margin-bottom:20px" onclick="toggleAddForm()">Pridať otázku a odpoveď</button>
+
+                <div id="add-form" style="display:none; margin-top:20px;">
+                    <form method="post" action="contact.php" style="max-width: 20vw; margin-left:55px">
+                        <div class="mb-2"><label>Otázka:</label><textarea name="otazka" class="form-control" required></textarea></div>
+                        <div class="mb-2"><label>Odpoveď:</label><textarea name="odpoved" class="form-control" required></textarea></div>
+                        <button type="submit" name="add-qna" class="tm-btn tm-btn-success" style="margin-top: 20px; margin-bottom:20px">Uložiť</button>
+                    </form>
+                </div>
+                <?php
+                    generateQna();
+                ?>
 		</main>
 		<?php include "parts/footer.php" ?>
 	</div>

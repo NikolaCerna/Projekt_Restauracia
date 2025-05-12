@@ -22,29 +22,24 @@ class About extends Database {
             $ID = $item['ID'];
             $icon = $item['icon'];
             $text = $item['text'];
-            $button = $item['button'];
             $finalAbout[$ID] = [
                 'ID' => $ID,
                 'icon' => $icon,
                 'text' => $text,
-                'button' => $button
                             ];
         }
         return $finalAbout;
     }
 
-    public function updateAbout(int $ID, string $icon = "", string $text = "", string $button = ""): bool
+    public function updateAbout(int $ID, string $icon = "", string $text = ""): bool
     {
-        $sql = "UPDATE Informacie SET ";
+        $sql = "UPDATE about SET ";
 
         if (!empty($icon)) {
             $sql .= " icon = '" . $icon . "'";
         }
         if (!empty($text)) {
-            $sql .= " text = '" . $text . "'";
-        }
-        if (!empty($button)) {
-            $sql .= " button = '" . $button . "'";
+            $sql .= ", text = '" . $text . "'";
         }
         $sql .= " WHERE ID = " . $ID;
 

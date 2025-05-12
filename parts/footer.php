@@ -71,3 +71,25 @@
         }
     }
 </script>
+<script>
+    function toggleEditForm(ID) {
+        var form = document.getElementById("edit-form-about-" + ID);
+        // Ak je formulár skrytý, zobrazíme ho; inak ho skryjeme
+        if (form.style.display === "none") {
+            form.style.display = "block";
+        } else {
+            form.style.display = "none";
+        }
+    }
+</script>
+<script>
+    function toggleEditForm(ID) {
+        var form = document.getElementById("edit-form-qna-" + ID);
+        // Ak je formulár skrytý, zobrazíme ho; inak ho skryjeme
+        if (form.style.display === "none") {
+            form.style.display = "block";
+        } else {
+            form.style.display = "none";
+        }
+    }
+</script>

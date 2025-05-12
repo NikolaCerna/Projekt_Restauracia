@@ -11,9 +11,9 @@ class QNA extends Database {
         $this->connection = $this->getConnection();
     }
 
-    public function insertQna(string $otazky, string $odpovede): bool
+    public function insertQna(string $otazka, string $odpoved): bool
     {
-        $sql = "INSERT INTO faq(otazka, odpoved) VALUES ('" . $otazky . "', '" . $odpovede . "')";
+        $sql = "INSERT INTO faq(otazka, odpoved) VALUES ('" . $otazka . "', '" . $odpoved . "')";
         $stmt = $this->connection->prepare($sql);
         return $stmt->execute();
     }
@@ -47,7 +47,7 @@ class QNA extends Database {
 
     public function updateQna(int $ID, string $otazka = "", string $odpoved = ""): bool
     {
-        $sql = "UPDATE Qna SET ";
+        $sql = "UPDATE faq SET ";
 
         if (!empty($otazka)) {
             $sql .= " otazka = '" . $otazka . "'";

@@ -47,6 +47,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_workers'])) {
     exit();
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_about'])) {
+    // Získame hodnoty z formulára
+    $ID = $_POST['update_about'];
+    $icon = $_POST['icon'];
+    $text = $_POST['text'];
+    $db = new About();
+    $db->updateAbout($ID, $icon, $text);
+    // Po úspešnom update presmerujeme na stránku (zobrazíme aktuálne dáta)
+    header("Location: about.php");
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_qna'])) {
+    // Získame hodnoty z formulára
+    $ID = $_POST['update_qna'];
+    $otazka = $_POST['otazka'];
+    $odpoved = $_POST['odpoved'];
+    $db = new QNA();
+    $db->updateQna($ID, $otazka, $odpoved);
+
+    header("Location: contact.php");
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add'])) {
     $nazov = $_POST['nazov'];
     $url_obrazka = $_POST['url_obrazka'];
@@ -79,6 +103,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-worker'])) {
     exit();
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-qna'])) {
+    $otazka = $_POST['otazka'];
+    $odpoved = $_POST['odpoved'];
+
+    $db = new QNA();
+    $db->insertQna($otazka, $odpoved);
+
+    header("Location: contact.php");
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete'])) {
     $ID = $_POST['delete'];
     $db = new JedalnyListok();
@@ -92,6 +127,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_worker'])) {
     $db = new Workers();
     $db->deleteWorker($ID);
     header("Location: about.php");
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_qna'])) {
+    $ID = $_POST['delete_qna'];
+    $db = new QNA();
+    $db->deleteQna($ID);
+    header("Location: contact.php");
     exit();
 }
 
@@ -228,16 +271,33 @@ function generateWorkers() {
 function generateQna() {
     $db = new QNA();
     $qna = $db->getQna();
-    echo '<div class="tm-container-inner-2 tm-info-section">';
-    echo '<div class="row">';
-    echo '<div class="col-12 tm-faq">';
-    echo '<h2 class="text-center tm-section-title">FAQs</h2>';
-    echo '<p class="text-center">Here you can find answers to the most frequently asked questions from our customers.</p>';
-    echo '<div class="tm-accordion">';
     foreach ($qna as $item) {
-        echo '<button class="accordion">' . $item['otazka'] . '</button>';
+        $ID = $item['ID'];
+        $otazka = $item['otazka'];
+        $odpoved = $item['odpoved'];
+
+        echo '<button class="accordion">' . $otazka . '</button>';
         echo '<div class="panel">';
-        echo '<p>' . $item['odpoved'] . '</p>';
+        echo '<p>' . $odpoved . '</p>';
+        echo '</div>';
+
+        echo '<div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">';
+        echo '<button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm(' . $ID . ')">Upraviť otázku</button>';
+        echo '<form method="post" action="contact.php" style="margin: 0;">';
+        echo '<button type="submit" name="delete_qna" value="' . $ID . '" class="tm-btn tm-btn-danger">Zmazať otázku</button>';
+        echo '</form>';
+        echo '</div>';
+
+        echo '<div id="edit-form-qna-' . $ID . '" class="edit-form" style="display:none;">';
+        echo '<form method="post" action="contact.php">';
+        echo '<input type="hidden" name="update_qna" value="' . $ID . '">';
+
+        echo '<div class="mb-2"><label>Popis:</label><textarea name="otazka" class="form-control">' . $otazka . '</textarea></div>';
+        echo '<div class="mb-2"><label>Popis:</label><textarea name="odpoved" class="form-control">' . $odpoved . '</textarea></div>';
+
+
+        echo '<button type="submit" class="tm-btn tm-btn-success" style="margin-bottom:20px">Uložiť</button>';
+        echo '</form>';
         echo '</div>';
     }
     echo '</div>';
@@ -251,14 +311,29 @@ function generateAbout() {
     echo '<div class="tm-container-inner tm-features">';
     echo '<div class="row">';
     foreach ($about as $item) {
+        $icon = $item['icon'];
+        $text = $item['text'];
+        $ID = $item['ID'];
         echo '<div class="col-lg-4">';
         echo '<div class="tm-feature">';
-        echo '<i class="fas fa-4x fa-' . $item["icon"] . ' tm-feature-icon"></i>';
-        echo '<p class="tm-feature-description">' . $item["text"] . '</p>';
-        echo '<a href="index.php" class="tm-btn tm-btn-' . $item["button"] . '">Read More</a>';
+        echo '<i class="fas fa-4x fa-' . $icon . ' tm-feature-icon"></i>';
+        echo '<p class="tm-feature-description">' . $text . '</p>';
+        echo '<button type="button" class="tm-btn tm-btn-warning" style="margin: auto" onclick="toggleEditForm(' . $ID . ')">Upraviť</button>';
+
+        echo '<div id="edit-form-about-' . $ID . '" class="edit-form" style="display:none;">';
+        echo '<form method="post" action="about.php">';
+        echo '<input type="hidden" name="update_about" value="' . $ID . '">';
+        echo '<div class="mb-2"><label>Icon:</label><input type="text" name="icon" class="form-control" value="' . $icon . '"></div>';
+        echo '<div class="mb-2"><label>Text:</label><textarea name="text" class="form-control">' . $text . '</textarea></div>';
+        echo '<button type="submit" class="tm-btn tm-btn-success" style="margin-bottom:20px">Uložiť</button>';
+        echo '</form>';
+        echo '</div>';
+
+
         echo '</div>';
         echo '</div>';
     }
+    echo '<a href="index.php" class="tm-btn tm-btn-success" style="margin: auto;">Read More</a>';
     echo '</div>';
     echo '</div>';
 }
