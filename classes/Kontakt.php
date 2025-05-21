@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', "On");
 if (!defined('__ROOT__')) {
-    define('__ROOT__', __DIR__);
+    define('__ROOT__', dirname(dirname(__FILE__)));
 }
 require_once(__ROOT__.'/classes/Database.php');
 class Kontakt extends Database {
@@ -26,8 +26,27 @@ class Kontakt extends Database {
         }
     }
 
-    public function getSprava($meno, $email, $sprava) {
-        $sql = "GET * FROM kontakt";
+    public function getAllSpravy() {
+        $sql = "SELECT * FROM kontakt";
         $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteSpravu($ID) {
+        if (!is_numeric($ID)) {
+            echo 'ID otázky musí byť číslo.';
+            exit;
+        }
+        $sql = "DELETE FROM kontakt WHERE ID = :ID";
+        $statement = $this->connection->prepare($sql);
+        try {
+            $insert = $statement->execute([':ID' => $ID]);
+            http_response_code(200);
+            return $insert;
+        } catch (Exception $exception) {
+            http_response_code(500);
+            return false;
+        }
     }
 }

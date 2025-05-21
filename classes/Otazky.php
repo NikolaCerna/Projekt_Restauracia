@@ -36,7 +36,14 @@ class Otazky extends Database {
         }
         $sql = "DELETE FROM otazky WHERE ID = :ID";
         $statement = $this->connection->prepare($sql);
-        return $statement->execute();
+        try {
+            $insert = $statement->execute([':ID' => $ID]);
+            http_response_code(200);
+            return $insert;
+        } catch (Exception $exception) {
+            http_response_code(500);
+            return false;
+        }
     }
 
     public function updateOtazky($ID, $otazka, $odpoved) {

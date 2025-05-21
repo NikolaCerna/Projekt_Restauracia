@@ -151,6 +151,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete'])) {
     exit();
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_sprava'])) {
+    $ID = $_POST['delete_sprava'];
+    $db = new Kontakt();
+    $db->deleteSpravu($ID);
+    header("Location: spravy.php");
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_worker'])) {
     $ID = $_POST['delete_worker'];
     $db = new Workers();
