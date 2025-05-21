@@ -1,11 +1,10 @@
 <?php
-declare(strict_types=1);
-
-require_once "functions.php";
-require_once "classes/JedalnyListok.php";
-require_once "classes/Workers.php";
-require_once "classes/Otazky.php";
-require_once "classes/InformacieJedla.php";
+include_once "functions.php";
+include_once "classes/JedalnyListok.php";
+include_once "classes/Workers.php";
+include_once "classes/Otazky.php";
+include_once "classes/InformacieJedla.php";
+include_once "classes/Obsah.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
     // Získame hodnoty z formulára
@@ -65,6 +64,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_qna'])) {
     $odpoved = $_POST['odpoved'];
     $db = new Otazky();
     $db->updateOtazky($ID, $otazka, $odpoved);
+
+    header("Location: contact.php");
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_id'], $_POST['nova_hodnota'])) {
+    $id = (int)$_POST['update_id'];
+    $novaHodnota = trim($_POST['nova_hodnota']);
+    $db = new Obsah();
+    $db->updateObsah($id, $novaHodnota);
+
+    header("Location: index.php");
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_id_a'], $_POST['nova_hodnota_a'])) {
+    $id = (int)$_POST['update_id_a'];
+    $novaHodnota = trim($_POST['nova_hodnota_a']);
+    $db = new Obsah();
+    $db->updateObsah($id, $novaHodnota);
+
+    header("Location: about.php");
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_id_c'], $_POST['nova_hodnota_c'])) {
+    $id = (int)$_POST['update_id_c'];
+    $novaHodnota = trim($_POST['nova_hodnota_c']);
+    $db = new Obsah();
+    $db->updateObsah($id, $novaHodnota);
 
     header("Location: contact.php");
     exit();
@@ -136,4 +165,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_qna'])) {
     header("Location: contact.php");
     exit();
 }
+
 ?>

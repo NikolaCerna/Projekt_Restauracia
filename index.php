@@ -7,21 +7,11 @@ include_once "parts/header.php";
             include_once "classes/Obsah.php";
             $obsah = new Obsah();
 
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_id'], $_POST['nova_hodnota'])) {
-                $id = (int)$_POST['update_id'];
-                $novaHodnota = trim($_POST['nova_hodnota']);
-                $obsah->updateObsah($id, $novaHodnota);
-                header("Location: index.php");
-                exit();
-            }
-
-            // Načítaj hodnoty a IDčka
             $nadpis = $obsah->getValue('nadpis');
             $nadpisID = $obsah->getID('nadpis');
             $text = $obsah->getValue('text');
             $textID = $obsah->getID('text');
 
-            // Výpis nadpisu + tlačidlo + formulár
             echo '<div class=" tm-welcome-section">';
             echo '<h2 class="col-12 text-center tm-section-title" id="nadpis' . $nadpisID . '">' . $nadpis . '</h2>';
             echo '<button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEdit(\'nadpis\', ' . $nadpisID . ')">Upraviť nadpis</button>';
@@ -35,7 +25,6 @@ include_once "parts/header.php";
             echo '</form>';
             echo '</div>';
 
-            // Výpis textu + tlačidlo + formulár
             echo '<p class="col-12 text-center" style="margin-top:50px" id="text' . $textID . '">' . $text . '</p>';
             echo '<button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEdit(\'text\', ' . $textID . ')">Upraviť text</button>';
 
@@ -61,6 +50,11 @@ include_once "parts/header.php";
 				</nav>
 			</div>
             <div>
+                <?php
+                    include_once "classes/Kategorie.php";
+                    $kategoriaDB = new Kategorie();
+                    $kategorie = $kategoriaDB->getAll();
+                ?>
                 <button type="button" class="tm-btn tm-btn-primary" style="margin-left: 55px; margin-bottom:20px" onclick="toggleAddForm()">Pridať jedlo</button>
 
                 <div id="add-form" style="display:none; margin-top:20px;">
@@ -71,9 +65,11 @@ include_once "parts/header.php";
                         <div class="mb-2"><label>Cena:</label><input type="text" name="cena" class="form-control" required></div>
                         <div class="mb-2"><label>Kategória:</label>
                             <select name="kategoria" class="form-control" required>
-                                <option value="pizza">pizza</option>
-                                <option value="salad">salad</option>
-                                <option value="noodle">noodle</option>
+                                <?php
+                                foreach ($kategorie as $kat) {
+                                    echo '<option value="' . $kat['ID'] . '">' . $kat['nazov'] . '</option>';
+                                }
+                                ?>
                             </select>
                         </div>
                         <button type="submit" name="add" class="tm-btn tm-btn-success" style="margin-top: 20px; margin-bottom:20px">Uložiť</button>
@@ -81,16 +77,16 @@ include_once "parts/header.php";
                 </div>
             <!-- Gallery -->
             <div id="tm-gallery-page-pizza" class="tm-gallery-page">
-                <?php generateMenu("pizza"); ?>
+                <?php generateMenu($kategorie[0]['nazov']); ?>
 
             </div>
 
             <div id="tm-gallery-page-salad" class="tm-gallery-page hidden">
-                <?php generateMenu("salad"); ?>
+                <?php generateMenu($kategorie[1]['nazov']); ?>
             </div>
 
             <div id="tm-gallery-page-noodle" class="tm-gallery-page hidden">
-                <?php generateMenu("noodle"); ?>
+                <?php generateMenu($kategorie[2]['nazov']); ?>
             </div><!-- Gallery -->
             </div>
 

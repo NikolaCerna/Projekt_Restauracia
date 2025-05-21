@@ -7,6 +7,7 @@ include_once "classes/JedalnyListok.php";
 include_once "classes/Workers.php";
 include_once "classes/Otazky.php";
 include_once "classes/InformacieJedla.php";
+include_once "classes/Kategorie.php";
 
 function generateMenu($kategoria) {
     $db = new JedalnyListok();
@@ -43,11 +44,14 @@ function generateMenu($kategoria) {
             echo '<div class="mb-2"><label>Názov:</label><input type="text" name="nazov" class="form-control" value="' . $nazov . '"></div>';
             echo '<div class="mb-2"><label>Popis:</label><textarea name="popis" class="form-control">' . $popis . '</textarea></div>';
             echo '<div class="mb-2"><label>Cena:</label><input type="text" name="cena" class="form-control" value="' . $cena . '"></div>';
-            echo '<div class="mb-2"><label>Kategoria:</label><select name="kategoria" class="form-control">';
-                        echo '<option value="pizza">pizza</option>';
-                        echo '<option value="salad">salad</option>';
-                        echo '<option value="noodle">noodle</option>';
-                    echo '</select>';
+            $kategoriaDB = new Kategorie();
+            $kategorie = $kategoriaDB->getAll();
+                    echo '<div class="mb-2"><label>Kategoria:</label><select name="kategoria" class="form-control">';
+                    foreach ($kategorie as $kat) {
+                        $selected = ($kat['nazov'] == $item['kategoria']) ? 'selected' : '';
+                        echo '<option value="' . $kat['ID'] . '" ' . $selected . '>' . $kat['nazov'] . '</option>';
+                    }
+                    echo '</select></div>';
             echo '<button type="submit" class="tm-btn tm-btn-success" style="margin-bottom:20px">Uložiť</button>';
             echo '</form>';
             echo '</div>';
@@ -227,7 +231,7 @@ function getMenuData(string $type): array {
                     'path' => 'index.php'
                 ],
                 'about' => [
-                    'name' => 'InformacieJedla',
+                    'name' => 'About',
                     'path' => 'about.php'
                 ],
                 'contact' => [

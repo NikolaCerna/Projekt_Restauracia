@@ -7,14 +7,6 @@ include_once "parts/header.php";
                 include_once "classes/Obsah.php";
                 $obsah = new Obsah();
 
-                if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_id_c'], $_POST['nova_hodnota_c'])) {
-                    $id = (int)$_POST['update_id_c'];
-                    $novaHodnota = trim($_POST['nova_hodnota_c']);
-                    $obsah->updateObsah($id, $novaHodnota);
-                    header("Location: contact.php");
-                    exit();
-                }
-
                 $nadpis = $obsah->getValue('contact_nadpis');
                 $nadpisID = $obsah->getID('contact_nadpis');
                 $text = $obsah->getValue('contact_text');

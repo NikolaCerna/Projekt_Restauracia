@@ -12,13 +12,6 @@ include_once "parts/header.php";
                 $text = $obsah->getValue('about_text');
                 $textID = $obsah->getID('about_text');
 
-                if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_id_a'], $_POST['nova_hodnota_a'])) {
-                    $id = (int)$_POST['update_id_a'];
-                    $novaHodnota = trim($_POST['nova_hodnota_a']);
-                    $obsah->updateObsah($id, $novaHodnota);
-                    header("Location: about.php");
-                    exit();
-                }
 
                 echo'<div class="tm-welcome-section">';
                 echo'<h2 class="col-12 text-center tm-section-title">' . $nadpis . '</h2>';

@@ -1,6 +1,4 @@
 <?php
-declare(strict_types=1);
-
 error_reporting(E_ALL);
 ini_set('display_errors', "On");
 
@@ -16,73 +14,93 @@ class JedalnyListok extends Database {
         $this->connection = $this->getConnection();
     }
 
-    public function addJedlo(string $nazov, string $url_obrazka, string $popis, float $cena, string $kategoria): bool
+    public function addJedlo(string $nazov, string $url_obrazka, string $popis, float $cena, int $id_kategoria): bool
     {
-        $sql = "INSERT INTO jedalny_listok(nazov, url_obrazka, popis, cena, kategoria) VALUES ('" . $nazov . "', '" . $url_obrazka . "', '" . $popis . "', '". $cena . "', '" . $kategoria . "')";
+        $sql = "INSERT INTO jedalny_listok(nazov, url_obrazka, popis, cena, id_kategoria) VALUES (:nazov, :url_obrazka, :popis, :cena, :id_kategoria)";
         $stmt = $this->connection->prepare($sql);
-        return $stmt->execute();
+        return $stmt->execute([
+            'nazov' => $nazov,
+            'url_obrazka' => $url_obrazka,
+            'popis' => $popis,
+            'cena' => $cena,
+            'id_kategoria' => $id_kategoria
+        ]);
     }
 
     public function getJedalnyListok(): array
     {
-        $sql = "SELECT * FROM jedalny_listok";
+        $sql = "SELECT j.*, k.nazov AS kategoria_nazov 
+                FROM jedalny_listok j 
+                INNER JOIN kategorie k ON j.id_kategoria = k.ID";
         $query = $this->connection->query($sql);
         $data = $query->fetchAll(\PDO::FETCH_ASSOC);
+
         $finalJedalnyListok = [];
 
         foreach ($data as $item) {
             $ID = $item['ID'];
-            $nazov = $item['nazov'];
-            $url_obrazka = $item['url_obrazka'];
-            $popis = $item['popis'];
-            $cena = $item['cena'];
-            $kategoria = $item['kategoria'];
             $finalJedalnyListok[$ID] = [
                 'ID' => $ID,
-                'nazov' => $nazov,
-                'url_obrazka' => $url_obrazka,
-                'popis' => $popis,
-                'cena' => $cena,
-                'kategoria' => $kategoria
+                'nazov' => $item['nazov'],
+                'url_obrazka' => $item['url_obrazka'],
+                'popis' => $item['popis'],
+                'cena' => $item['cena'],
+                'id_kategoria' => $item['id_kategoria'],
+                'kategoria' => $item['kategoria_nazov']
             ];
         }
 
         return $finalJedalnyListok;
     }
 
-    public function deleteJedlo(int $ID): bool
+    public function getKategorie(): array
     {
-        $sql = "DELETE FROM jedalny_listok WHERE ID = " . $ID;
-        $stmt = $this->connection->prepare($sql);
-        return $stmt->execute();
+        $sql = "SELECT * FROM kategorie";
+        $query = $this->connection->query($sql);
+        return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function updateJedlo(int $ID, string $nazov = "", string $url_obrazka = "", string $popis = "", float $cena = null, string $kategoria = ""): bool
+    public function deleteJedlo(int $ID): bool
     {
-        $sql = "UPDATE jedalny_listok SET ";
+        $sql = "DELETE FROM jedalny_listok WHERE ID = :ID";
+        $stmt = $this->connection->prepare($sql);
+        return $stmt->execute(['ID' => $ID]);
+    }
+
+    public function updateJedlo(int $ID, string $nazov = "", string $url_obrazka = "", string $popis = "", float $cena = null, int $id_kategoria = 0): bool
+    {
+        $fields = [];
+        $params = ['ID' => $ID];
 
         if (!empty($nazov)) {
-            $sql .= " nazov = '" . $nazov . "'";
+            $fields[] = "nazov = :nazov";
+            $params['nazov'] = $nazov;
         }
 
         if (!empty($url_obrazka)) {
-            $sql .= ", url_obrazka = '" . $url_obrazka . "'";
+            $fields[] = "url_obrazka = :url_obrazka";
+            $params['url_obrazka'] = $url_obrazka;
         }
 
         if (!empty($popis)) {
-            $sql .= ", popis = '" . $popis . "'";
+            $fields[] = "popis = :popis";
+            $params['popis'] = $popis;
         }
 
-        if (!empty($cena)) {
-            $sql .= ", cena = '" . $cena . "'";
-        }
-        if (!empty($kategoria)) {
-            $sql .= ", kategoria = '" . $kategoria . "'";
+        if (!is_null($cena)) {
+            $fields[] = "cena = :cena";
+            $params['cena'] = $cena;
         }
 
-        $sql .= " WHERE ID = " . $ID;
+        if (!empty($id_kategoria)) {
+            $fields[] = "id_kategoria = :id_kategoria";
+            $params['id_kategoria'] = $id_kategoria;
+        }
 
+        if (empty($fields)) return false;
+
+        $sql = "UPDATE jedalny_listok SET " . implode(", ", $fields) . " WHERE ID = :ID";
         $stmt = $this->connection->prepare($sql);
-        return $stmt->execute();
+        return $stmt->execute($params);
     }
 }
