@@ -5,9 +5,7 @@ ini_set('display_errors', "On");
 require_once(__ROOT__.'/classes/Database.php');
 
 class JedalnyListok extends Database {
-
     protected $connection;
-
     public function __construct()
     {
         $this->connect();
