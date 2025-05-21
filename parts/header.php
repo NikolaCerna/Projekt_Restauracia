@@ -12,8 +12,9 @@
 </head>
 
 <body>
-<?php include_once "functions.php";
-$menu = getMenuData("header");
+<?php
+    include_once "functions.php";
+    $menu = getMenuData("header");
 ?>
 <div class="container">
     <header class="placeholder">

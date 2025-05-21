@@ -1,4 +1,7 @@
-<?php include "parts/header.php" ?>
+<?php
+include_once "handlers.php";
+include_once "parts/header.php";
+?>
 		<main>
             <?php
             include_once "classes/Obsah.php";

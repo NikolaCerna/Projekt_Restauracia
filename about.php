@@ -1,4 +1,7 @@
-<?php include "parts/header.php" ?>
+<?php
+include_once "handlers.php";
+include_once "parts/header.php";
+?>
 		<main>
             <?php
                 include_once "classes/Obsah.php";
@@ -65,19 +68,6 @@
                 </div>
                 <?php
                 generateWorkers();
-
-                //$url = $obsah->getValue('about_background');
-
-                //echo '<div class="tm-container-inner tm-featured-image">';
-                //echo '<div class="row">';
-                //echo '<div class="col-12">';
-                //echo '<div class="placeholder-2">';
-                //echo '<div class="parallax-window-2" data-parallax="scroll" data-image-src="' . $url . '"></div>';
-                //echo '</div>';
-                //echo '</div>';
-                //echo '</div>';
-                //echo '</div>';
-
                 generateInformacieJedla();
 
                 $nadpis = $obsah->getValue('history_nadpis');

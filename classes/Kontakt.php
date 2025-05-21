@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 error_reporting(E_ALL);
 ini_set('display_errors', "On");
 require_once(__ROOT__.'/classes/Database.php');
@@ -10,7 +12,8 @@ class Kontakt extends Database {
         $this->connection = $this->getConnection();
     }
 
-    public function getSprava($meno, $email, $sprava) {
+    public function getSprava(string $meno, string $email, string $sprava): bool
+    {
         $sql = "INSERT INTO kontakt (meno, email, sprava)
                 VALUES (:meno, :email, :sprava)";
         $statement = $this->connection->prepare($sql);

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 error_reporting(E_ALL);
 ini_set('display_errors', "On");
 require_once(__ROOT__.'/classes/Database.php');
@@ -6,21 +8,22 @@ require_once(__ROOT__.'/classes/Database.php');
 class Otazky extends Database {
     protected $connection;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->connect();
         $this->connection = $this->getConnection();
     }
 
     public function insertOtazky(string $otazka, string $odpoved): bool
     {
-        $sql = "INSERT INTO Otazky(otazka, odpoved) VALUES ('" . $otazka . "', '" . $odpoved . "')";
+        $sql = "INSERT INTO otazky(otazka, odpoved) VALUES ('" . $otazka . "', '" . $odpoved . "')";
         $stmt = $this->connection->prepare($sql);
         return $stmt->execute();
     }
 
     public function getOtazky(): array
     {
-        $sql = "SELECT * FROM Otazky";
+        $sql = "SELECT * FROM otazky";
         $query = $this->connection->query($sql);
         $data = $query->fetchAll(\PDO::FETCH_ASSOC);
         $finalQna = [];
@@ -40,14 +43,14 @@ class Otazky extends Database {
 
     public function deleteOtazky(int $ID): bool
     {
-        $sql = "DELETE FROM Otazky WHERE ID = " . $ID;
+        $sql = "DELETE FROM otazky WHERE ID = " . $ID;
         $stmt = $this->connection->prepare($sql);
         return $stmt->execute();
     }
 
     public function updateOtazky(int $ID, string $otazka = "", string $odpoved = ""): bool
     {
-        $sql = "UPDATE Otazky SET ";
+        $sql = "UPDATE otazky SET ";
 
         if (!empty($otazka)) {
             $sql .= " otazka = '" . $otazka . "'";

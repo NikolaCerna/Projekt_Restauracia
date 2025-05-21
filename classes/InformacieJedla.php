@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 error_reporting(E_ALL);
 ini_set('display_errors', "On");
 require_once(__ROOT__.'/classes/Database.php');
@@ -6,7 +8,8 @@ require_once(__ROOT__.'/classes/Database.php');
 class InformacieJedla extends Database {
     protected $connection;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->connect();
         $this->connection = $this->getConnection();
     }
@@ -26,7 +29,7 @@ class InformacieJedla extends Database {
                 'ID' => $ID,
                 'icon' => $icon,
                 'text' => $text,
-                            ];
+            ];
         }
         return $finalInformacieJedla;
     }
