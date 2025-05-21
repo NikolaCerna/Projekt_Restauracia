@@ -5,6 +5,7 @@ include_once "classes/Workers.php";
 include_once "classes/Otazky.php";
 include_once "classes/InformacieJedla.php";
 include_once "classes/Obsah.php";
+require_once "classes/Kontakt.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
     // Získame hodnoty z formulára
@@ -164,6 +165,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_qna'])) {
     $db->deleteOtazky($ID);
     header("Location: contact.php");
     exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    session_start();
+    $meno = $_POST['meno'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $sprava = $_POST['sprava'] ?? '';
+
+    $_SESSION['meno'] = $meno;
+    $_SESSION['email'] = $email;
+    $_SESSION['sprava'] = $sprava;
+
+    $kontakt = new Kontakt();
+    $ulozene = $kontakt->ulozitSpravu($meno, $email, $sprava);
+
+    if ($ulozene) {
+        header("Location: thankyou.php");
+        exit;
+    } else {
+        echo "Nastala chyba pri odosielaní správy.";
+    }
 }
 
 ?>
