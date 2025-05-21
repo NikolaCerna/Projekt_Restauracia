@@ -78,7 +78,7 @@
                 //echo '</div>';
                 //echo '</div>';
 
-                generateAbout();
+                generateInformacieJedla();
 
                 $nadpis = $obsah->getValue('history_nadpis');
                 $nadpisID = $obsah->getID('history_nadpis');

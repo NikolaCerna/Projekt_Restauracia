@@ -10,8 +10,8 @@ class Kontakt extends Database {
         $this->connection = $this->getConnection();
     }
 
-    public function ulozitSpravu($meno, $email, $sprava) {
-        $sql = "INSERT INTO contact_page (meno, email, sprava)
+    public function getSprava($meno, $email, $sprava) {
+        $sql = "INSERT INTO kontakt (meno, email, sprava)
                 VALUES (:meno, :email, :sprava)";
         $statement = $this->connection->prepare($sql);
         try {

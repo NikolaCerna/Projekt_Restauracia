@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', "On");
 require_once(__ROOT__.'/classes/Database.php');
 
-class About extends Database {
+class InformacieJedla extends Database {
     protected $connection;
 
     public function __construct() {
@@ -11,29 +11,29 @@ class About extends Database {
         $this->connection = $this->getConnection();
     }
 
-    public function getAbout(): array
+    public function getInformacieJedla(): array
     {
-        $sql = "SELECT * FROM about";
+        $sql = "SELECT * FROM informacie_jedla";
         $query = $this->connection->query($sql);
         $data = $query->fetchAll(\PDO::FETCH_ASSOC);
-        $finalAbout = [];
+        $finalInformacieJedla = [];
 
         foreach ($data as $item) {
             $ID = $item['ID'];
             $icon = $item['icon'];
             $text = $item['text'];
-            $finalAbout[$ID] = [
+            $finalInformacieJedla[$ID] = [
                 'ID' => $ID,
                 'icon' => $icon,
                 'text' => $text,
                             ];
         }
-        return $finalAbout;
+        return $finalInformacieJedla;
     }
 
-    public function updateAbout(int $ID, string $icon = "", string $text = ""): bool
+    public function updateInformacieJedla(int $ID, string $icon = "", string $text = ""): bool
     {
-        $sql = "UPDATE about SET ";
+        $sql = "UPDATE informacie_jedla SET ";
 
         if (!empty($icon)) {
             $sql .= " icon = '" . $icon . "'";

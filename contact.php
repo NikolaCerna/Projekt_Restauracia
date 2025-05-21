@@ -105,7 +105,7 @@
                     echo '<form method="post" action="contact.php" style="margin-left:5px;">';
                     echo '<input type="hidden" name="update_id_c" value="' . $adresaID . '">';
                     echo '<input type="hidden" name="kluc" value="adresa">';
-                    echo '<div class="mb-2"><textarea name="nova_hodnota_c" class="form-control">' . $adresa . '"</textarea></div>';
+                    echo '<div class="mb-2"><textarea name="nova_hodnota_c" class="form-control">' . $adresa . '</textarea></div>';
                     echo '<button type="submit" class="tm-btn tm-btn-success" style="margin-bottom:20px">Uložiť</button>';
                     echo '</form>';
                     echo '</div>';
@@ -119,8 +119,8 @@
                     echo '<form method="post" action="contact.php" style="margin-left:5px;">';
                     echo '<input type="hidden" name="update_id_c" value="' . $telefonne_cisloID . '">';
                     echo '<input type="hidden" name="kluc" value="telefonne_cislo">';
-                    echo '<div class="mb-2"><input type="text" name="nova_hodnota_c" class="form-control" value="' . $telefonne_cislo . '"</input></div>';
-                    echo '<button type="submit" class="tm-btn tm-btn-success"">Uložiť</button>';
+                    echo '<div class="mb-2"><input type="text" name="nova_hodnota_c" class="form-control" value="' . $telefonne_cislo . '"></div>';
+                    echo '<button type="submit" class="tm-btn tm-btn-success">Uložiť</button>';
                     echo '</form>';
                     echo '</div>';
 
@@ -134,8 +134,8 @@
                     echo '<form method="post" action="contact.php" style="margin-left:5px;">';
                     echo '<input type="hidden" name="update_id_c" value="' . $emailID . '">';
                     echo '<input type="hidden" name="kluc" value="email">';
-                    echo '<div class="mb-2"><input type="text" name="nova_hodnota_c" class="form-control" value="' . $email . '"</input></div>';
-                    echo '<button type="submit" class="tm-btn tm-btn-success"">Uložiť</button>';
+                    echo '<div class="mb-2"><input type="text" name="nova_hodnota_c" class="form-control" value="' . $email . '"></div>';
+                    echo '<button type="submit" class="tm-btn tm-btn-success">Uložiť</button>';
                     echo '</form>';
                     echo '</div>';
 
@@ -170,21 +170,21 @@
                 echo '<div class="col-12">';
                 echo '<div class="tm-map">';
                 echo '<iframe src="' . $mapa .'" frameborder="0" style="border:0;" allowfullscreen=""></iframe>';
-                echo'<button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEdit(\'mapa\', ' . $mapaID . ')">Upraviť adresu (mapa)</button>';
 
-                echo '<div id="edit-form-mapa-' . $mapaID . '" class="edit-form" style="display:none;">';
-                echo '<form method="post" action="contact.php" style="margin-left:5px;">';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+                echo'<button type="button" class="tm-btn tm-btn-warning" style="margin: auto; margin-top: 10px" onclick="toggleEdit(\'mapa\', ' . $mapaID . ')">Upraviť adresu (mapa)</button>';
+                echo '<div id="edit-form-mapa-' . $mapaID . '" class="edit-form" style="display:none; margin-top:10px;">';
+                echo '<form method="post" action="contact.php" style="margin-left:5px; margin-bottom:10px;">';
                 echo '<input type="hidden" name="update_id_c" value="' . $mapaID . '">';
                 echo '<input type="hidden" name="kluc" value="mapa">';
-                echo '<div class="mb-2"><input type="text" name="nova_hodnota_c" class="form-control" value="' . $mapa . '"</input></div>';
-                echo '<button type="submit" class="tm-btn tm-btn-success"">Uložiť</button>';
+                echo '<div class="mb-2"><input type="text" name="nova_hodnota_c" class="form-control" value="' . $mapa . '"></div>';
+                echo '<button type="submit" class="tm-btn tm-btn-success">Uložiť</button>';
                 echo '</form>';
                 echo '</div>';
+                echo '</div>';
 
-                echo '</div>';
-                echo '</div>';
-                echo '</div>';
-                echo '</div>';
                 echo '<div class="tm-container-inner-2 tm-info-section">';
                 echo '<div class="row">';
                 echo '<div class="col-12 tm-faq">';
@@ -200,7 +200,7 @@
                 echo '<form method="post" action="contact.php" style="margin-left:5px;">';
                 echo '<input type="hidden" name="update_id_c" value="' . $nadpisID . '">';
                 echo '<input type="hidden" name="kluc" value="qna_nadpis">';
-                echo '<div class="mb-2"><input type="text" name="nova_hodnota_c" class="form-control" value="' . $nadpis . '"</input></div>';
+                echo '<div class="mb-2"><input type="text" name="nova_hodnota_c" class="form-control" value="' . $nadpis . '"></div>';
                 echo '<button type="submit" class="tm-btn tm-btn-success"">Uložiť</button>';
                 echo '</form>';
                 echo '</div>';
@@ -212,7 +212,7 @@
                 echo '<form method="post" action="contact.php" style="margin-left:5px;">';
                 echo '<input type="hidden" name="update_id_c" value="' . $textID . '">';
                 echo '<input type="hidden" name="kluc" value="qna_text">';
-                echo '<div class="mb-2"><input type="text" name="nova_hodnota_c" class="form-control" value="' . $text . '"</input></div>';
+                echo '<div class="mb-2"><input type="text" name="nova_hodnota_c" class="form-control" value="' . $text . '"></div>';
                 echo '<button type="submit" class="tm-btn tm-btn-success"">Uložiť</button>';
                 echo '</form>';
                 echo '</div>';
@@ -230,7 +230,7 @@
                     </form>
                 </div>
                 <?php
-                    generateQna();
+                    generateOtazky();
                 ?>
 		</main>
 		<?php include "parts/footer.php" ?>

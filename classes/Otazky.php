@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', "On");
 require_once(__ROOT__.'/classes/Database.php');
 
-class QNA extends Database {
+class Otazky extends Database {
     protected $connection;
 
     public function __construct() {
@@ -11,16 +11,16 @@ class QNA extends Database {
         $this->connection = $this->getConnection();
     }
 
-    public function insertQna(string $otazka, string $odpoved): bool
+    public function insertOtazky(string $otazka, string $odpoved): bool
     {
-        $sql = "INSERT INTO faq(otazka, odpoved) VALUES ('" . $otazka . "', '" . $odpoved . "')";
+        $sql = "INSERT INTO Otazky(otazka, odpoved) VALUES ('" . $otazka . "', '" . $odpoved . "')";
         $stmt = $this->connection->prepare($sql);
         return $stmt->execute();
     }
 
-    public function getQna(): array
+    public function getOtazky(): array
     {
-        $sql = "SELECT * FROM faq";
+        $sql = "SELECT * FROM Otazky";
         $query = $this->connection->query($sql);
         $data = $query->fetchAll(\PDO::FETCH_ASSOC);
         $finalQna = [];
@@ -38,16 +38,16 @@ class QNA extends Database {
         return $finalQna;
     }
 
-    public function deleteQna(int $ID): bool
+    public function deleteOtazky(int $ID): bool
     {
-        $sql = "DELETE FROM faq WHERE ID = " . $ID;
+        $sql = "DELETE FROM Otazky WHERE ID = " . $ID;
         $stmt = $this->connection->prepare($sql);
         return $stmt->execute();
     }
 
-    public function updateQna(int $ID, string $otazka = "", string $odpoved = ""): bool
+    public function updateOtazky(int $ID, string $otazka = "", string $odpoved = ""): bool
     {
-        $sql = "UPDATE faq SET ";
+        $sql = "UPDATE Otazky SET ";
 
         if (!empty($otazka)) {
             $sql .= " otazka = '" . $otazka . "'";

@@ -5,8 +5,8 @@ if (!defined('__ROOT__')) {
 
 include_once "classes/JedalnyListok.php";
 include_once "classes/Workers.php";
-include_once "classes/QNA.php";
-include_once "classes/About.php";
+include_once "classes/Otazky.php";
+include_once "classes/InformacieJedla.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
     // Získame hodnoty z formulára
@@ -52,8 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_about'])) {
     $ID = $_POST['update_about'];
     $icon = $_POST['icon'];
     $text = $_POST['text'];
-    $db = new About();
-    $db->updateAbout($ID, $icon, $text);
+    $db = new InformacieJedla();
+    $db->updateInformacieJedla($ID, $icon, $text);
     // Po úspešnom update presmerujeme na stránku (zobrazíme aktuálne dáta)
     header("Location: about.php");
     exit();
@@ -64,8 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_qna'])) {
     $ID = $_POST['update_qna'];
     $otazka = $_POST['otazka'];
     $odpoved = $_POST['odpoved'];
-    $db = new QNA();
-    $db->updateQna($ID, $otazka, $odpoved);
+    $db = new Otazky();
+    $db->updateOtazky($ID, $otazka, $odpoved);
 
     header("Location: contact.php");
     exit();
@@ -107,8 +107,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-qna'])) {
     $otazka = $_POST['otazka'];
     $odpoved = $_POST['odpoved'];
 
-    $db = new QNA();
-    $db->insertQna($otazka, $odpoved);
+    $db = new Otazky();
+    $db->insertOtazky($otazka, $odpoved);
 
     header("Location: contact.php");
     exit();
@@ -132,8 +132,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_worker'])) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_qna'])) {
     $ID = $_POST['delete_qna'];
-    $db = new QNA();
-    $db->deleteQna($ID);
+    $db = new Otazky();
+    $db->deleteOtazky($ID);
     header("Location: contact.php");
     exit();
 }
@@ -153,7 +153,7 @@ function generateMenu($kategoria) {
             echo '<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">';
             echo '<figure>';
             echo '<div style="display: flex; align-items: center;">';
-            echo '<button type="button" class="tm-btn tm-btn-warning" style="margin-right:22px" onclick="toggleEditForm(' . $ID . ')">Upraviť</button>';
+            echo '<button type="button" class="tm-btn tm-btn-warning" style="margin-right:22px" onclick="toggleEdit(\'menu\',' . $ID . ')">Upraviť</button>';
             echo '<form method="post" action="index.php" style="display: inline;">';
             echo '<button type="submit" name="delete" value="' . $ID . '" class="tm-btn tm-btn-danger">Zmazať</button>';
             echo '</form>';
@@ -167,7 +167,7 @@ function generateMenu($kategoria) {
             echo '</figure>';
 
 
-            echo '<div id="edit-form-' . $ID . '" class="edit-form" style="display:none;">';
+            echo '<div id="edit-form-menu-' . $ID . '" class="edit-form" style="display:none;">';
             echo '<form method="post" action="index.php">';
             echo '<input type="hidden" name="update" value="' . $ID . '">';
             echo '<div class="mb-2"><label>URL obrázka:</label><input type="text" name="url_obrazka" class="form-control" value="' . $url_obrazka . '"></div>';
@@ -175,11 +175,9 @@ function generateMenu($kategoria) {
             echo '<div class="mb-2"><label>Popis:</label><textarea name="popis" class="form-control">' . $popis . '</textarea></div>';
             echo '<div class="mb-2"><label>Cena:</label><input type="text" name="cena" class="form-control" value="' . $cena . '"></div>';
             echo '<div class="mb-2"><label>Kategoria:</label><select name="kategoria" class="form-control">';
-                        $kategorie = ['pizza', 'salad', 'noodle'];
-                        foreach ($kategorie as $kat) {
-                            $selected = ($kategoria == $kat) ? 'selected' : '';
-                        echo '<option value="' . $kat . '" ' . $selected . '>' . $kat . '</option>';
-                    }
+                        echo '<option value="pizza">pizza</option>';
+                        echo '<option value="salad">salad</option>';
+                        echo '<option value="noodle">noodle</option>';
                     echo '</select>';
             echo '<button type="submit" class="tm-btn tm-btn-success" style="margin-bottom:20px">Uložiť</button>';
             echo '</form>';
@@ -207,7 +205,7 @@ function generateWorkers() {
         $instagram = $worker['instagram'];
         $youtube = $worker['youtube'];
         echo'<article class="col-lg-6">';
-        echo '<button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm(' . $ID . ')">Upraviť</button>';
+        echo '<button type="button" class="tm-btn tm-btn-warning" onclick="toggleEdit(\'workers\',' . $ID . ')">Upraviť</button>';
         echo'<figure class="tm-person">';
         echo'<img src=' . $url_obrazka .' alt="Image" class="img-fluid tm-person-img" />';
 
@@ -268,9 +266,9 @@ function generateWorkers() {
 }
 
 
-function generateQna() {
-    $db = new QNA();
-    $qna = $db->getQna();
+function generateOtazky() {
+    $db = new Otazky();
+    $qna = $db->getOtazky();
     foreach ($qna as $item) {
         $ID = $item['ID'];
         $otazka = $item['otazka'];
@@ -282,7 +280,7 @@ function generateQna() {
         echo '</div>';
 
         echo '<div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">';
-        echo '<button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm(' . $ID . ')">Upraviť otázku</button>';
+        echo '<button type="button" class="tm-btn tm-btn-warning" onclick="toggleEdit(\'qna\',' . $ID . ')">Upraviť otázku</button>';
         echo '<form method="post" action="contact.php" style="margin: 0;">';
         echo '<button type="submit" name="delete_qna" value="' . $ID . '" class="tm-btn tm-btn-danger">Zmazať otázku</button>';
         echo '</form>';
@@ -292,8 +290,8 @@ function generateQna() {
         echo '<form method="post" action="contact.php">';
         echo '<input type="hidden" name="update_qna" value="' . $ID . '">';
 
-        echo '<div class="mb-2"><label>Popis:</label><textarea name="otazka" class="form-control">' . $otazka . '</textarea></div>';
-        echo '<div class="mb-2"><label>Popis:</label><textarea name="odpoved" class="form-control">' . $odpoved . '</textarea></div>';
+        echo '<div class="mb-2"><label>Otázka:</label><textarea name="otazka" class="form-control">' . $otazka . '</textarea></div>';
+        echo '<div class="mb-2"><label>Odpoveď:</label><textarea name="odpoved" class="form-control">' . $odpoved . '</textarea></div>';
 
 
         echo '<button type="submit" class="tm-btn tm-btn-success" style="margin-bottom:20px">Uložiť</button>';
@@ -305,9 +303,9 @@ function generateQna() {
     echo '</div>';
     echo '</div>';
 }
-function generateAbout() {
-    $db = new About();
-    $about = $db->getAbout();
+function generateInformacieJedla() {
+    $db = new InformacieJedla();
+    $about = $db->getInformacieJedla();
     echo '<div class="tm-container-inner tm-features">';
     echo '<div class="row">';
     foreach ($about as $item) {
@@ -318,7 +316,7 @@ function generateAbout() {
         echo '<div class="tm-feature">';
         echo '<i class="fas fa-4x fa-' . $icon . ' tm-feature-icon"></i>';
         echo '<p class="tm-feature-description">' . $text . '</p>';
-        echo '<button type="button" class="tm-btn tm-btn-warning" style="margin: auto" onclick="toggleEditForm(' . $ID . ')">Upraviť</button>';
+        echo '<button type="button" class="tm-btn tm-btn-warning" style="margin: auto" onclick="toggleEdit(\'about\',' . $ID . ')">Upraviť</button>';
 
         echo '<div id="edit-form-about-' . $ID . '" class="edit-form" style="display:none;">';
         echo '<form method="post" action="about.php">';
@@ -360,7 +358,7 @@ function getMenuData(string $type): array {
                     'path' => 'index.php'
                 ],
                 'about' => [
-                    'name' => 'About',
+                    'name' => 'InformacieJedla',
                     'path' => 'about.php'
                 ],
                 'contact' => [
