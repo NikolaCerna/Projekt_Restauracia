@@ -2,20 +2,24 @@
 include_once "handlers/ObsahHandler.php";
 include_once "handlers/JedalnyListokHandler.php";
 include_once "parts/header.php";
+include_once "functions.php";
 include_once "classes/Obsah.php";
+include_once "classes/Users.php";
 
 $obsah = new Obsah();
 $nadpis = $obsah->getValue('nadpis');
 $nadpisID = $obsah->getID('nadpis');
 $text = $obsah->getValue('text');
 $textID = $obsah->getID('text');
+$admin = new Users();
 ?>
 
 <main>
     <div class="tm-welcome-section">
         <h2 class="col-12 text-center tm-section-title"><?= $nadpis ?></h2>
+        <?php if ($admin->isAdmin()) { ?>
         <button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm('obsah<?= $nadpisID ?>')">Upraviť nadpis</button>
-
+        <?php } ?>
         <div id="edit-form-obsah<?= $nadpisID ?>" class="edit-form" style="display:none;">
             <form method="post" action="index.php" style="margin-left:5px;">
                 <input type="hidden" name="update_obsah" value="<?= $nadpisID ?>">
@@ -27,8 +31,9 @@ $textID = $obsah->getID('text');
         </div>
 
         <p class="col-12 text-center" style="margin-top:50px"><?= $text ?></p>
+        <?php if ($admin->isAdmin()) { ?>
         <button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm('obsah<?= $textID ?>')">Upraviť text</button>
-
+        <?php } ?>
         <div id="edit-form-obsah<?= $textID ?>" class="edit-form" style="display:none;">
             <form method="post" action="index.php" style="margin-left:5px;">
                 <input type="hidden" name="update_obsah" value="<?= $textID ?>">
@@ -54,10 +59,9 @@ $textID = $obsah->getID('text');
     include_once "classes/Kategorie.php";
     $kategoriaDB = new Kategorie();
     $kategorie = $kategoriaDB->getAll();
-    ?>
-
+    if ($admin->isAdmin()) { ?>
     <button type="button" class="tm-btn tm-btn-primary" style="margin-left: 55px; margin-bottom:20px" onclick="toggleAddForm()">Pridať jedlo</button>
-
+    <?php } ?>
     <div id="add-form" style="display:none; margin-top:20px;">
         <form method="post" action="index.php" style="max-width: 20vw; margin-left:55px">
             <div class="mb-2"><label>Názov:</label><input type="text" name="nazov" class="form-control" required></div>
@@ -99,7 +103,9 @@ $textID = $obsah->getID('text');
             <div class="col-md-6">
                 <figure class="tm-description-figure">
                     <img src="<?= $url ?>" alt="Image" class="img-fluid" />
+                    <?php if ($admin->isAdmin()) { ?>
                     <button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm('obsah<?= $urlID ?>')">Upraviť fotografiu</button>
+                    <?php } ?>
                     <div id="edit-form-obsah<?= $urlID ?>" class="edit-form" style="display:none;">
                         <form method="post" action="index.php" style="margin-left:5px;">
                             <input type="hidden" name="update_obsah" value="<?= $urlID ?>">
@@ -115,7 +121,9 @@ $textID = $obsah->getID('text');
             <div class="col-md-6">
                 <div class="tm-description-box">
                     <h4 class="tm-gallery-title"><?= $qnadpis ?></h4>
+                    <?php if ($admin->isAdmin()) { ?>
                     <button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm('obsah<?= $qnadpisID ?>')">Upraviť nadpis</button>
+                    <?php } ?>
                     <div id="edit-form-obsah<?= $qnadpisID ?>" class="edit-form" style="display:none;">
                         <form method="post" action="index.php" style="margin-left:5px;">
                             <input type="hidden" name="update_obsah" value="<?= $qnadpisID ?>">
@@ -127,7 +135,9 @@ $textID = $obsah->getID('text');
                     </div>
 
                     <p class="tm-mb-p"><?= $qtext ?></p>
+                    <?php if ($admin->isAdmin()) { ?>
                     <button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm('obsah<?= $qtextID ?>')">Upraviť text</button>
+                    <?php } ?>
                     <div id="edit-form-obsah<?= $qtextID ?>" class="edit-form" style="display:none;">
                         <form method="post" action="index.php" style="margin-left:5px;">
                             <input type="hidden" name="update_obsah" value="<?= $qtextID ?>">

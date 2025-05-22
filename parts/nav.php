@@ -1,9 +1,13 @@
 <?php
-include_once "functions.php";
-$menu = getMenuData("header")
+include_once "classes/Menu.php";
+$db = new Menu();
+$menu = $db->getMenuData("header");
 ?>
 <nav class="col-md-6 col-12 tm-nav">
     <ul class="tm-nav-ul">
-        <?php printMenu($menu); ?>
+        <?php
+        $db->printMenu($menu);
+        $db->printLoginRegister();
+        ?>
     </ul>
 </nav>

@@ -8,9 +8,11 @@ include_once "classes/Zamestnanci.php";
 include_once "classes/Otazky.php";
 include_once "classes/InformacieJedla.php";
 include_once "classes/Kategorie.php";
+include_once "classes/Users.php";
 
 function generateMenu($kategoria) {
     $db = new JedalnyListok();
+    $admin = new Users();
     $jedalnyListok = $db->getJedalnyListok();
     foreach ($jedalnyListok as $item) {
         if ($item['kategoria_nazov'] == $kategoria) {
@@ -23,9 +25,11 @@ function generateMenu($kategoria) {
             echo '<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">';
             echo '<figure>';
             echo '<div style="display: flex; align-items: center;">';
-            echo '<button type="button" class="tm-btn tm-btn-warning" style="margin-right:22px" onclick="toggleEditForm(\'menu' . $ID . '\')">Upraviť</button>';
-            echo '<form method="post" action="index.php" style="display: inline;">';
-            echo '<button type="submit" name="delete_jedlo" value="' . $ID . '" class="tm-btn tm-btn-danger">Zmazať</button>';
+            if ($admin->isAdmin()) {
+                echo '<button type="button" class="tm-btn tm-btn-warning" style="margin-right:22px" onclick="toggleEditForm(\'menu' . $ID . '\')">Upraviť</button>';
+                echo '<form method="post" action="index.php" style="display: inline;">';
+                echo '<button type="submit" name="delete_jedlo" value="' . $ID . '" class="tm-btn tm-btn-danger">Zmazať</button>';
+            }
             echo '</form>';
             echo '</div>';
             echo '<img src="' . $url_obrazka . '" alt="' . $nazov . '" class="img-fluid tm-gallery-img" />';
@@ -60,6 +64,7 @@ function generateMenu($kategoria) {
 }
 
 function generateWorkers() {
+    $admin = new Users();
     $db = new Zamestnanci();
     $workers = $db->getWorkers();
     echo '<div class="tm-container-inner tm-persons">';
@@ -76,7 +81,9 @@ function generateWorkers() {
         $instagram = $worker['instagram'];
         $youtube = $worker['youtube'];
         echo'<article class="col-lg-6">';
-        echo '<button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm(\'workers' . $ID . '\')">Upraviť</button>';
+        if ($admin->isAdmin()) {
+            echo '<button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm(\'workers' . $ID . '\')">Upraviť</button>';
+        }
         echo'<figure class="tm-person">';
         echo'<img src=' . $url_obrazka .' alt="Image" class="img-fluid tm-person-img" />';
 
@@ -109,7 +116,9 @@ function generateWorkers() {
         echo'</div>';
         echo'</figcaption>';
         echo '<form method="post" action="about.php">';
+        if ($admin->isAdmin()) {
         echo '<button type="submit" name="delete_worker" value="' . $ID . '" class="tm-btn tm-btn-danger">Zmazať</button>';
+        }
         echo '</form>';
         echo'</figure>';
         echo '<div id="edit-form-workers' . $ID . '" class="edit-form" style="display:none;">';
@@ -135,6 +144,7 @@ function generateWorkers() {
 }
 
 function generateOtazky() {
+    $admin = new Users();
     $db = new Otazky();
     $qna = $db->getOtazky();
     foreach ($qna as $item) {
@@ -146,13 +156,14 @@ function generateOtazky() {
         echo '<div class="panel">';
         echo '<p>' . $odpoved . '</p>';
         echo '</div>';
-
+        if ($admin->isAdmin()) {
         echo '<div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">';
         echo '<button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm(\'qna' . $ID . '\')">Upraviť otázku</button>';
         echo '<form method="post" action="contact.php" style="margin: 0;">';
         echo '<button type="submit" name="delete_qna" value="' . $ID . '" class="tm-btn tm-btn-danger">Zmazať otázku</button>';
         echo '</form>';
         echo '</div>';
+        }
 
         echo '<div id="edit-form-qna' . $ID . '" class="edit-form" style="display:none;">';
         echo '<form method="post" action="contact.php">';
@@ -172,6 +183,7 @@ function generateOtazky() {
 }
 
 function generateInformacieJedla() {
+    $admin = new Users();
     $db = new InformacieJedla();
     $about = $db->getInformacieJedla();
     echo '<div class="tm-container-inner tm-features">';
@@ -184,8 +196,9 @@ function generateInformacieJedla() {
         echo '<div class="tm-feature">';
         echo '<i class="fas fa-4x fa-' . $icon . ' tm-feature-icon"></i>';
         echo '<p class="tm-feature-description">' . $text . '</p>';
+        if ($admin->isAdmin()) {
         echo '<button type="button" class="tm-btn tm-btn-warning" style="margin: auto" onclick="toggleEditForm(\'info' . $ID . '\')">Upraviť</button>';
-
+        }
         echo '<div id="edit-form-info' . $ID . '" class="edit-form" style="display:none;">';
         echo '<form method="post" action="about.php">';
         echo '<input type="hidden" name="update_about" value="' . $ID . '">';
@@ -204,44 +217,4 @@ function generateInformacieJedla() {
     echo '</div>';
 }
 
-function validateMenuType(string $type): bool {
-    $menuTypes = [
-        'header',
-        'footer'
-    ];
-    if (in_array($type, $menuTypes)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function getMenuData(string $type): array {
-    $menu = [];
-    if (validateMenuType($type)) {
-        if ($type == "header") {
-            $menu = [
-                'home' => [
-                    'name' => 'Home',
-                    'path' => 'index.php'
-                ],
-                'about' => [
-                    'name' => 'About',
-                    'path' => 'about.php'
-                ],
-                'contact' => [
-                    'name' => 'Contact',
-                    'path' => 'contact.php'
-                ]
-            ];
-        }
-    }
-    return $menu;
-}
-
-function printMenu(array $menu) {
-    foreach ($menu as $menuName => $menuData) {
-       echo '<li class="tm-nav-li"><a href="' . $menuData['path'] . '" class="tm-nav-link">' . $menuData['name']. '</a></li>';
-    }
-}
 ?>

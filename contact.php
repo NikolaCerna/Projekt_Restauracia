@@ -3,6 +3,9 @@ include_once "handlers/ObsahHandler.php";
 include_once "handlers/OtazkyHandler.php";
 include_once "handlers/SpravyHandler.php";
 include_once "parts/header.php";
+include_once "functions.php";
+include_once "classes/Users.php";
+$admin = new Users();
 ?>
 		<main>
             <?php
@@ -17,7 +20,9 @@ include_once "parts/header.php";
 
             <div class="tm-welcome-section">
                 <h2 class="col-12 text-center tm-section-title" style="margin-bottom:10px"><?= $nadpis ?></h2>
+                <?php if ($admin->isAdmin()) { ?>
                 <button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm('obsah<?= $nadpisID ?>')">Upraviť nadpis</button>
+                <?php } ?>
 
                 <div id="edit-form-obsah<?= $nadpisID ?>" class="edit-form" style="display:none;">
                     <form method="post" action="contact.php" style="margin-left:5px;">
@@ -32,7 +37,9 @@ include_once "parts/header.php";
                 </div>
 
                 <p class="col-12 text-center" style="margin-top:50px"><?= $text ?></p>
+                <?php if ($admin->isAdmin()) { ?>
                 <button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm('obsah<?= $textID ?>')">Upraviť text</button>
+                <?php } ?>
 
                 <div id="edit-form-obsah<?= $textID ?>" class="edit-form" style="display:none;">
                     <form method="post" action="contact.php" style="margin-left:5px;">
@@ -69,7 +76,9 @@ include_once "parts/header.php";
 					          </button>
 					        </div>
                             <div class="form-group tm-d-flex" style="margin-top: 10px;">
+                                <?php if ($admin->isAdmin()) { ?>
                                 <a href="spravy.php" class="tm-btn tm-btn-primary tm-btn-right">Zobraziť správy</a>
+                                <?php } ?>
                             </div>
 						</form>
 					</div>
@@ -91,7 +100,9 @@ include_once "parts/header.php";
                     <div class="col-md-6">
                         <div class="tm-address-box">
                             <h4 class="tm-info-title tm-text-success"><?= $nadpis_adresa ?></h4>
+                            <?php if ($admin->isAdmin()) { ?>
                             <button type="button" class="tm-btn tm-btn-warning" style="margin-bottom:20px" onclick="toggleEditForm('obsah<?= $nadpis_adresaID ?>')">Upraviť nadpis</button>
+                            <?php } ?>
 
                             <div id="edit-form-obsah<?= $nadpis_adresaID ?>" class="edit-form" style="display:none;">
                                 <form method="post" action="contact.php" style="margin-left:5px;">
@@ -104,7 +115,9 @@ include_once "parts/header.php";
                             </div>
 
                             <address><?= $adresa ?></address>
+                            <?php if ($admin->isAdmin()) { ?>
                             <button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm('obsah<?= $adresaID ?>')">Upraviť adresu</button>
+                            <?php } ?>
 
                             <div id="edit-form-obsah<?= $adresaID ?>" class="edit-form" style="display:none;">
                                 <form method="post" action="contact.php" style="margin-left:5px;">
@@ -119,7 +132,9 @@ include_once "parts/header.php";
                             <a href="tel:<?= $telefonne_cislo ?>" class="tm-contact-link">
                                 <i class="fas fa-phone tm-contact-icon"></i><?= $telefonne_cislo ?>
                             </a>
+                            <?php if ($admin->isAdmin()) { ?>
                             <button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm('obsah<?= $telefonne_cisloID ?>')">Upraviť tel. číslo</button>
+                            <?php } ?>
 
                             <div id="edit-form-obsah<?= $telefonne_cisloID ?>" class="edit-form" style="display:none;">
                                 <form method="post" action="contact.php" style="margin-left:5px;">
@@ -134,7 +149,9 @@ include_once "parts/header.php";
                             <a href="mailto:<?= $email ?>" class="tm-contact-link">
                                 <i class="fas fa-envelope tm-contact-icon"></i><?= $email ?>
                             </a>
+                            <?php if ($admin->isAdmin()) { ?>
                             <button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm('obsah<?= $emailID ?>')">Upraviť emailovú adresu</button>
+                            <?php } ?>
 
                             <div id="edit-form-obsah<?= $emailID ?>" class="edit-form" style="display:none;">
                                 <form method="post" action="contact.php" style="margin-left:5px;">
@@ -177,7 +194,9 @@ include_once "parts/header.php";
                             </div>
                         </div>
                     </div>
+                    <?php if ($admin->isAdmin()) { ?>
                     <button type="button" class="tm-btn tm-btn-warning" style="margin: auto; margin-top: 10px" onclick="toggleEditForm('obsah<?= $mapaID ?>')">Upraviť adresu (mapa)</button>
+                    <?php } ?>
                     <div id="edit-form-obsah<?= $mapaID ?>" class="edit-form" style="display:none; margin-top:10px;">
                         <form method="post" action="contact.php" style="margin-left:5px; margin-bottom:10px;">
                             <input type="hidden" name="update_obsah" value="<?= $mapaID ?>">
@@ -200,7 +219,9 @@ include_once "parts/header.php";
                     <div class="row">
                         <div class="col-12 tm-faq">
                             <h2 class="text-center tm-section-title"><?= $nadpis ?></h2>
+                            <?php if ($admin->isAdmin()) { ?>
                             <button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm('obsah<?= $nadpisID ?>')">Upraviť nadpis</button>
+                            <?php } ?>
                             <div id="edit-form-obsah<?= $nadpisID ?>" class="edit-form" style="display:none;">
                                 <form method="post" action="contact.php" style="margin-left:5px;">
                                     <input type="hidden" name="update_obsah" value="<?= $nadpisID ?>">
@@ -212,7 +233,9 @@ include_once "parts/header.php";
                             </div>
 
                             <p class="text-center"><?= $text ?></p>
+                            <?php if ($admin->isAdmin()) { ?>
                             <button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm('obsah<?= $textID ?>')">Upraviť text</button>
+                            <?php } ?>
                             <div id="edit-form-obsah<?= $textID ?>" class="edit-form" style="display:none;">
                                 <form method="post" action="contact.php" style="margin-left:5px;">
                                     <input type="hidden" name="update_obsah" value="<?= $textID ?>">
@@ -224,10 +247,10 @@ include_once "parts/header.php";
                             </div>
 
                             <div class="tm-accordion">
-
-
-                            <button type="button" class="tm-btn tm-btn-primary" style="margin-left: 55px; margin-bottom:20px" onclick="toggleAddForm()">Pridať otázku a odpoveď</button>
-
+                                <?php if ($admin->isAdmin()) { ?>
+                                <button type="button" class="tm-btn tm-btn-primary" style="margin-left: 55px; margin-bottom:20px" onclick="toggleAddForm()">Pridať otázku a odpoveď</button>
+                                <?php } ?>
+                            </div>
                 <div id="add-form" style="display:none; margin-top:20px;">
                     <form method="post" action="contact.php" style="max-width: 20vw; margin-left:55px">
                         <div class="mb-2"><label>Otázka:</label><textarea name="otazka" class="form-control" required></textarea></div>
