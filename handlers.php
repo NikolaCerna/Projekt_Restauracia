@@ -5,7 +5,7 @@ include_once "classes/Workers.php";
 include_once "classes/Otazky.php";
 include_once "classes/InformacieJedla.php";
 include_once "classes/Obsah.php";
-require_once "classes/Kontakt.php";
+require_once "classes/Spravy.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
     // Získame hodnoty z formulára
@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete'])) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_sprava'])) {
     $ID = $_POST['delete_sprava'];
-    $db = new Kontakt();
+    $db = new Spravy();
     $db->deleteSpravu($ID);
     header("Location: spravy.php");
     exit();
@@ -185,7 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['email'] = $email;
     $_SESSION['sprava'] = $sprava;
 
-    $kontakt = new Kontakt();
+    $kontakt = new Spravy();
     $ulozene = $kontakt->ulozitSpravu($meno, $email, $sprava);
 
     if ($ulozene) {

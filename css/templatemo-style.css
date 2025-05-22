@@ -861,3 +861,48 @@ address {
 .panel p {
   padding: 5px 20px 30px;
 }
+
+.spravy-container {
+  max-width: 1400px;
+  margin: 50px auto;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+.spravy-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.spravy-table th,
+.spravy-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+  vertical-align: top;
+}
+
+.spravy-table th {
+  background-color: #f7f7f7;
+  font-weight: bold;
+}
+
+.spravy-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.spravy-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .spravy-table th,
+  .spravy-table td {
+    font-size: 14px;
+  }
+}

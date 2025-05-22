@@ -5,7 +5,7 @@ if (!defined('__ROOT__')) {
     define('__ROOT__', dirname(dirname(__FILE__)));
 }
 require_once(__ROOT__.'/classes/Database.php');
-class Kontakt extends Database {
+class Spravy extends Database {
     private $connection;
     public function __construct() {
         $this->connect();
@@ -13,7 +13,7 @@ class Kontakt extends Database {
     }
 
     public function ulozitSpravu($meno, $email, $sprava) {
-        $sql = "INSERT INTO kontakt (meno, email, sprava)
+        $sql = "INSERT INTO spravy (meno, email, sprava)
                 VALUES (:meno, :email, :sprava)";
         $statement = $this->connection->prepare($sql);
         try {
@@ -27,7 +27,7 @@ class Kontakt extends Database {
     }
 
     public function getAllSpravy() {
-        $sql = "SELECT * FROM kontakt";
+        $sql = "SELECT * FROM spravy";
         $statement = $this->connection->prepare($sql);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -38,7 +38,7 @@ class Kontakt extends Database {
             echo 'ID otázky musí byť číslo.';
             exit;
         }
-        $sql = "DELETE FROM kontakt WHERE ID = :ID";
+        $sql = "DELETE FROM spravy WHERE ID = :ID";
         $statement = $this->connection->prepare($sql);
         try {
             $insert = $statement->execute([':ID' => $ID]);
