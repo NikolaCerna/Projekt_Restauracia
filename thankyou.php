@@ -1,12 +1,12 @@
 <?php
-session_start();
-$meno = $_SESSION['meno'] ?? 'Návštevník';
-$email = $_SESSION['email'] ?? 'neuvedený';
-$sprava = $_SESSION['sprava'] ?? 'bez správy';
+require_once "classes/Spravy.php";
 
-// vymažeme údaje zo session, aby tam neostali po refreshe
-session_unset();
-session_destroy();
+$kontakt = new Spravy();
+$last = $kontakt->getLastSprava();
+
+$meno = $last['meno'] ?? 'Návštevník';
+$email = $last['email'] ?? 'neuvedený';
+$sprava = $last['sprava'] ?? 'bez správy';
 ?>
 <!DOCTYPE html>
 <html lang="sk">

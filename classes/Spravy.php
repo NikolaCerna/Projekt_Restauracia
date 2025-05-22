@@ -48,4 +48,11 @@ class Spravy extends Database {
             return false;
         }
     }
+
+    public function getLastSprava() {
+        $sql = "SELECT meno, email, sprava FROM spravy ORDER BY ID DESC LIMIT 1";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
 }
