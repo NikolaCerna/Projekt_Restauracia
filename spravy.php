@@ -1,10 +1,10 @@
 <?php
 require_once "classes/Spravy.php";
-include_once "handlers.php";
-include_once "parts/header.php";
+require_once "handlers/SpravyHandler.php";
+require_once "parts/header.php";
 
 $kontakt = new Spravy();
-$spravy = $kontakt->getAllSpravy();
+$spravy = $kontakt->getSpravy();
 ?>
 <main style="margin: 20px">
     <div class="spravy-container">

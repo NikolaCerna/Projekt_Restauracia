@@ -1,7 +1,9 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', "On");
-
+if (!defined('__ROOT__')) {
+    define('__ROOT__', dirname(dirname(__FILE__)));
+}
 require_once(__ROOT__.'/classes/Database.php');
 
 class JedalnyListok extends Database {

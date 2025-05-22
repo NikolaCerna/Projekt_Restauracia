@@ -25,7 +25,7 @@ class Spravy extends Database {
         }
     }
 
-    public function getAllSpravy() {
+    public function getSpravy() {
         $sql = "SELECT * FROM spravy";
         $statement = $this->connection->prepare($sql);
         $statement->execute();
