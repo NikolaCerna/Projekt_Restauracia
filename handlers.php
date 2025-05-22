@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
     $nazov = $_POST['nazov'];
     $popis = $_POST['popis'];
     $cena = $_POST['cena'];
-    $kategoria = $_POST['kategoria'];
+    $kategoria = $_POST['id_kategoria'];
 
     // Vytvoríme inštanciu triedy JedalnyListok a voláme metódu na update
     $db = new JedalnyListok();
@@ -71,8 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_qna'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_id'], $_POST['nova_hodnota'])) {
-    $id = (int)$_POST['update_id'];
-    $novaHodnota = trim($_POST['nova_hodnota']);
+    $id = $_POST['update_id'];
+    $novaHodnota = $_POST['nova_hodnota'];
     $db = new Obsah();
     $db->updateObsah($id, $novaHodnota);
 
@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add-qna'])) {
     $odpoved = $_POST['odpoved'];
 
     $db = new Otazky();
-    $db->insertOtazky($otazka, $odpoved);
+    $db->addOtazky($otazka, $odpoved);
 
     header("Location: contact.php");
     exit();
@@ -195,5 +195,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Nastala chyba pri odosielaní správy.";
     }
 }
-
 ?>

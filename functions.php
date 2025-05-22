@@ -13,7 +13,7 @@ function generateMenu($kategoria) {
     $db = new JedalnyListok();
     $jedalnyListok = $db->getJedalnyListok();
     foreach ($jedalnyListok as $item) {
-        if ($item['kategoria'] == $kategoria) {
+        if ($item['kategoria_nazov'] == $kategoria) {
             $ID = $item['ID'];
             $nazov = $item['nazov'];
             $url_obrazka = $item['url_obrazka'];
@@ -36,7 +36,6 @@ function generateMenu($kategoria) {
             echo '</figcaption>';
             echo '</figure>';
 
-
             echo '<div id="edit-form-menu-' . $ID . '" class="edit-form" style="display:none;">';
             echo '<form method="post" action="index.php">';
             echo '<input type="hidden" name="update" value="' . $ID . '">';
@@ -46,16 +45,15 @@ function generateMenu($kategoria) {
             echo '<div class="mb-2"><label>Cena:</label><input type="text" name="cena" class="form-control" value="' . $cena . '"></div>';
             $kategoriaDB = new Kategorie();
             $kategorie = $kategoriaDB->getAll();
-                    echo '<div class="mb-2"><label>Kategoria:</label><select name="kategoria" class="form-control">';
+                    echo '<div class="mb-2"><label>Kategoria:</label><select name="id_kategoria" class="form-control">';
                     foreach ($kategorie as $kat) {
-                        $selected = ($kat['nazov'] == $item['kategoria']) ? 'selected' : '';
+                        $selected = ($kat['nazov'] == $item['kategoria_nazov']) ? 'selected' : '';
                         echo '<option value="' . $kat['ID'] . '" ' . $selected . '>' . $kat['nazov'] . '</option>';
                     }
                     echo '</select></div>';
             echo '<button type="submit" class="tm-btn tm-btn-success" style="margin-bottom:20px">Uložiť</button>';
             echo '</form>';
             echo '</div>';
-
             echo '</article>';
         }
     }
@@ -81,7 +79,6 @@ function generateWorkers() {
         echo '<button type="button" class="tm-btn tm-btn-warning" onclick="toggleEdit(\'workers\',' . $ID . ')">Upraviť</button>';
         echo'<figure class="tm-person">';
         echo'<img src=' . $url_obrazka .' alt="Image" class="img-fluid tm-person-img" />';
-
 
         echo'<figcaption class="tm-person-description">';
         echo'<h4 class="tm-person-name">'. $meno . " " . $priezvisko . '</h4>';
@@ -132,12 +129,10 @@ function generateWorkers() {
         echo '</form>';
         echo '</div>';
         echo'</article>';
-
     }
     echo '</div>';
     echo '</div>';
 }
-
 
 function generateOtazky() {
     $db = new Otazky();
@@ -166,7 +161,6 @@ function generateOtazky() {
         echo '<div class="mb-2"><label>Otázka:</label><textarea name="otazka" class="form-control">' . $otazka . '</textarea></div>';
         echo '<div class="mb-2"><label>Odpoveď:</label><textarea name="odpoved" class="form-control">' . $odpoved . '</textarea></div>';
 
-
         echo '<button type="submit" class="tm-btn tm-btn-success" style="margin-bottom:20px">Uložiť</button>';
         echo '</form>';
         echo '</div>';
@@ -176,6 +170,7 @@ function generateOtazky() {
     echo '</div>';
     echo '</div>';
 }
+
 function generateInformacieJedla() {
     $db = new InformacieJedla();
     $about = $db->getInformacieJedla();
@@ -199,7 +194,6 @@ function generateInformacieJedla() {
         echo '<button type="submit" class="tm-btn tm-btn-success" style="margin-bottom:20px">Uložiť</button>';
         echo '</form>';
         echo '</div>';
-
 
         echo '</div>';
         echo '</div>';
@@ -249,5 +243,4 @@ function printMenu(array $menu) {
        echo '<li class="tm-nav-li"><a href="' . $menuData['path'] . '" class="tm-nav-link">' . $menuData['name']. '</a></li>';
     }
 }
-
 ?>

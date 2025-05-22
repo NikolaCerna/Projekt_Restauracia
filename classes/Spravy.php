@@ -13,11 +13,10 @@ class Spravy extends Database {
     }
 
     public function ulozitSpravu($meno, $email, $sprava) {
-        $sql = "INSERT INTO spravy (meno, email, sprava)
-                VALUES (:meno, :email, :sprava)";
+        $sql = "INSERT INTO spravy (meno, email, sprava) VALUES (:meno, :email, :sprava)";
         $statement = $this->connection->prepare($sql);
         try {
-            $insert = $statement->execute(array(':meno' => $meno, ':email' => $email, ':sprava' => $sprava));
+            $insert = $statement->execute(['meno' => $meno, 'email' => $email, 'sprava' => $sprava]);
             header("Location: http://localhost/Projekt_Restauracia/thankyou.php");
             return $insert;
         } catch (\Exception $exception) {
@@ -41,7 +40,7 @@ class Spravy extends Database {
         $sql = "DELETE FROM spravy WHERE ID = :ID";
         $statement = $this->connection->prepare($sql);
         try {
-            $insert = $statement->execute([':ID' => $ID]);
+            $insert = $statement->execute(['ID' => $ID]);
             http_response_code(200);
             return $insert;
         } catch (Exception $exception) {

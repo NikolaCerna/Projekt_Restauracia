@@ -10,11 +10,11 @@ class Otazky extends Database {
         $this->connection = $this->getConnection();
     }
 
-    public function insertOtazky(string $otazka, string $odpoved) {
+    public function addOtazky(string $otazka, string $odpoved) {
         $sql = "INSERT INTO otazky(otazka, odpoved) VALUES (:otazka, :odpoved)";
         $statement = $this->connection->prepare($sql);
         try {
-            $insert = $statement->execute([':otazka' => $otazka, ':odpoved' => $odpoved]);
+            $insert = $statement->execute(['otazka' => $otazka, 'odpoved' => $odpoved]);
             http_response_code(200);
             return $insert;
         } catch (Exception $exception) {
@@ -27,6 +27,7 @@ class Otazky extends Database {
         $sql = "SELECT * FROM otazky";
         $statement = $this->connection->prepare($sql);
         $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function deleteOtazky($ID) {
@@ -37,7 +38,7 @@ class Otazky extends Database {
         $sql = "DELETE FROM otazky WHERE ID = :ID";
         $statement = $this->connection->prepare($sql);
         try {
-            $insert = $statement->execute([':ID' => $ID]);
+            $insert = $statement->execute(['ID' => $ID]);
             http_response_code(200);
             return $insert;
         } catch (Exception $exception) {
@@ -53,6 +54,13 @@ class Otazky extends Database {
         }
         $sql = "UPDATE otazky SET otazka = :otazka, odpoved = :odpoved WHERE ID = :ID";
         $statement = $this->connection->prepare($sql);
-        return $statement->execute();
+        try {
+            $insert = $statement->execute(['otazka' => $otazka, 'odpoved' => $odpoved, 'ID' => $ID]);
+            http_response_code(200);
+            return $insert;
+        } catch (Exception $exception) {
+            http_response_code(500);
+            return false;
+        }
     }
 }
