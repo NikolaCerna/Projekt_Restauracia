@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', "On");
 require_once(__ROOT__.'/classes/Database.php');
-class Workers extends Database {
+class Zamestnanci extends Database {
     private $connection;
     public function __construct() {
         $this->connect();

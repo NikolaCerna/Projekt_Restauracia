@@ -4,7 +4,7 @@ if (!defined('__ROOT__')) {
 }
 
 include_once "classes/JedalnyListok.php";
-include_once "classes/Workers.php";
+include_once "classes/Zamestnanci.php";
 include_once "classes/Otazky.php";
 include_once "classes/InformacieJedla.php";
 include_once "classes/Kategorie.php";
@@ -23,9 +23,9 @@ function generateMenu($kategoria) {
             echo '<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">';
             echo '<figure>';
             echo '<div style="display: flex; align-items: center;">';
-            echo '<button type="button" class="tm-btn tm-btn-warning" style="margin-right:22px" onclick="toggleEdit(\'menu\',' . $ID . ')">Upraviť</button>';
+            echo '<button type="button" class="tm-btn tm-btn-warning" style="margin-right:22px" onclick="toggleEditForm(\'menu' . $ID . '\')">Upraviť</button>';
             echo '<form method="post" action="index.php" style="display: inline;">';
-            echo '<button type="submit" name="delete" value="' . $ID . '" class="tm-btn tm-btn-danger">Zmazať</button>';
+            echo '<button type="submit" name="delete_jedlo" value="' . $ID . '" class="tm-btn tm-btn-danger">Zmazať</button>';
             echo '</form>';
             echo '</div>';
             echo '<img src="' . $url_obrazka . '" alt="' . $nazov . '" class="img-fluid tm-gallery-img" />';
@@ -36,9 +36,9 @@ function generateMenu($kategoria) {
             echo '</figcaption>';
             echo '</figure>';
 
-            echo '<div id="edit-form-menu-' . $ID . '" class="edit-form" style="display:none;">';
+            echo '<div id="edit-form-menu' . $ID . '" class="edit-form" style="display:none;">';
             echo '<form method="post" action="index.php">';
-            echo '<input type="hidden" name="update" value="' . $ID . '">';
+            echo '<input type="hidden" name="update_jedlo" value="' . $ID . '">';
             echo '<div class="mb-2"><label>URL obrázka:</label><input type="text" name="url_obrazka" class="form-control" value="' . $url_obrazka . '"></div>';
             echo '<div class="mb-2"><label>Názov:</label><input type="text" name="nazov" class="form-control" value="' . $nazov . '"></div>';
             echo '<div class="mb-2"><label>Popis:</label><textarea name="popis" class="form-control">' . $popis . '</textarea></div>';
@@ -60,7 +60,7 @@ function generateMenu($kategoria) {
 }
 
 function generateWorkers() {
-    $db = new Workers();
+    $db = new Zamestnanci();
     $workers = $db->getWorkers();
     echo '<div class="tm-container-inner tm-persons">';
     echo '<div class="row">';
@@ -76,7 +76,7 @@ function generateWorkers() {
         $instagram = $worker['instagram'];
         $youtube = $worker['youtube'];
         echo'<article class="col-lg-6">';
-        echo '<button type="button" class="tm-btn tm-btn-warning" onclick="toggleEdit(\'workers\',' . $ID . ')">Upraviť</button>';
+        echo '<button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm(\'workers' . $ID . '\')">Upraviť</button>';
         echo'<figure class="tm-person">';
         echo'<img src=' . $url_obrazka .' alt="Image" class="img-fluid tm-person-img" />';
 
@@ -112,7 +112,7 @@ function generateWorkers() {
         echo '<button type="submit" name="delete_worker" value="' . $ID . '" class="tm-btn tm-btn-danger">Zmazať</button>';
         echo '</form>';
         echo'</figure>';
-        echo '<div id="edit-form-workers-' . $ID . '" class="edit-form" style="display:none;">';
+        echo '<div id="edit-form-workers' . $ID . '" class="edit-form" style="display:none;">';
         echo '<form method="post" action="about.php">';
         echo '<input type="hidden" name="update_workers" value="' . $ID . '">';
         echo '<div class="mb-2"><label>URL obrázka:</label><input type="text" name="url_fotografie" class="form-control" value="' . $url_obrazka . '"></div>';
@@ -148,13 +148,13 @@ function generateOtazky() {
         echo '</div>';
 
         echo '<div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">';
-        echo '<button type="button" class="tm-btn tm-btn-warning" onclick="toggleEdit(\'qna\',' . $ID . ')">Upraviť otázku</button>';
+        echo '<button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm(\'qna' . $ID . '\')">Upraviť otázku</button>';
         echo '<form method="post" action="contact.php" style="margin: 0;">';
         echo '<button type="submit" name="delete_qna" value="' . $ID . '" class="tm-btn tm-btn-danger">Zmazať otázku</button>';
         echo '</form>';
         echo '</div>';
 
-        echo '<div id="edit-form-qna-' . $ID . '" class="edit-form" style="display:none;">';
+        echo '<div id="edit-form-qna' . $ID . '" class="edit-form" style="display:none;">';
         echo '<form method="post" action="contact.php">';
         echo '<input type="hidden" name="update_qna" value="' . $ID . '">';
 
@@ -184,11 +184,12 @@ function generateInformacieJedla() {
         echo '<div class="tm-feature">';
         echo '<i class="fas fa-4x fa-' . $icon . ' tm-feature-icon"></i>';
         echo '<p class="tm-feature-description">' . $text . '</p>';
-        echo '<button type="button" class="tm-btn tm-btn-warning" style="margin: auto" onclick="toggleEdit(\'about\',' . $ID . ')">Upraviť</button>';
+        echo '<button type="button" class="tm-btn tm-btn-warning" style="margin: auto" onclick="toggleEditForm(\'info' . $ID . '\')">Upraviť</button>';
 
-        echo '<div id="edit-form-about-' . $ID . '" class="edit-form" style="display:none;">';
+        echo '<div id="edit-form-info' . $ID . '" class="edit-form" style="display:none;">';
         echo '<form method="post" action="about.php">';
         echo '<input type="hidden" name="update_about" value="' . $ID . '">';
+        echo '<input type="hidden" name="redirect" value="' . $_SERVER['REQUEST_URI'] . ' ">';
         echo '<div class="mb-2"><label>Icon:</label><input type="text" name="icon" class="form-control" value="' . $icon . '"></div>';
         echo '<div class="mb-2"><label>Text:</label><textarea name="text" class="form-control">' . $text . '</textarea></div>';
         echo '<button type="submit" class="tm-btn tm-btn-success" style="margin-bottom:20px">Uložiť</button>';

@@ -14,11 +14,12 @@ include_once "parts/header.php";
 
             echo '<div class=" tm-welcome-section">';
             echo '<h2 class="col-12 text-center tm-section-title" id="nadpis' . $nadpisID . '">' . $nadpis . '</h2>';
-            echo '<button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEdit(\'nadpis\', ' . $nadpisID . ')">Upraviť nadpis</button>';
+            echo '<button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm(\'obsah' . $nadpisID . '\')">Upraviť nadpis</button>';
 
-            echo '<div id="edit-form-nadpis-' . $nadpisID . '" class="edit-form" style="display:none;">';
+            echo '<div id="edit-form-obsah' . $nadpisID . '" class="edit-form" style="display:none;">';
             echo '<form method="post" action="index.php" style="margin-left:5px;">';
-            echo '<input type="hidden" name="update_id" value="' . $nadpisID . '">';
+            echo '<input type="hidden" name="update_obsah" value="' . $nadpisID . '">';
+            echo '<input type="hidden" name="redirect" value="' . $_SERVER['REQUEST_URI'] . ' ">';
             echo '<input type="hidden" name="kluc" value="nadpis">';
             echo '<div class="mb-2"><input type="text" name="nova_hodnota" class="form-control" value="' . $nadpis . '"></div>';
             echo '<button type="submit" class="tm-btn tm-btn-success" style="margin-bottom:20px">Uložiť</button>';
@@ -26,11 +27,12 @@ include_once "parts/header.php";
             echo '</div>';
 
             echo '<p class="col-12 text-center" style="margin-top:50px" id="text' . $textID . '">' . $text . '</p>';
-            echo '<button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEdit(\'text\', ' . $textID . ')">Upraviť text</button>';
+            echo '<button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm(\'obsah' . $textID . '\')">Upraviť text</button>';
 
-            echo '<div id="edit-form-text-' . $textID . '" class="edit-form" style="display:none;">';
+            echo '<div id="edit-form-obsah' . $textID . '" class="edit-form" style="display:none;">';
             echo '<form method="post" action="index.php" style="margin-left:5px;">';
-            echo '<input type="hidden" name="update_id" value="' . $textID . '">';
+            echo '<input type="hidden" name="update_obsah" value="' . $textID . '">';
+            echo '<input type="hidden" name="redirect" value="' . $_SERVER['REQUEST_URI'] . ' ">';
             echo '<input type="hidden" name="kluc" value="text">';
             echo '<div class="mb-2"><textarea name="nova_hodnota" class="form-control">' . $text . '</textarea></div>';
             echo '<button type="submit" class="tm-btn tm-btn-success" style="margin-bottom:20px">Uložiť</button>';
@@ -72,7 +74,7 @@ include_once "parts/header.php";
                                 ?>
                             </select>
                         </div>
-                        <button type="submit" name="add" class="tm-btn tm-btn-success" style="margin-top: 20px; margin-bottom:20px">Uložiť</button>
+                        <button type="submit" name="add_jedlo" class="tm-btn tm-btn-success" style="margin-top: 20px; margin-bottom:20px">Uložiť</button>
                     </form>
                 </div>
             <!-- Gallery -->
@@ -104,11 +106,12 @@ include_once "parts/header.php";
                 echo'<div class="col-md-6">';
                 echo'<figure class="tm-description-figure">';
                 echo'<img src="' . $url . '" alt="Image" class="img-fluid" />';
-                echo '<button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEdit(\'questions_url\', ' . $urlID . ')">Upraviť fotografiu</button>';
+                echo '<button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm(\'obsah' . $urlID . '\')">Upraviť fotografiu</button>';
 
-                echo '<div id="edit-form-questions_url-' . $urlID . '" class="edit-form" style="display:none;">';
+                echo '<div id="edit-form-obsah' . $urlID . '" class="edit-form" style="display:none;">';
                 echo '<form method="post" action="index.php" style="margin-left:5px;">';
-                echo '<input type="hidden" name="update_id" value="' . $urlID . '">';
+                echo '<input type="hidden" name="update_obsah" value="' . $urlID . '">';
+                echo '<input type="hidden" name="redirect" value="' . $_SERVER['REQUEST_URI'] . ' ">';
                 echo '<input type="hidden" name="kluc" value="questions_url">';
                 echo '<div class="mb-2"><input type="text" name="nova_hodnota" class="form-control" value="' . $url . '"></div>';
                 echo '<button type="submit" class="tm-btn tm-btn-success" style="margin-bottom:20px">Uložiť</button>';
@@ -120,11 +123,12 @@ include_once "parts/header.php";
                 echo'<div class="col-md-6">';
                 echo'<div class="tm-description-box"> ';
                 echo'<h4 class="tm-gallery-title">' . $nadpis . '</h4>';
-                echo '<button type="button" class="tm-btn tm-btn-warning" onclick="toggleEdit(\'questions_nadpis\', ' . $nadpisID . ')">Upraviť nadpis</button>';
+                echo '<button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm(\'obsah' . $nadpisID . '\')">Upraviť nadpis</button>';
 
-                echo '<div id="edit-form-questions_nadpis-' . $nadpisID . '" class="edit-form" style="display:none;">';
+                echo '<div id="edit-form-obsah' . $nadpisID . '" class="edit-form" style="display:none;">';
                 echo '<form method="post" action="index.php" style="margin-left:5px;">';
-                echo '<input type="hidden" name="update_id" value="' . $nadpisID . '">';
+                echo '<input type="hidden" name="update_obsah" value="' . $nadpisID . '">';
+                echo '<input type="hidden" name="redirect" value="' . $_SERVER['REQUEST_URI'] . ' ">';
                 echo '<input type="hidden" name="kluc" value="questions_nadpis">';
                 echo '<div class="mb-2"><input type="text" name="nova_hodnota" class="form-control" value="' . $nadpis . '"></div>';
                 echo '<button type="submit" class="tm-btn tm-btn-success" style="margin-bottom:20px">Uložiť</button>';
@@ -132,11 +136,12 @@ include_once "parts/header.php";
                 echo '</div>';
 
                 echo'<p class="tm-mb-p">' . $text . '</p>';
-                echo '<button type="button" class="tm-btn tm-btn-warning" onclick="toggleEdit(\'questions_text\', ' . $textID . ')">Upraviť text</button>';
+                echo '<button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm(\'obsah' . $textID . '\')">Upraviť text</button>';
 
-                echo '<div id="edit-form-questions_text-' . $textID . '" class="edit-form" style="display:none;">';
+                echo '<div id="edit-form-obsah' . $textID . '" class="edit-form" style="display:none;">';
                 echo '<form method="post" action="index.php" style="margin-left:5px;">';
-                echo '<input type="hidden" name="update_id" value="' . $textID . '">';
+                echo '<input type="hidden" name="update_obsah" value="' . $textID . '">';
+                echo '<input type="hidden" name="redirect" value="' . $_SERVER['REQUEST_URI'] . ' ">';
                 echo '<input type="hidden" name="kluc" value="questions_text">';
                 echo '<div class="mb-2"><textarea name="nova_hodnota" class="form-control">' . $text . '</textarea></div>';
                 echo '<button type="submit" class="tm-btn tm-btn-success" style="margin-bottom:20px">Uložiť</button>';
