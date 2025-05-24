@@ -34,6 +34,34 @@ class Users extends Database {
         return $statement->execute([$rola, $id]);
     }
 
+    public function getUsersByMeno($hladat) {
+        $sql = "SELECT * FROM pouzivatelia WHERE meno LIKE ?";
+        $statement = $this->connection->prepare($sql);
+        $hladat = "%$hladat%";
+        $statement->execute([$hladat]);
+        return $statement->fetchAll();
+    }
+
+    public function getUsersByFilter($meno = '', $rola = '') {
+        $sql = "SELECT * FROM pouzivatelia WHERE 1";
+        $params = [];
+
+        if ($meno !== '') {
+            $sql .= " AND meno LIKE ?";
+            $params[] = "%" . $meno . "%";
+        }
+
+        if ($rola !== '') {
+            $sql .= " AND rola = ?";
+            $params[] = $rola;
+        }
+
+        $statement = $this->connection->prepare($sql);
+        $statement->execute($params);
+        return $statement->fetchAll();
+    }
+
+
     public function register($login, $email, $password) {
         try {
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);

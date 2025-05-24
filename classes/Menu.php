@@ -67,7 +67,7 @@ class Menu extends Database {
               </li>';
         } else {
             echo '<li class="tm-nav-li">
-                <a href="db/register.php" class="tm-nav-link">Sign up/ Siqn in</a>
+                <a href="db/register.php" class="tm-nav-link">Sign up/ Sign in</a>
               </li>';
         }
     }

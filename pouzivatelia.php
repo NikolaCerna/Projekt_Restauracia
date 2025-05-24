@@ -1,28 +1,18 @@
 <?php
-include_once "classes/Users.php";
 session_start();
-
+include_once "classes/Users.php";
+include_once "handlers/PouzivateliaHandler.php";
 $users = new Users();
+$hladat = $_GET['hladat'] ?? '';
 
-if (!isset($_SESSION['rola']) || $_SESSION['rola'] !== 'admin') {
-    header("Location: index.php");
-    exit();
+$hladat = $_GET['hladat'] ?? '';
+$rola = $_GET['rola'] ?? '';
+
+if ($hladat !== '' || $rola !== '') {
+    $vsetci = $users->getUsersByFilter($hladat, $rola);
+} else {
+    $vsetci = $users->getAllUsers();
 }
-
-// Zmazanie používateľa
-if (isset($_POST['delete_id'])) {
-    $idToDelete = $_POST['delete_id'];
-    if ($idToDelete != $_SESSION['user_id']) {
-        $users->deleteUser($idToDelete);
-    }
-}
-
-// Zmena roly používateľa
-if (isset($_POST['update_id']) && isset($_POST['new_role'])) {
-    $users->updateUserRole($_POST['update_id'], $_POST['new_role']);
-}
-
-$vsetci = $users->getAllUsers();
 ?>
 
 <!DOCTYPE html>
@@ -81,11 +71,30 @@ $vsetci = $users->getAllUsers();
         </tr>
         </thead>
         <tbody>
+        <form method="get" action="pouzivatelia.php" style="margin-bottom: 20px;">
+            <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px">
+                <input type="text" name="hladat" placeholder="Vyhľadať podľa mena" class="form-control" style="width: 300px;">
+                <button type="submit" class="tm-btn tm-btn-primary">Hľadať</button>
+                <select name="rola" class="form-control" style="width: 180px;">
+                    <option value="">-- Všetky roly --</option>
+                    <?php
+                    $roles = ['admin', 'pouzivatel', 'kuchar', 'recepcny', 'editor'];
+                    foreach ($roles as $role) {
+                        $selected = (($_GET['rola'] ?? '') === $role) ? 'selected' : '';
+                        echo "<option value='$role' $selected>$role</option>";
+                    }
+                    ?>
+                </select>
+
+                <button type="submit" class="tm-btn tm-btn-primary">Filtrovať</button>
+            </div>
+        </form>
+
         <?php foreach ($vsetci as $user): ?>
             <tr>
                 <td><?= $user['ID'] ?></td>
-                <td><?= htmlspecialchars($user['meno']) ?></td>
-                <td><?= htmlspecialchars($user['email']) ?></td>
+                <td><?= $user['meno'] ?></td>
+                <td><?= $user['email'] ?></td>
                 <td>
                     <form method="post" class="action-buttons">
                         <input type="hidden" name="update_id" value="<?= $user['ID'] ?>">
