@@ -12,13 +12,18 @@
 </head>
 
 <body>
+<?php
+    include_once "classes/Menu.php";
+    $db = new Menu();
+    $menu = $db->getMenuData("header");
+?>
 <div class="container">
     <header class="placeholder">
         <div class="parallax-window" data-parallax="scroll" data-image-src="img/header/simple-house-01.jpg">
             <div class="tm-header">
                 <div class="row tm-header-inner">
                     <div class="col-md-6 col-12">
-                        <a href="index.php">
+                        <a href="<?php echo $menu['home']['path']; ?>">
                             <img src="img/header/simple-house-logo.png" alt="Logo" class="tm-site-logo" />
                         </a>
                         <div class="tm-site-text-box">
@@ -26,8 +31,7 @@
                             <h6 class="tm-site-description">Taste. Style. Comfort.</h6>
                         </div>
                     </div>
-                    <!-- Tu sa načíta navigácia -->
-                    <?php include "parts/nav.php"; ?>
+                    <?php include "parts/nav.php" ?>
                 </div>
             </div>
         </div>

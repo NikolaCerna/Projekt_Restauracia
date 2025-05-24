@@ -905,3 +905,19 @@ address {
     font-size: 14px;
   }
 }
+
+.select-role {
+  padding: 8px 10px;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+.select-role:focus {
+  outline: none;
+  border-color: #2D99CC;
+  box-shadow: 0 0 4px rgba(45, 153, 204, 0.5);
+}

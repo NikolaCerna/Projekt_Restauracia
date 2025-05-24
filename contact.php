@@ -20,7 +20,7 @@ $admin = new Users();
 
             <div class="tm-welcome-section">
                 <h2 class="col-12 text-center tm-section-title" style="margin-bottom:10px"><?= $nadpis ?></h2>
-                <?php if ($admin->isAdmin()) { ?>
+                <?php if ($admin->isAdmin() || $admin->isEditor()) { ?>
                 <button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm('obsah<?= $nadpisID ?>')">Upraviť nadpis</button>
                 <?php } ?>
 
@@ -37,7 +37,7 @@ $admin = new Users();
                 </div>
 
                 <p class="col-12 text-center" style="margin-top:50px"><?= $text ?></p>
-                <?php if ($admin->isAdmin()) { ?>
+                <?php if ($admin->isAdmin() || $admin->isEditor()) { ?>
                 <button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm('obsah<?= $textID ?>')">Upraviť text</button>
                 <?php } ?>
 
@@ -76,7 +76,7 @@ $admin = new Users();
 					          </button>
 					        </div>
                             <div class="form-group tm-d-flex" style="margin-top: 10px;">
-                                <?php if ($admin->isAdmin()) { ?>
+                                <?php if ($admin->isAdmin() || $admin->isRecepcny()) { ?>
                                 <a href="spravy.php" class="tm-btn tm-btn-primary tm-btn-right">Zobraziť správy</a>
                                 <?php } ?>
                             </div>
@@ -100,7 +100,7 @@ $admin = new Users();
                     <div class="col-md-6">
                         <div class="tm-address-box">
                             <h4 class="tm-info-title tm-text-success"><?= $nadpis_adresa ?></h4>
-                            <?php if ($admin->isAdmin()) { ?>
+                            <?php if ($admin->isAdmin() || $admin->isEditor()) { ?>
                             <button type="button" class="tm-btn tm-btn-warning" style="margin-bottom:20px" onclick="toggleEditForm('obsah<?= $nadpis_adresaID ?>')">Upraviť nadpis</button>
                             <?php } ?>
 
@@ -219,7 +219,7 @@ $admin = new Users();
                     <div class="row">
                         <div class="col-12 tm-faq">
                             <h2 class="text-center tm-section-title"><?= $nadpis ?></h2>
-                            <?php if ($admin->isAdmin()) { ?>
+                            <?php if ($admin->isAdmin() || $admin->isEditor()) { ?>
                             <button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm('obsah<?= $nadpisID ?>')">Upraviť nadpis</button>
                             <?php } ?>
                             <div id="edit-form-obsah<?= $nadpisID ?>" class="edit-form" style="display:none;">
@@ -233,7 +233,7 @@ $admin = new Users();
                             </div>
 
                             <p class="text-center"><?= $text ?></p>
-                            <?php if ($admin->isAdmin()) { ?>
+                            <?php if ($admin->isAdmin() || $admin->isEditor()) { ?>
                             <button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm('obsah<?= $textID ?>')">Upraviť text</button>
                             <?php } ?>
                             <div id="edit-form-obsah<?= $textID ?>" class="edit-form" style="display:none;">
@@ -247,7 +247,7 @@ $admin = new Users();
                             </div>
 
                             <div class="tm-accordion">
-                                <?php if ($admin->isAdmin()) { ?>
+                                <?php if ($admin->isAdmin() || $admin->isEditor()) { ?>
                                 <button type="button" class="tm-btn tm-btn-primary" style="margin-left: 55px; margin-bottom:20px" onclick="toggleAddForm()">Pridať otázku a odpoveď</button>
                                 <?php } ?>
                             </div>

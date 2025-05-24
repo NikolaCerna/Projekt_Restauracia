@@ -20,7 +20,7 @@ $admin = new Users();
     ?>
     <div class="tm-welcome-section">
         <h2 class="col-12 text-center tm-section-title"><?= $nadpis ?></h2>
-        <?php if ($admin->isAdmin()) { ?>
+        <?php if ($admin->isAdmin() || $admin->isEditor()) { ?>
         <button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm('obsah<?= $nadpisID ?>')">Upraviť nadpis</button>
         <?php } ?>
         <div id="edit-form-obsah<?= $nadpisID ?>" class="edit-form" style="display:none;">
@@ -34,7 +34,7 @@ $admin = new Users();
         </div>
 
         <p class="col-12 text-center" style="margin-top:50px" id="text<?= $textID ?>"><?= $text ?></p>
-        <?php if ($admin->isAdmin()) { ?>
+        <?php if ($admin->isAdmin() || $admin->isEditor()) { ?>
         <button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm('obsah<?= $textID ?>')">Upraviť text</button>
         <?php } ?>
         <div id="edit-form-obsah<?= $textID ?>" class="edit-form" style="display:none;">
@@ -82,7 +82,7 @@ $admin = new Users();
                 <div class="tm-history-inner">
                     <div>
                         <img src="<?= $url ?>" alt="Image" class="img-fluid tm-history-img" />
-                        <?php if ($admin->isAdmin()) { ?>
+                        <?php if ($admin->isAdmin() || $admin->isEditor()) { ?>
                         <button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm('obsah<?= $urlID ?>')">Upraviť fotografiu</button>
                         <?php } ?>
                         <div id="edit-form-obsah<?= $urlID ?>" class="edit-form" style="display:none;">
@@ -98,7 +98,7 @@ $admin = new Users();
 
                     <div class="tm-history-text">
                         <h4 class="tm-history-title"><?= $nadpis ?></h4>
-                        <?php if ($admin->isAdmin()) { ?>
+                        <?php if ($admin->isAdmin() || $admin->isEditor()) { ?>
                         <button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm('obsah<?= $nadpisID ?>')">Upraviť nadpis</button>
                         <?php } ?>
                         <div id="edit-form-obsah<?= $nadpisID ?>" class="edit-form" style="display:none;">
@@ -112,7 +112,7 @@ $admin = new Users();
                         </div>
 
                         <p class="tm-mb-p"><?= $text ?></p>
-                        <?php if ($admin->isAdmin()) { ?>
+                        <?php if ($admin->isAdmin() || $admin->isEditor()) { ?>
                         <button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm('obsah<?= $textID ?>')">Upraviť text</button>
                         <?php } ?>
                         <div id="edit-form-obsah<?= $textID ?>" class="edit-form" style="display:none;">

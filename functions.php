@@ -25,7 +25,7 @@ function generateMenu($kategoria) {
             echo '<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">';
             echo '<figure>';
             echo '<div style="display: flex; align-items: center;">';
-            if ($admin->isAdmin()) {
+            if ($admin->isAdmin() || $admin->isKuchar()) {
                 echo '<button type="button" class="tm-btn tm-btn-warning" style="margin-right:22px" onclick="toggleEditForm(\'menu' . $ID . '\')">Upraviť</button>';
                 echo '<form method="post" action="index.php" style="display: inline;">';
                 echo '<button type="submit" name="delete_jedlo" value="' . $ID . '" class="tm-btn tm-btn-danger">Zmazať</button>';
@@ -196,7 +196,7 @@ function generateInformacieJedla() {
         echo '<div class="tm-feature">';
         echo '<i class="fas fa-4x fa-' . $icon . ' tm-feature-icon"></i>';
         echo '<p class="tm-feature-description">' . $text . '</p>';
-        if ($admin->isAdmin()) {
+        if ($admin->isAdmin() || $admin->isEditor()) {
         echo '<button type="button" class="tm-btn tm-btn-warning" style="margin: auto" onclick="toggleEditForm(\'info' . $ID . '\')">Upraviť</button>';
         }
         echo '<div id="edit-form-info' . $ID . '" class="edit-form" style="display:none;">';

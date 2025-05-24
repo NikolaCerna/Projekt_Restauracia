@@ -15,9 +15,16 @@ $admin = new Users();
 ?>
 
 <main>
+    <?php if ($admin->isAdmin()) { ?>
+    <div style="display: flex; justify-content: flex-end; margin: 20px;">
+        <a href="pouzivatelia.php" class="tm-btn tm-btn-success" style="white-space: nowrap;">
+            <i class="fas fa-users-cog"></i> Používatelia
+        </a>
+    </div>
+    <?php } ?>
     <div class="tm-welcome-section">
         <h2 class="col-12 text-center tm-section-title"><?= $nadpis ?></h2>
-        <?php if ($admin->isAdmin()) { ?>
+        <?php if ($admin->isAdmin() || $admin->isEditor()) { ?>
         <button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm('obsah<?= $nadpisID ?>')">Upraviť nadpis</button>
         <?php } ?>
         <div id="edit-form-obsah<?= $nadpisID ?>" class="edit-form" style="display:none;">
@@ -31,7 +38,7 @@ $admin = new Users();
         </div>
 
         <p class="col-12 text-center" style="margin-top:50px"><?= $text ?></p>
-        <?php if ($admin->isAdmin()) { ?>
+        <?php if ($admin->isAdmin() || $admin->isEditor()) { ?>
         <button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm('obsah<?= $textID ?>')">Upraviť text</button>
         <?php } ?>
         <div id="edit-form-obsah<?= $textID ?>" class="edit-form" style="display:none;">
@@ -59,7 +66,7 @@ $admin = new Users();
     include_once "classes/Kategorie.php";
     $kategoriaDB = new Kategorie();
     $kategorie = $kategoriaDB->getAll();
-    if ($admin->isAdmin()) { ?>
+    if ($admin->isAdmin() || $admin->isKuchar()) { ?>
     <button type="button" class="tm-btn tm-btn-primary" style="margin-left: 55px; margin-bottom:20px" onclick="toggleAddForm()">Pridať jedlo</button>
     <?php } ?>
     <div id="add-form" style="display:none; margin-top:20px;">
@@ -103,7 +110,7 @@ $admin = new Users();
             <div class="col-md-6">
                 <figure class="tm-description-figure">
                     <img src="<?= $url ?>" alt="Image" class="img-fluid" />
-                    <?php if ($admin->isAdmin()) { ?>
+                    <?php if ($admin->isAdmin() || $admin->isEditor()) { ?>
                     <button type="button" class="tm-btn tm-btn-warning" style="margin: auto;" onclick="toggleEditForm('obsah<?= $urlID ?>')">Upraviť fotografiu</button>
                     <?php } ?>
                     <div id="edit-form-obsah<?= $urlID ?>" class="edit-form" style="display:none;">
@@ -121,7 +128,7 @@ $admin = new Users();
             <div class="col-md-6">
                 <div class="tm-description-box">
                     <h4 class="tm-gallery-title"><?= $qnadpis ?></h4>
-                    <?php if ($admin->isAdmin()) { ?>
+                    <?php if ($admin->isAdmin() || $admin->isEditor()) { ?>
                     <button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm('obsah<?= $qnadpisID ?>')">Upraviť nadpis</button>
                     <?php } ?>
                     <div id="edit-form-obsah<?= $qnadpisID ?>" class="edit-form" style="display:none;">
@@ -135,7 +142,7 @@ $admin = new Users();
                     </div>
 
                     <p class="tm-mb-p"><?= $qtext ?></p>
-                    <?php if ($admin->isAdmin()) { ?>
+                    <?php if ($admin->isAdmin() || $admin->isEditor()) { ?>
                     <button type="button" class="tm-btn tm-btn-warning" onclick="toggleEditForm('obsah<?= $qtextID ?>')">Upraviť text</button>
                     <?php } ?>
                     <div id="edit-form-obsah<?= $qtextID ?>" class="edit-form" style="display:none;">

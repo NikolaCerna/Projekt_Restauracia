@@ -2,9 +2,11 @@
 require_once "classes/Spravy.php";
 require_once "handlers/SpravyHandler.php";
 require_once "parts/header.php";
+require_once "classes/Users.php";
 
 $kontakt = new Spravy();
 $spravy = $kontakt->getSpravy();
+$admin = new Users();
 ?>
 <main style="margin: 20px">
     <div class="spravy-container">
@@ -20,7 +22,9 @@ $spravy = $kontakt->getSpravy();
                     <th>Email</th>
                     <th>Správa</th>
                     <th>Odoslané</th>
+                    <?php if ($admin->isAdmin()) { ?>
                     <th>Akcia</th>
+                    <?php }?>
                 </tr>
                 </thead>
                 <tbody>
@@ -36,12 +40,14 @@ $spravy = $kontakt->getSpravy();
                         <td><?= $email ?></td>
                         <td><?= $sprava ?></td>
                         <td><?= $datum ?></td>
+                        <?php if ($admin->isAdmin()) { ?>
                         <td style="text-align: center;">
                             <form method="post" action="spravy.php" style="display: inline;" onsubmit="return confirm('Naozaj chceš túto správu zmazať?');">
                                 <input type="hidden" name="delete_sprava" value="<?= $ID ?>">
                                 <button type="submit" class="tm-btn tm-btn-danger">Zmazať</button>
                             </form>
                         </td>
+                        <?php }?>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

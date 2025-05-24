@@ -12,6 +12,28 @@ class Users extends Database {
         $this->connection = $this->getConnection();
     }
 
+    public function getAllUsers() {
+        $sql = "SELECT ID, meno, email, rola FROM pouzivatelia ORDER BY ID ASC";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteUser($id) {
+        if (!is_numeric($id)) return false;
+        $sql = "DELETE FROM pouzivatelia WHERE ID = ?";
+        $statement = $this->connection->prepare($sql);
+        return $statement->execute([$id]);
+    }
+
+    public function updateUserRole($id, $rola) {
+        $validRoles = ['admin', 'pouzivatel', 'kuchar', 'recepcny', 'editor'];
+        if (!in_array($rola, $validRoles) || !is_numeric($id)) return false;
+        $sql = "UPDATE pouzivatelia SET rola = ? WHERE ID = ?";
+        $statement = $this->connection->prepare($sql);
+        return $statement->execute([$rola, $id]);
+    }
+
     public function register($login, $email, $password) {
         try {
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
@@ -62,10 +84,18 @@ class Users extends Database {
     }
 
     public function isAdmin() {
-        if (isset($_SESSION['rola']) && $_SESSION['rola'] === 'admin') {
-            return true;
-        } else {
-            return false;
-        }
+        return (isset($_SESSION['rola']) && $_SESSION['rola'] === 'admin');
+    }
+
+    public function isKuchar() {
+        return (isset($_SESSION['rola']) && $_SESSION['rola'] === 'kuchar');
+    }
+
+    public function isRecepcny() {
+        return (isset($_SESSION['rola']) && $_SESSION['rola'] === 'recepcny');
+    }
+
+    public function isEditor() {
+        return (isset($_SESSION['rola']) && $_SESSION['rola'] === 'editor');
     }
 }
