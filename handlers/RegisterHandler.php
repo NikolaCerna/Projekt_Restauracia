@@ -1,12 +1,12 @@
 <?php
+include_once(__ROOT__ . '/classes/Users.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $meno = $_POST['meno'];
 $email = $_POST['email'];
 $heslo = $_POST['heslo'];
-$rola = 'admin'; // Alebo 'uzivatel'
 
 $user = new Users();
-$ok = $user->register($meno, $email, $heslo, $rola);
+$ok = $user->register($meno, $email, $heslo);
 
 if ($ok) {
     header("Location: thankyoupage.php");

@@ -3,7 +3,6 @@ if (!defined('__ROOT__')) {
     define('__ROOT__', dirname(dirname(__FILE__)));
 }
 session_start();
-require_once(__ROOT__ . '/classes/Users.php');
 require_once (__ROOT__ . '/handlers/RegisterHandler.php');
 ?>
 <!DOCTYPE html>

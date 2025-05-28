@@ -3,7 +3,6 @@ session_start();
 include_once "classes/Users.php";
 include_once "handlers/PouzivateliaHandler.php";
 $users = new Users();
-$hladat = $_GET['hladat'] ?? '';
 
 $hladat = $_GET['hladat'] ?? '';
 $rola = $_GET['rola'] ?? '';
@@ -73,8 +72,8 @@ if ($hladat !== '' || $rola !== '') {
         <tbody>
         <form method="get" action="pouzivatelia.php" style="margin-bottom: 20px;">
             <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px">
-                <input type="text" name="hladat" placeholder="Vyhľadať podľa mena" class="form-control" style="width: 300px;">
-                <button type="submit" class="tm-btn tm-btn-primary">Hľadať</button>
+                <input type="text" name="hladat" value="<?= $hladat ?>" placeholder="Vyhľadať podľa mena" class="form-control" style="width: 300px;">
+
                 <select name="rola" class="form-control" style="width: 180px;">
                     <option value="">-- Všetky roly --</option>
                     <?php
@@ -85,8 +84,9 @@ if ($hladat !== '' || $rola !== '') {
                     }
                     ?>
                 </select>
+                <button type="submit" class="tm-btn tm-btn-primary">Hľadať</button>
+                <a href="pouzivatelia.php" class="tm-btn tm-btn-danger" style="padding: 12px;">Zrušiť filter</a>
 
-                <button type="submit" class="tm-btn tm-btn-primary">Filtrovať</button>
             </div>
         </form>
 

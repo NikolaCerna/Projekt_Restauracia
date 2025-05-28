@@ -35,14 +35,6 @@ class Users extends Database {
         return $statement->execute([$rola, $id]);
     }
 
-    public function getUsersByMeno($hladat) {
-        $sql = "SELECT * FROM pouzivatelia WHERE meno LIKE ?";
-        $statement = $this->connection->prepare($sql);
-        $hladat = "%$hladat%";
-        $statement->execute([$hladat]);
-        return $statement->fetchAll();
-    }
-
     public function getUsersByFilter($meno = '', $rola = '') {
         $sql = "SELECT * FROM pouzivatelia WHERE 1";
         $params = [];
