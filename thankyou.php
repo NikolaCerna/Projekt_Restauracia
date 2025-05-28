@@ -4,9 +4,9 @@ require_once "classes/Spravy.php";
 $kontakt = new Spravy();
 $last = $kontakt->getLastSprava();
 
-$meno = $last['meno'] ?? 'Návštevník';
-$email = $last['email'] ?? 'neuvedený';
-$sprava = $last['sprava'] ?? 'bez správy';
+$meno = $last['meno'];
+$email = $last['email'];
+$sprava = $last['sprava'];
 ?>
 <!DOCTYPE html>
 <html lang="sk">
