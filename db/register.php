@@ -4,7 +4,7 @@ if (!defined('__ROOT__')) {
 }
 session_start();
 require_once(__ROOT__ . '/classes/Users.php');
-require_once (__ROOT__ . '/handlers/usersHandler.php');
+require_once (__ROOT__ . '/handlers/RegisterHandler.php');
 ?>
 <!DOCTYPE html>
 <html lang="sk">

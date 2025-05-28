@@ -9,10 +9,11 @@ $user = new Users();
 $ok = $user->register($meno, $email, $heslo, $rola);
 
 if ($ok) {
-header("Location: thankyoupage.php");
-exit;
+    header("Location: thankyoupage.php");
+    exit;
 } else {
-$error = "Registrácia zlyhala. Email môže byť už registrovaný.";
+    $error = "Registrácia zlyhala. Email môže byť už registrovaný.";
 }
+
 }
 ?>

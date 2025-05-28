@@ -18,4 +18,5 @@ if (isset($_POST['delete_id'])) {
 if (isset($_POST['update_id']) && isset($_POST['new_role'])) {
     $users->updateUserRole($_POST['update_id'], $_POST['new_role']);
 }
+
 ?>

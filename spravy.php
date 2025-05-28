@@ -22,7 +22,7 @@ $admin = new Users();
                     <th>Email</th>
                     <th>Správa</th>
                     <th>Odoslané</th>
-                    <?php if ($admin->isAdmin()) { ?>
+                    <?php if ($admin->isAdmin() || $admin->isRecepcny()) { ?>
                     <th>Akcia</th>
                     <?php }?>
                 </tr>
@@ -40,7 +40,7 @@ $admin = new Users();
                         <td><?= $email ?></td>
                         <td><?= $sprava ?></td>
                         <td><?= $datum ?></td>
-                        <?php if ($admin->isAdmin()) { ?>
+                        <?php if ($admin->isAdmin() || $admin->isRecepcny()) { ?>
                         <td style="text-align: center;">
                             <form method="post" action="spravy.php" style="display: inline;" onsubmit="return confirm('Naozaj chceš túto správu zmazať?');">
                                 <input type="hidden" name="delete_sprava" value="<?= $ID ?>">

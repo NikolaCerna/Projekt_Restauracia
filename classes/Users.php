@@ -3,6 +3,7 @@ if (!defined('__ROOT__')) {
     define('__ROOT__', dirname(dirname(__FILE__)));
 }
 require_once(__ROOT__ . '/classes/Database.php');
+require_once(__ROOT__ . '/classes/Users.php');
 class Users extends Database {
     private $rola;
     private $connection;
@@ -13,7 +14,7 @@ class Users extends Database {
     }
 
     public function getAllUsers() {
-        $sql = "SELECT ID, meno, email, rola FROM pouzivatelia ORDER BY ID ASC";
+        $sql = "SELECT ID, meno, email, rola FROM pouzivatelia";
         $statement = $this->connection->prepare($sql);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -61,7 +62,6 @@ class Users extends Database {
         return $statement->fetchAll();
     }
 
-
     public function register($login, $email, $password) {
         try {
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
@@ -70,25 +70,21 @@ class Users extends Database {
             $statement->execute([$login, $email]);
             $existingUser = $statement->fetch();
             if ($existingUser) {
-                return false; // Toto je kľúčová zmena!
+                return false;
             }
-
             $sql = "INSERT INTO pouzivatelia (meno, email, heslo, rola) VALUES (?, ?, ?, ?)";
             $statement = $this->connection->prepare($sql);
             $statement->execute([$login, $email, $hashedPassword, $this->rola]);
-
-            return true; // všetko OK
+            return true;
         } catch (Exception $e) {
-            return false; // ak niečo zlyhá
+            return false;
         }
     }
-
 
     public function login($email, $password) {
         $sql = "SELECT * FROM pouzivatelia WHERE email = ?";
         $statement = $this->connection->prepare($sql);
-        $statement->bindParam(1, $email);
-        $statement->execute();
+        $statement->execute([$email]);
         $user = $statement->fetch();
         if (!$user) {
             throw new Exception("Používateľ s daným e-mailom neexistuje.");
