@@ -20,19 +20,30 @@ class Users extends Database {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function deleteUser($id) {
-        if (!is_numeric($id)) return false;
-        $sql = "DELETE FROM pouzivatelia WHERE ID = ?";
+    public function getAllRoles() {
+        $sql = "SELECT DISTINCT rola FROM roly";
         $statement = $this->connection->prepare($sql);
-        return $statement->execute([$id]);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    public function updateUserRole($id, $rola) {
+    public function deleteUser($ID) {
+        if (!is_numeric($ID)) return false;
+        $sql = "DELETE FROM pouzivatelia WHERE ID = ?";
+        $statement = $this->connection->prepare($sql);
+        return $statement->execute([$ID]);
+    }
+
+    public function updateUserRole($ID, $rola) {
+        if ($_SESSION['user_id'] == $ID) {
+            $_SESSION['rola'] = $rola;
+            header("Location: index.php");
+        }
         $validRoles = ['admin', 'pouzivatel', 'kuchar', 'recepcny', 'editor'];
-        if (!in_array($rola, $validRoles) || !is_numeric($id)) return false;
+        if (!in_array($rola, $validRoles) || !is_numeric($ID)) return false;
         $sql = "UPDATE pouzivatelia SET rola = ? WHERE ID = ?";
         $statement = $this->connection->prepare($sql);
-        return $statement->execute([$rola, $id]);
+        return $statement->execute([$rola, $ID]);
     }
 
     public function getUsersByFilter($meno = '', $rola = '') {

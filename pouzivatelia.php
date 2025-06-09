@@ -100,10 +100,11 @@ if ($hladat !== '' || $rola !== '') {
                         <input type="hidden" name="update_id" value="<?= $user['ID'] ?>">
                         <select name="new_role" class="select-role">
                             <?php
-                            $roles = ['admin', 'pouzivatel', 'kuchar', 'recepcny', 'editor'];
+                            $roles = $users->getAllRoles();
                             foreach ($roles as $role) {
                                 $selected = ($user['rola'] === $role) ? 'selected' : '';
                                 echo "<option value='$role' $selected>$role</option>";
+
                             }
                             ?>
                         </select>
@@ -119,7 +120,7 @@ if ($hladat !== '' || $rola !== '') {
                             </button>
                         </form>
                     <?php else: ?>
-                        <em>(ty)</em>
+                        <em>(prihlásený)</em>
                     <?php endif; ?>
                 </td>
             </tr>
