@@ -38,10 +38,10 @@ class Otazky extends Database {
             echo 'ID otázky musí byť číslo.';
             exit;
         }
-        $sql = "DELETE FROM otazky WHERE ID = :ID";
+        $sql = "DELETE FROM otazky WHERE ID = ?";
         $statement = $this->connection->prepare($sql);
         try {
-            $insert = $statement->execute(['ID' => $ID]);
+            $insert = $statement->execute([$ID]);
             http_response_code(200);
             return $insert;
         } catch (Exception $exception) {

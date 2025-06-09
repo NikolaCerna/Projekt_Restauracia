@@ -25,31 +25,20 @@ class Menu extends Database {
     }
 
     public function getMenuData($type) {
-        $menu = [];
         if ($this->validateMenuType($type)) {
             if ($type == "header") {
-                $menu = [
-                    'home' => [
-                        'name' => 'Home',
-                        'path' => 'index.php'
-                    ],
-                    'about' => [
-                        'name' => 'About',
-                        'path' => 'about.php'
-                    ],
-                    'contact' => [
-                        'name' => 'Contact',
-                        'path' => 'contact.php'
-                    ]
-                ];
+                $sql = "SELECT polozka, path FROM navigacne_menu";
+                $statement = $this->connection->prepare($sql);
+                $statement->execute();
+                $menu = $statement->fetchAll(PDO::FETCH_ASSOC);
             }
         }
         return $menu;
     }
 
     public function printMenu($menu) {
-        foreach ($menu as $menuName => $menuData) {
-            echo '<li class="tm-nav-li"><a href="' . $menuData['path'] . '" class="tm-nav-link">' . $menuData['name']. '</a></li>';
+        foreach ($menu as $menuData) {
+            echo '<li class="tm-nav-li"><a href="' . $menuData['path'] . '" class="tm-nav-link">' . $menuData['polozka']. '</a></li>';
         }
     }
 

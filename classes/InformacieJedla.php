@@ -22,7 +22,7 @@ class InformacieJedla extends Database {
 
     public function updateInformacieJedla($ID, $icon, $text) {
         if (!is_numeric($ID)) {
-            echo 'ID otázky musí byť číslo.';
+            echo 'ID musí byť číslo.';
             exit;
         }
         $sql = "UPDATE informacie_jedla SET icon = :icon, text = :text WHERE ID = :ID";

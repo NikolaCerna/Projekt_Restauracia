@@ -36,7 +36,7 @@ class JedalnyListok extends Database {
 
     public function deleteJedlo(int $ID) {
         if (!is_numeric($ID)) {
-            echo 'ID otázky musí byť číslo.';
+            echo 'ID musí byť číslo.';
             exit;
         }
         $sql = "DELETE FROM jedalny_listok WHERE ID = :ID";
@@ -53,7 +53,7 @@ class JedalnyListok extends Database {
 
     public function updateJedlo($ID, $nazov, $url_obrazka, $popis, $cena, $id_kategoria) {
         if (!is_numeric($ID)) {
-            echo 'ID otázky musí byť číslo.';
+            echo 'ID musí byť číslo.';
             exit;
         }
         $sql = "UPDATE jedalny_listok SET nazov = :nazov, url_obrazka = :url_obrazka, popis = :popis, cena = :cena, id_kategoria = :id_kategoria WHERE ID = :ID";

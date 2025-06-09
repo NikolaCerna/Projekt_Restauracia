@@ -23,7 +23,7 @@
             <div class="tm-header">
                 <div class="row tm-header-inner">
                     <div class="col-md-6 col-12">
-                        <a href="<?php echo $menu['home']['path']; ?>">
+                        <a href="<?php echo $menu[0]['path']; ?>">
                             <img src="img/header/simple-house-logo.png" alt="Logo" class="tm-site-logo" />
                         </a>
                         <div class="tm-site-text-box">

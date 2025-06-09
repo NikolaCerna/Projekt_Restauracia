@@ -34,13 +34,13 @@ class Spravy extends Database {
 
     public function deleteSpravu($ID) {
         if (!is_numeric($ID)) {
-            echo 'ID otázky musí byť číslo.';
+            echo 'ID musí byť číslo.';
             exit;
         }
-        $sql = "DELETE FROM spravy WHERE ID = :ID";
+        $sql = "DELETE FROM spravy WHERE ID = ?";
         $statement = $this->connection->prepare($sql);
         try {
-            $insert = $statement->execute(['ID' => $ID]);
+            $insert = $statement->execute([$ID]);
             http_response_code(200);
             return $insert;
         } catch (Exception $exception) {

@@ -14,17 +14,17 @@ class Obsah extends Database {
     }
 
     public function getValue($kluc) {
-        $sql = "SELECT hodnota FROM obsah_stranky WHERE kluc = :kluc";
+        $sql = "SELECT hodnota FROM obsah_stranky WHERE kluc = ?";
         $statement = $this->connection->prepare($sql);
-        $statement->execute(['kluc' => $kluc]);
+        $statement->execute([$kluc]);
         $result = $statement->fetch(\PDO::FETCH_ASSOC);
         return $result['hodnota'] ?? null;
     }
 
     public function getID($kluc) {
-        $sql = "SELECT ID FROM obsah_stranky WHERE kluc = :kluc";
+        $sql = "SELECT ID FROM obsah_stranky WHERE kluc = ?";
         $statement = $this->connection->prepare($sql);
-        $statement->execute(['kluc' => $kluc]);
+        $statement->execute([$kluc]);
         $result = $statement->fetch(\PDO::FETCH_ASSOC);
         return $result['ID'] ?? null;
     }

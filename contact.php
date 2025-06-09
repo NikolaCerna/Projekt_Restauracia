@@ -247,7 +247,7 @@ $admin = new Users();
                             </div>
 
                             <div class="tm-accordion">
-                                <?php if ($admin->isAdmin() || $admin->isEditor()) { ?>
+                                <?php if ($admin->isAdmin()) { ?>
                                 <button type="button" class="tm-btn tm-btn-primary" style="margin-left: 55px; margin-bottom:20px" onclick="toggleAddForm()">Pridať otázku a odpoveď</button>
                                 <?php } ?>
                             </div>

@@ -36,13 +36,13 @@ class Zamestnanci extends Database {
 
     public function deleteWorker($ID){
         if (!is_numeric($ID)) {
-            echo 'ID otázky musí byť číslo.';
+            echo 'ID musí byť číslo.';
             exit;
         }
-        $sql = "DELETE FROM zamestnanci WHERE ID = :ID";
+        $sql = "DELETE FROM zamestnanci WHERE ID = ?";
         $statement = $this->connection->prepare($sql);
         try {
-            $insert = $statement->execute(['ID' => $ID]);
+            $insert = $statement->execute([$ID]);
             http_response_code(200);
             return $insert;
         } catch (PDOException $exception) {
@@ -52,6 +52,10 @@ class Zamestnanci extends Database {
     }
 
     public function updateWorker($ID, $meno, $priezvisko, $pozicia, $popis, $facebook, $twitter, $instagram, $youtube, $url_fotografie) {
+        if (!is_numeric($ID)) {
+            echo 'ID musí byť číslo.';
+            exit;
+        }
         $sql = "UPDATE zamestnanci SET meno = :meno, priezvisko = :priezvisko, pozicia = :pozicia, popis = :popis, facebook = :facebook, twitter = :twitter, 
                                         instagram = :instagram, youtube = :youtube, url_fotografie = :url_fotografie WHERE ID = :ID";
         $statement = $this->connection->prepare($sql);
