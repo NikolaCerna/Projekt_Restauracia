@@ -41,7 +41,7 @@ $spravy = $kontakt->getSpravy();
                         <td><?= $email ?></td>
                         <td><?= $sprava ?></td>
                         <td><?= $datum ?></td>
-                        <?php if ($admin->isAdmin() || $admin->isRecepcny()) { ?>
+                        <?php if ($admin->isAdmin()) { ?>
                         <td style="text-align: center;">
                             <form method="post" action="spravy.php" style="display: inline;" onsubmit="return confirm('Naozaj chceš túto správu zmazať?');">
                                 <input type="hidden" name="delete_sprava" value="<?= $ID ?>">
