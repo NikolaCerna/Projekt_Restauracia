@@ -13,6 +13,13 @@ class Otazky extends Database {
         $this->connection = $this->getConnection();
     }
 
+    public function getOtazky() {
+        $sql = "SELECT * FROM otazky";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function addOtazky(string $otazka, string $odpoved) {
         $sql = "INSERT INTO otazky(otazka, odpoved) VALUES (:otazka, :odpoved)";
         $statement = $this->connection->prepare($sql);
@@ -24,13 +31,6 @@ class Otazky extends Database {
             http_response_code(500);
             return false;
         }
-    }
-
-    public function getOtazky() {
-        $sql = "SELECT * FROM otazky";
-        $statement = $this->connection->prepare($sql);
-        $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function deleteOtazky($ID) {

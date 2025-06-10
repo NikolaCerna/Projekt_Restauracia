@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once "classes/Users.php";
-include_once "handlers/PouzivateliaHandler.php";
+require_once "classes/Users.php";
+require_once "handlers/PouzivateliaHandler.php";
 $users = new Users();
 
 $hladat = $_GET['hladat'] ?? '';

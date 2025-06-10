@@ -1,14 +1,9 @@
 <?php
-if (!defined('__ROOT__')) {
-    define('__ROOT__', __DIR__);
-}
-
-include_once "classes/JedalnyListok.php";
-include_once "classes/Zamestnanci.php";
-include_once "classes/Otazky.php";
-include_once "classes/InformacieJedla.php";
-include_once "classes/Kategorie.php";
-include_once "classes/Users.php";
+require_once "classes/JedalnyListok.php";
+require_once "classes/Zamestnanci.php";
+require_once "classes/Otazky.php";
+require_once "classes/InformacieJedla.php";
+require_once "classes/Users.php";
 
 function generateMenu($kategoria) {
     $db = new JedalnyListok();
@@ -47,8 +42,7 @@ function generateMenu($kategoria) {
             echo '<div class="mb-2"><label>Názov:</label><input type="text" name="nazov" class="form-control" value="' . $nazov . '"></div>';
             echo '<div class="mb-2"><label>Popis:</label><textarea name="popis" class="form-control">' . $popis . '</textarea></div>';
             echo '<div class="mb-2"><label>Cena:</label><input type="text" name="cena" class="form-control" value="' . $cena . '"></div>';
-            $kategoriaDB = new Kategorie();
-            $kategorie = $kategoriaDB->getAll();
+            $kategorie = $db->getKategorie();
                     echo '<div class="mb-2"><label>Kategoria:</label><select name="id_kategoria" class="form-control">';
                     foreach ($kategorie as $kat) {
                         $selected = ($kat['nazov'] == $item['kategoria_nazov']) ? 'selected' : '';
@@ -217,4 +211,4 @@ function generateInformacieJedla() {
     echo '</div>';
 }
 
-?>
+?>;

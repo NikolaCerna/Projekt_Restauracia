@@ -1,5 +1,8 @@
 <?php
-require_once "classes/Otazky.php";
+if (!defined('__ROOT__')) {
+    define('__ROOT__', dirname(dirname(__FILE__)));
+}
+require_once (__ROOT__ . "/classes/Otazky.php");
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['add-qna'])) {
         $otazka = $_POST['otazka'];

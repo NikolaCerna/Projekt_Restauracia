@@ -14,6 +14,13 @@ class JedalnyListok extends Database {
         $this->connection = $this->getConnection();
     }
 
+    public function getJedalnyListok() {
+        $sql = "SELECT j.*, k.nazov AS kategoria_nazov FROM jedalny_listok j INNER JOIN kategorie k ON j.id_kategoria = k.ID";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function addJedlo($nazov, $url_obrazka, $popis, $cena, $id_kategoria) {
         $sql = "INSERT INTO jedalny_listok(nazov, url_obrazka, popis, cena, id_kategoria) VALUES (:nazov, :url_obrazka, :popis, :cena, :id_kategoria)";
         $statement= $this->connection->prepare($sql);
@@ -25,13 +32,6 @@ class JedalnyListok extends Database {
             http_response_code(500);
             return false;
         }
-    }
-
-    public function getJedalnyListok() {
-        $sql = "SELECT j.*, k.nazov AS kategoria_nazov FROM jedalny_listok j INNER JOIN kategorie k ON j.id_kategoria = k.ID";
-        $statement = $this->connection->prepare($sql);
-        $statement->execute();
-        return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function deleteJedlo(int $ID) {
@@ -66,5 +66,12 @@ class JedalnyListok extends Database {
             http_response_code(500);
             return false;
         }
+    }
+
+    public function getKategorie() {
+        $sql = "SELECT * FROM kategorie";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 }

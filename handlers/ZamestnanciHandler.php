@@ -1,5 +1,8 @@
 <?php
-require_once "classes/Zamestnanci.php";
+if (!defined('__ROOT__')) {
+    define('__ROOT__', dirname(dirname(__FILE__)));
+}
+require_once (__ROOT__ . "/classes/Zamestnanci.php");
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['add-worker'])) {
         $pozicia = $_POST['pozicia'];

@@ -3,7 +3,6 @@ if (!defined('__ROOT__')) {
     define('__ROOT__', dirname(dirname(__FILE__)));
 }
 require_once(__ROOT__ . '/classes/Database.php');
-require_once(__ROOT__ . '/classes/Users.php');
 class Users extends Database {
     private $rola;
     private $connection;
@@ -39,7 +38,7 @@ class Users extends Database {
             $_SESSION['rola'] = $rola;
             header("Location: index.php");
         }
-        $validRoles = ['admin', 'pouzivatel', 'kuchar', 'recepcny', 'editor'];
+        $validRoles = $this->getAllRoles();
         if (!in_array($rola, $validRoles) || !is_numeric($ID)) return false;
         $sql = "UPDATE pouzivatelia SET rola = ? WHERE ID = ?";
         $statement = $this->connection->prepare($sql);
@@ -62,7 +61,7 @@ class Users extends Database {
 
         $statement = $this->connection->prepare($sql);
         $statement->execute($params);
-        return $statement->fetchAll();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function register($login, $email, $password) {
@@ -71,7 +70,7 @@ class Users extends Database {
             $sql = "SELECT * FROM pouzivatelia WHERE (meno = ?) OR (email = ?) LIMIT 1";
             $statement = $this->connection->prepare($sql);
             $statement->execute([$login, $email]);
-            $existingUser = $statement->fetch();
+            $existingUser = $statement->fetch(PDO::FETCH_ASSOC);
             if ($existingUser) {
                 return false;
             }
@@ -88,7 +87,7 @@ class Users extends Database {
         $sql = "SELECT * FROM pouzivatelia WHERE email = ?";
         $statement = $this->connection->prepare($sql);
         $statement->execute([$email]);
-        $user = $statement->fetch();
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
         if (!$user) {
             throw new Exception("Používateľ s daným e-mailom neexistuje.");
         }

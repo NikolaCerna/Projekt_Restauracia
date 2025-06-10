@@ -13,7 +13,10 @@
 
 <body>
 <?php
-    include_once "classes/Menu.php";
+    if (!defined('__ROOT__')) {
+        define('__ROOT__', dirname(dirname(__FILE__)));
+    }
+    require_once (__ROOT__ . "/classes/Menu.php");
     $db = new Menu();
     $menu = $db->getMenuData("header");
 ?>

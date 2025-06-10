@@ -1,5 +1,8 @@
 <?php
-require_once "classes/InformacieJedla.php";
+if (!defined('__ROOT__')) {
+    define('__ROOT__', dirname(dirname(__FILE__)));
+}
+require_once (__ROOT__ . "/classes/InformacieJedla.php");
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['update_about'])) {
         $ID = $_POST['update_about'];

@@ -1,10 +1,11 @@
 <?php
-include_once "handlers/ObsahHandler.php";
-include_once "handlers/JedalnyListokHandler.php";
-include_once "parts/header.php";
-include_once "functions.php";
-include_once "classes/Obsah.php";
-include_once "classes/Users.php";
+require_once "handlers/ObsahHandler.php";
+require_once "handlers/JedalnyListokHandler.php";
+require_once "classes/JedalnyListok.php";
+require_once "parts/header.php";
+require_once "functions.php";
+require_once "classes/Obsah.php";
+require_once "classes/Users.php";
 
 $obsah = new Obsah();
 $nadpis = $obsah->getValue('nadpis');
@@ -63,9 +64,8 @@ $admin = new Users();
     </div>
 
     <?php
-    include_once "classes/Kategorie.php";
-    $kategoriaDB = new Kategorie();
-    $kategorie = $kategoriaDB->getAll();
+    $db = new JedalnyListok();
+    $kategorie = $db->getKategorie();
     if ($admin->isAdmin() || $admin->isKuchar()) { ?>
     <button type="button" class="tm-btn tm-btn-primary" style="margin-left: 55px; margin-bottom:20px" onclick="toggleAddForm()">Pridať jedlo</button>
     <?php } ?>

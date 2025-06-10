@@ -12,24 +12,31 @@ class Spravy extends Database {
         $this->connection = $this->getConnection();
     }
 
-    public function ulozitSpravu($meno, $email, $sprava) {
-        $sql = "INSERT INTO spravy (meno, email, sprava) VALUES (:meno, :email, :sprava)";
-        $statement = $this->connection->prepare($sql);
-        try {
-            $insert = $statement->execute(['meno' => $meno, 'email' => $email, 'sprava' => $sprava]);
-            header("Location: http://localhost/Projekt_Restauracia/thankyou.php");
-            return $insert;
-        } catch (\Exception $exception) {
-            http_response_code(500);
-            return false;
-        }
-    }
-
     public function getSpravy() {
         $sql = "SELECT * FROM spravy";
         $statement = $this->connection->prepare($sql);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getLastSprava() {
+        $sql = "SELECT meno, email, sprava FROM spravy ORDER BY ID DESC LIMIT 1";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function ulozitSpravu($meno, $email, $sprava) {
+        $sql = "INSERT INTO spravy (meno, email, sprava) VALUES (:meno, :email, :sprava)";
+        $statement = $this->connection->prepare($sql);
+        try {
+            $insert = $statement->execute(['meno' => $meno, 'email' => $email, 'sprava' => $sprava]);
+            header("Location: ../thankyou.php");
+            return $insert;
+        } catch (\Exception $exception) {
+            http_response_code(500);
+            return false;
+        }
     }
 
     public function deleteSpravu($ID) {
@@ -47,12 +54,5 @@ class Spravy extends Database {
             http_response_code(500);
             return false;
         }
-    }
-
-    public function getLastSprava() {
-        $sql = "SELECT meno, email, sprava FROM spravy ORDER BY ID DESC LIMIT 1";
-        $statement = $this->connection->prepare($sql);
-        $statement->execute();
-        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 }

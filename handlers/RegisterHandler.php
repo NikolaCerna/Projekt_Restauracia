@@ -1,4 +1,7 @@
 <?php
+if (!defined('__ROOT__')) {
+    define('__ROOT__', dirname(dirname(__FILE__)));
+}
 include_once(__ROOT__ . '/classes/Users.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $meno = $_POST['meno'];

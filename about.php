@@ -1,11 +1,11 @@
 
 <?php
-include_once "handlers/ObsahHandler.php";
-include_once "handlers/ZamestnanciHandler.php";
-include_once "handlers/InformacieJedlaHandler.php";
-include_once "parts/header.php";
-include_once "functions.php";
-include_once "classes/Users.php";
+require_once "handlers/ObsahHandler.php";
+require_once "handlers/ZamestnanciHandler.php";
+require_once "handlers/InformacieJedlaHandler.php";
+require_once "parts/header.php";
+require_once "functions.php";
+require_once "classes/Users.php";
 $admin = new Users();
 ?>
 <main>

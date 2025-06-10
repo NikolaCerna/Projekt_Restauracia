@@ -1,10 +1,10 @@
 <?php
-include_once "handlers/ObsahHandler.php";
-include_once "handlers/OtazkyHandler.php";
-include_once "handlers/SpravyHandler.php";
-include_once "parts/header.php";
-include_once "functions.php";
-include_once "classes/Users.php";
+require_once "handlers/ObsahHandler.php";
+require_once "handlers/OtazkyHandler.php";
+require_once "handlers/SpravyHandler.php";
+require_once "parts/header.php";
+require_once "functions.php";
+require_once "classes/Users.php";
 $admin = new Users();
 ?>
 		<main>
