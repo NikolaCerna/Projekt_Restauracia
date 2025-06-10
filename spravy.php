@@ -1,12 +1,13 @@
 <?php
-require_once "classes/Spravy.php";
-require_once "handlers/SpravyHandler.php";
 require_once "parts/header.php";
+
+require_once "handlers/SpravyHandler.php";
+require_once "classes/Spravy.php";
 require_once "classes/Users.php";
 
+$admin = new Users();
 $kontakt = new Spravy();
 $spravy = $kontakt->getSpravy();
-$admin = new Users();
 ?>
 <main style="margin: 20px">
     <div class="spravy-container">
@@ -22,7 +23,7 @@ $admin = new Users();
                     <th>Email</th>
                     <th>Správa</th>
                     <th>Odoslané</th>
-                    <?php if ($admin->isAdmin() || $admin->isRecepcny()) { ?>
+                    <?php if ($admin->isAdmin()) { ?>
                     <th>Akcia</th>
                     <?php }?>
                 </tr>

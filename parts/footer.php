@@ -40,7 +40,6 @@
 <script>
     function toggleEditForm(ID) {
         var form = document.getElementById("edit-form-"+ ID);
-        // Ak je formulár skrytý, zobrazíme ho; inak ho skryjeme
         if (form.style.display === "none") {
             form.style.display = "block";
         } else {

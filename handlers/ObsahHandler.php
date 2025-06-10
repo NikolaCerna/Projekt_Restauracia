@@ -9,8 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $novaHodnota = $_POST['nova_hodnota'];
         $db = new Obsah();
         $db->updateObsah($id, $novaHodnota);
-        $redirect = $_POST['redirect'];
-        header("Location: $redirect");
+        header("Location: ../about.php");
         exit();
     }
 }

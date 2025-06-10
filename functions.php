@@ -196,7 +196,6 @@ function generateInformacieJedla() {
         echo '<div id="edit-form-info' . $ID . '" class="edit-form" style="display:none;">';
         echo '<form method="post" action="about.php">';
         echo '<input type="hidden" name="update_about" value="' . $ID . '">';
-        echo '<input type="hidden" name="redirect" value="' . $_SERVER['REQUEST_URI'] . ' ">';
         echo '<div class="mb-2"><label>Icon:</label><input type="text" name="icon" class="form-control" value="' . $icon . '"></div>';
         echo '<div class="mb-2"><label>Text:</label><textarea name="text" class="form-control">' . $text . '</textarea></div>';
         echo '<button type="submit" class="tm-btn tm-btn-success" style="margin-bottom:20px">Uložiť</button>';
@@ -210,5 +209,4 @@ function generateInformacieJedla() {
     echo '</div>';
     echo '</div>';
 }
-
-?>;
+?>
