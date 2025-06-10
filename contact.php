@@ -190,7 +190,7 @@ $admin = new Users();
                     <div class="row">
                         <div class="col-12">
                             <div class="tm-map">
-                                <iframe src="<?= $mapa ?>" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                                <?= $mapa ?>
                             </div>
                         </div>
                     </div>
@@ -202,7 +202,7 @@ $admin = new Users();
                             <input type="hidden" name="update_obsah" value="<?= $mapaID ?>">
                             <input type="hidden" name="redirect" value="<?= $_SERVER['REQUEST_URI'] ?>">
                             <input type="hidden" name="kluc" value="mapa">
-                            <div class="mb-2"><input type="text" name="nova_hodnota" class="form-control" value="<?= $mapa ?>"></div>
+                            <div class="mb-2"><textarea name="nova_hodnota" class="form-control" rows="6"><?= $mapa ?></textarea></div>
                             <button type="submit" class="tm-btn tm-btn-success">Uložiť</button>
                         </form>
                     </div>
